@@ -1,10 +1,10 @@
 import React, {useContext, useState} from 'react';
 import {Button, Card, Container, Form, Row} from "react-bootstrap";
 import {NavLink, useLocation, useHistory} from "react-router-dom";
-import {SIGNIN_ROUTE, MAIN_ROUTE, REGISTER_ROUTE} from "../utils/routes";
-import {login, registration} from "../http/authApi";
+import {SIGNIN_ROUTE, MAIN_ROUTE, REGISTER_ROUTE, PROFILE_ROUTE} from "../../utils/routes";
+import {login, registration} from "../../http/authApi";
 import {observer} from "mobx-react-lite";
-import {Context} from "../index";
+import {Context} from "../../index";
 
 const Auth = observer(() => {
     const {user} = useContext(Context)
@@ -24,7 +24,7 @@ const Auth = observer(() => {
             }
             user.setUser(newUser)
             user.setIsAuth(true)
-            history.push(MAIN_ROUTE)
+            history.push(PROFILE_ROUTE)
         } catch (e) {
             if (e.response.data.status === 401) {
                 alert(isLogin ? `Неверный Логин или Пароль` : `Логин ${username} занят`)

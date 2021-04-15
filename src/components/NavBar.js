@@ -1,7 +1,7 @@
 import React, {useContext} from 'react';
 import {Context} from "../index";
 import {Button, Container, Nav, Navbar, NavLink} from "react-bootstrap";
-import {SIGNIN_ROUTE, MAIN_ROUTE} from "../utils/routes";
+import {SIGNIN_ROUTE, MAIN_ROUTE, PROFILE_ROUTE} from "../utils/routes";
 import {observer} from "mobx-react-lite";
 import {useHistory} from "react-router-dom";
 
@@ -19,10 +19,16 @@ const NavBar = observer(() => {
         return (
             <Navbar bg="dark" variant="dark">
                 <Container>
-                    <NavLink to={MAIN_ROUTE}>Список турниров</NavLink>
+                    <Nav className="mr-auto">
+                        <NavLink href={MAIN_ROUTE}>Главная</NavLink>
+                        <NavLink href="#">Пояснительная записка</NavLink>
+                    </Nav>
                     {
                         user.isAuth ?
                             <Nav className="ml-auto">
+                                <NavLink href={PROFILE_ROUTE}>
+                                    Профиль
+                                </NavLink>
                                 <Button
                                     onClick={() => logOut()}
                                 >

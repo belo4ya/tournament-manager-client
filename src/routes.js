@@ -1,13 +1,18 @@
-import {MAIN_ROUTE, REGISTER_ROUTE, SIGNIN_ROUTE, TEAM_ROUTE, TOURNAMENT_ROUTE} from "./utils/routes";
-import Auth from "./pages/Auth";
-import Main from "./pages/Main";
-import Tournaments from "./pages/Tournaments";
-import Teams from "./pages/Teams";
+import {MAIN_ROUTE, PROFILE_ROUTE, REGISTER_ROUTE, SIGNIN_ROUTE, TEAM_ROUTE, TOURNAMENT_ROUTE} from "./utils/routes";
+import Auth from "./pages/public/Auth";
+import Main from "./pages/public/Main";
+import Tournaments from "./pages/authorized/Tournaments";
+import Teams from "./pages/authorized/Teams";
+import Profile from "./pages/authorized/Profile";
 
 export const authRoutes = [
     {
         path: MAIN_ROUTE,
         Component: Main,
+    },
+    {
+        path: PROFILE_ROUTE,
+        Component: Profile,
     },
     {
         path: TOURNAMENT_ROUTE,
