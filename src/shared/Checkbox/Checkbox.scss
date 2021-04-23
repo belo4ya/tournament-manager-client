@@ -1,0 +1,27 @@
+.checkbox {
+  display: flex;
+  align-items: center;
+
+  input[type="checkbox"] {
+    appearance: none;
+    width: 16px;
+    height: 16px;
+    border: 1px solid #000000;
+    border-radius: 8px;
+    cursor: pointer;
+
+    &:checked {
+      border-color: #f3493e;
+      background: #f3493e;
+
+      & + label {
+        color: #f3493e;
+      }
+    }
+  }
+
+  label {
+    margin-left: 11px;
+    cursor: pointer;
+  }
+}

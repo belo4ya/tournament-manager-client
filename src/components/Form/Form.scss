@@ -1,0 +1,92 @@
+form.form {
+  display: flex;
+  align-items: center;
+  flex-direction: column;
+  background: #ffffff;
+  border-radius: 15px;
+  padding: 21px 70px 42px;
+  width: max-content;
+  position: relative;
+
+  .close {
+    position: absolute;
+    top: 20px;
+    right: 20px;
+    font-size: 24px;
+    font-weight: 700;
+    color: #858585;
+    cursor: pointer;
+  }
+
+  h2 {
+    margin-bottom: 84px;
+  }
+
+  .image {
+    width: 100%;
+    margin-bottom: 25px;
+
+    label {
+      font-size: 16px;
+      font-weight: 700;
+    }
+
+    .box {
+      width: 200px;
+      height: 200px;
+      background: #ededed;
+      border: 6px dashed #cbcbcb;
+      border-radius: 20px;
+      margin: 7px auto 0;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      text-align: center;
+
+      p {
+        font-size: 16px;
+        color: #cbcbcb;
+
+        span {
+          font-weight: 700;
+          text-decoration: underline;
+        }
+      }
+    }
+  }
+
+  .fields {
+    width: 320px;
+
+    .input {
+      margin-bottom: 25px;
+    }
+  }
+
+  a.forgotPassword {
+    font-size: 16px;
+    margin-left: auto;
+    margin-top: -15px;
+  }
+
+  .actions {
+    width: 100%;
+    margin-top: 36px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+
+    button {
+      width: 100%;
+    }
+
+    span {
+      font-weight: 700;
+      margin-top: 24px;
+
+      a {
+        margin-left: 7px;
+      }
+    }
+  }
+}

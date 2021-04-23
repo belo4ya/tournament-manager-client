@@ -1,0 +1,16 @@
+nav.navigation {
+  display: flex;
+
+  .nav-item {
+    margin: 16px;
+    font-size: 18px;
+
+    &.selected {
+      font-weight: 700;
+    }
+  }
+
+  &.white {
+    color: white;
+  }
+}

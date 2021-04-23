@@ -1,0 +1,32 @@
+button {
+  width: 132px;
+  height: 42px;
+  padding: 13px 16px;
+  border: none;
+  outline: none;
+  font-size: 18px;
+  cursor: pointer;
+  background: transparent;
+}
+button.black {
+  background: black;
+  color: white;
+}
+button.white {
+  background: white;
+  color: black;
+}
+button.red {
+  background: #f3493e;
+  color: white;
+}
+button.rounded {
+  border-radius: 20px;
+}
+button.main {
+  font-weight: 700;
+  padding-left: 32px;
+  padding-right: 32px;
+}
+
+/*# sourceMappingURL=Button.css.map */

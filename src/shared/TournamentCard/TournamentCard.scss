@@ -1,0 +1,31 @@
+.tournament-card {
+  display: grid;
+  grid-template-columns: 3fr 1fr 1fr;
+  background: #d8d8d8;
+  padding: 10px;
+
+  span.subtitle {
+    font-size: 12px;
+    margin-top: 2px;
+  }
+
+  .title-container {
+    display: flex;
+    align-items: center;
+
+    img {
+      width: 50px;
+      height: 50px;
+      background: #c4c4c4;
+      margin-right: 10px;
+    }
+  }
+
+  .teams,
+  .date {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+  }
+}

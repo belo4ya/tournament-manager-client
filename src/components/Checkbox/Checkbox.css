@@ -1,0 +1,25 @@
+.checkbox {
+  display: flex;
+  align-items: center;
+}
+.checkbox input[type=checkbox] {
+  appearance: none;
+  width: 16px;
+  height: 16px;
+  border: 1px solid #000000;
+  border-radius: 8px;
+  cursor: pointer;
+}
+.checkbox input[type=checkbox]:checked {
+  border-color: #f3493e;
+  background: #f3493e;
+}
+.checkbox input[type=checkbox]:checked + label {
+  color: #f3493e;
+}
+.checkbox label {
+  margin-left: 11px;
+  cursor: pointer;
+}
+
+/*# sourceMappingURL=Checkbox.css.map */

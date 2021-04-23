@@ -1,0 +1,17 @@
+.input label {
+  font-size: 16px;
+  font-weight: 700;
+}
+.input input {
+  height: 42px;
+  border: 1px solid #858585;
+  font-size: 14px;
+  padding-left: 15px;
+  padding-right: 15px;
+  outline: none;
+  max-width: 320px;
+  width: 100%;
+  margin-top: 7px;
+}
+
+/*# sourceMappingURL=Input.css.map */

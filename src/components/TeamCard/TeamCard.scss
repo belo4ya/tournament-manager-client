@@ -1,0 +1,15 @@
+.team-card {
+  background: #d8d8d8;
+  padding: 5px 20px;
+  display: flex;
+  align-items: center;
+  flex-direction: column;
+  width: max-content;
+
+  img {
+    margin: 10px 0;
+    background: #c4c4c4;
+    width: 90px;
+    height: 90px;
+  }
+}

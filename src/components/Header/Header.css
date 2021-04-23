@@ -1,0 +1,15 @@
+header {
+  background: #f3493e;
+  width: 100%;
+  height: 150px;
+}
+header .container {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+header .auth button {
+  margin-left: 10px;
+}
+
+/*# sourceMappingURL=Header.css.map */

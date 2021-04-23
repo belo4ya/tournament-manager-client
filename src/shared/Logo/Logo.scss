@@ -1,0 +1,20 @@
+.logo {
+  border-radius: 20px;
+  width: 65px;
+  height: 65px;
+  font-weight: 700;
+  color: white;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  &.black {
+    background: #000000;
+    color: white;
+  }
+
+  &.white {
+    background: #fff;
+    color: black;
+  }
+}

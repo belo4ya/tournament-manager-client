@@ -1,0 +1,10 @@
+{
+  "clips" : [
+    {
+      "content" : "import \".\/$PARENT_FOLDER.scss\"\n\nexport default function $PARENT_FOLDER() {\n\treturn (\n\t\t<div>\n\t\t\t<div><\/div>\n\t\t<\/div>\n\t)\n}",
+      "name" : "React Component",
+      "scope" : "editor",
+      "syntax" : "jsx"
+    }
+  ]
+}

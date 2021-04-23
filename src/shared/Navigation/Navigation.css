@@ -1,0 +1,12 @@
+nav.navigation {
+  display: flex;
+}
+nav.navigation .nav-item {
+  margin: 16px;
+  font-size: 18px;
+}
+nav.navigation .nav-item.selected {
+  font-weight: 700;
+}
+
+/*# sourceMappingURL=Navigation.css.map */

@@ -1,0 +1,77 @@
+.tournaments-table {
+  border-top: 3px solid #f3493e;
+
+  .head {
+    display: grid;
+    grid-template-columns: 10px 3fr 1fr 1fr 10px 100px;
+    margin: 5px 0 23px;
+
+    .head-item {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 14px;
+
+      &.bold {
+        font-weight: 700;
+      }
+
+      &.filter {
+        .filter-arrow {
+          display: block;
+        }
+
+        &.up {
+          .filter-arrow {
+            transform: rotate(180deg);
+          }
+        }
+      }
+
+      .filter-arrow {
+        display: none;
+        margin-left: 6px;
+        color: #c4c4c4;
+      }
+    }
+  }
+
+  .content {
+    .tournament {
+      display: flex;
+      align-items: center;
+      margin-bottom: 20px;
+
+      .tournament-card {
+        width: calc(100% - 100px);
+      }
+
+      .actions {
+        width: 100px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        flex-direction: column;
+
+        img {
+          width: 18px;
+          height: 18px;
+          margin: 7px;
+          cursor: pointer;
+        }
+      }
+    }
+  }
+
+  .actions {
+    display: flex;
+    align-items: flex-start;
+    justify-content: space-between;
+    margin-top: 5px;
+    width: calc(100% - 100px);
+
+    .page-selector {
+      margin-left: 100px;
+    }
+  }
+}

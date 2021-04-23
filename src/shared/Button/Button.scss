@@ -1,0 +1,33 @@
+button {
+  padding: 13px 16px;
+  border: none;
+  outline: none;
+  font-size: 18px;
+  cursor: pointer;
+  background: transparent;
+
+  &.black {
+    background: black;
+    color: white;
+  }
+
+  &.white {
+    background: white;
+    color: black;
+  }
+
+  &.red {
+    background: #f3493e;
+    color: white;
+  }
+
+  &.rounded {
+    border-radius: 20px;
+  }
+
+  &.main {
+    font-weight: 700;
+    padding-left: 32px;
+    padding-right: 32px;
+  }
+}

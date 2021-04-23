@@ -1,0 +1,22 @@
+.onPageNavigation {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  border-bottom: 1px solid #f3493e;
+  padding-bottom: 8px;
+}
+.onPageNavigation nav.links {
+  display: flex;
+  align-items: center;
+}
+.onPageNavigation nav.links .nav-item {
+  margin-right: 32px;
+}
+.onPageNavigation nav.links .nav-item.selected {
+  font-weight: 700;
+}
+.onPageNavigation .buttons button {
+  margin-left: 30px;
+}
+
+/*# sourceMappingURL=OnPageNavigation.css.map */

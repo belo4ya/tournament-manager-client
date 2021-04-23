@@ -1,0 +1,15 @@
+.page-selector {
+  display: flex;
+  align-items: center;
+
+  .arrow {
+    font-size: 24px;
+    cursor: pointer;
+  }
+
+  .current-page {
+    font-size: 18px;
+    color: #c4c4c4;
+    margin: 0 20px;
+  }
+}

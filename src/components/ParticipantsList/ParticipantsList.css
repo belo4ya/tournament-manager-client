@@ -1,0 +1,43 @@
+.participants-list {
+  border: 1px solid #858585;
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 10px;
+  padding: 7px 10px;
+  width: min-content;
+  position: relative;
+}
+.participants-list .team {
+  display: flex;
+  align-items: center;
+  font-size: 14px;
+  padding: 5px 10px;
+  background: #e7e7e7;
+  border: 1px solid #dadada;
+  width: max-content;
+}
+.participants-list .team span {
+  font-weight: 700;
+  margin-right: 6px;
+}
+.participants-list .team p {
+  margin: 0 6px;
+}
+.participants-list .team .close {
+  font-weight: 700;
+  margin-left: 6px;
+}
+.participants-list input {
+  outline: none;
+  border: none;
+  font-size: 14px;
+}
+.participants-list .clear {
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+  right: 10px;
+  font-weight: 700;
+}
+
+/*# sourceMappingURL=ParticipantsList.css.map */

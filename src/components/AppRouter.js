@@ -1,21 +1,21 @@
-import React, {useContext} from 'react';
-import {Switch, Route, Redirect} from 'react-router-dom';
-import {authRoutes, publicRoutes} from "../routes";
-import {MAIN_ROUTE} from "../utils/routes";
-import {Context} from "../index";
 import {observer} from "mobx-react-lite";
+import {authRoutes, publicRoutes} from "../routes";
+import {Switch, Route, Redirect} from "react-router-dom"
+import {INDEX_ROUTE} from "../utils/constants";
+import {useContext} from "react";
+import {Context} from "../index";
 
 const AppRouter = observer(() => {
-    const {user} = useContext(Context);
+    const {userStore} = useContext(Context)
     return (
         <Switch>
-            {user.isAuth && authRoutes.map(({path, Component}) => {
+            {userStore.isAuth && authRoutes.map(({path, Component}) => {
                 return (<Route key={path} path={path} component={Component} exact/>);
             })}
             {publicRoutes.map(({path, Component}) => {
                 return (<Route key={path} path={path} component={Component} exact/>);
             })}
-            <Redirect to={MAIN_ROUTE}/>
+            <Redirect to={INDEX_ROUTE}/>
         </Switch>
     );
 });

@@ -1,13 +1,21 @@
-import {MAIN_ROUTE, PROFILE_ROUTE, REGISTER_ROUTE, SIGNIN_ROUTE, TEAM_ROUTE, TOURNAMENT_ROUTE} from "./utils/routes";
-import Auth from "./pages/public/Auth";
-import Main from "./pages/public/Main";
-import Tournaments from "./pages/authorized/Tournaments";
-import Teams from "./pages/authorized/Teams";
-import Profile from "./pages/authorized/Profile";
+import {
+    INDEX_ROUTE,
+    PROFILE_ROUTE,
+    PROFILE_TEAMS_ROUTE,
+    PROFILE_TOURNAMENTS_ROUTE,
+    SIGN_IN_ROUTE,
+    SIGN_UP_ROUTE
+} from "./utils/constants";
+import {
+    Main,
+    Profile,
+    ProfileTournaments,
+    ProfileTeams
+} from "./pages"
 
 export const authRoutes = [
     {
-        path: MAIN_ROUTE,
+        path: INDEX_ROUTE,
         Component: Main,
     },
     {
@@ -15,26 +23,26 @@ export const authRoutes = [
         Component: Profile,
     },
     {
-        path: TOURNAMENT_ROUTE,
-        Component: Tournaments,
+        path: PROFILE_TOURNAMENTS_ROUTE,
+        Component: ProfileTournaments,
     },
     {
-        path: TEAM_ROUTE,
-        Component: Teams,
+        path: PROFILE_TEAMS_ROUTE,
+        Component: ProfileTeams,
     },
 ];
 
 export const publicRoutes = [
     {
-        path: MAIN_ROUTE,
+        path: INDEX_ROUTE,
         Component: Main,
     },
     {
-        path: SIGNIN_ROUTE,
-        Component: Auth,
+        path: SIGN_IN_ROUTE,
+        Component: Main,
     },
     {
-        path: REGISTER_ROUTE,
-        Component: Auth,
+        path: SIGN_UP_ROUTE,
+        Component: Main,
     },
 ]
