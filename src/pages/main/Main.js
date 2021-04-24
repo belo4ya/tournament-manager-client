@@ -20,9 +20,12 @@ const getTournaments = async (page, size = 2) => {
             }
         }
     )
-        .then((response) => response.data)
+        .then((response) => {
+            return response.data
+        })
         .catch((e) => {
             alert(e)
+            return {_embedded: {tournaments: []}, page: {totalPages: 1}}
         })
 }
 

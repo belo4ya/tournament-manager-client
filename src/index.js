@@ -15,10 +15,10 @@ export const Context = createContext(null);
 ReactDOM.render(
     <Context.Provider value={{
         userStore: new UserStore(),
-        tournamentStore: new TournamentStore(),
-        teamStore: new TeamStore(),
         signInModal: new ModalDialog(),
-        signUpModal: new ModalDialog()
+        signUpModal: new ModalDialog(),
+        teamStore: new TeamStore(),
+        tournamentStore: new TournamentStore()
     }}>
         <App/>
     </Context.Provider>,

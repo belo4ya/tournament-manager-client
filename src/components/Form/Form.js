@@ -30,18 +30,26 @@ const Form = (props) => {
                             label={field.label}
                             type={field.type}
                             placeholder={field.placeholder}
+                            value={field.value}
+                            onChange={field.onChange}
                         />
                     );
                 })}
             </div>
             {props.forgotPassword && (
-                <a href="/#" className="forgotPassword">Забыли пароль?</a>
+                <a
+                    href="/#"
+                    className="forgotPassword"
+                    onClick={() => alert('Функционал в разработке')}
+                >
+                    Забыли пароль?
+                </a>
             )}
             <div className="actions">
-                <Button class="modal-rounded red">{props.title}</Button>
+                <Button class="modal-rounded red" onClick={props.handleSubmit}>{props.title}</Button>
                 {props.authText && (
                     <span>{props.authText.text}
-                        <a href="/#">{props.authText.action}</a>
+                        <a href="/#" onClick={props.authText.onClick}>{props.authText.action}</a>
                     </span>
                 )}
             </div>

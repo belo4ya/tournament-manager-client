@@ -1,8 +1,8 @@
-import "./Footer.scss";
+import "./footer.scss";
 
 import React from 'react';
 import Logo from "../Logo";
-import Navigation from "../Navigation";
+import Navigation from "../Navigation/Navigation";
 
 const Footer = () => {
     return (

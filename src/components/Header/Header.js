@@ -1,8 +1,8 @@
-import "./Header.scss";
+import "./header.scss";
 
 import React, {useContext} from 'react';
 import Logo from "../Logo";
-import Navigation from "../Navigation";
+import Navigation from "../Navigation/Navigation";
 import Button from "../Button";
 import {Context} from "../../index";
 import {observer} from "mobx-react-lite";
@@ -20,6 +20,8 @@ const Header = observer(() => {
     }
     const handleSignOut = () => {
         userStore.isAuth = false
+        userStore.username = ''
+        userStore.roles = []
     }
     const handleProfile = () => {
     }
