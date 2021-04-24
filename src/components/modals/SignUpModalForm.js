@@ -6,6 +6,8 @@ import {observer} from "mobx-react-lite";
 import {$host} from "../../http";
 import {SIGN_UP_ENDPOINT} from "../../utils/endpoints";
 import jwtDecode from "jwt-decode";
+import {useHistory} from "react-router-dom";
+import {PROFILE_ROUTE} from "../../utils/constants";
 
 
 const style = {
@@ -20,6 +22,7 @@ const signUp = async (login, password) => {
 
 
 const SignUpModalForm = observer(() => {
+    const history = useHistory()
     const {userStore} = useContext(Context)
     const {signInModal} = useContext(Context)
     const {signUpModal} = useContext(Context)
@@ -44,12 +47,13 @@ const SignUpModalForm = observer(() => {
         setRePassword(event.target.value)
     }
 
-    const handleSignInButton = (event) => {
+    const handleSignInButton = () => {
         handleClose()
         signInModal.openModal()
     }
 
     const handleSignUpButton = (event) => {
+        event.preventDefault()
         if (isValidLogin(login) && isValidPassword(password) && isValidRePassword(password, rePassword)) {
             signUp(login, password)
                 .then((data) => {
@@ -59,6 +63,7 @@ const SignUpModalForm = observer(() => {
                     userStore.username = userData.sub
                     userStore.roles = userData.roles
                     handleClose()
+                    history.push(PROFILE_ROUTE)
                 })
                 .catch((e) => {
                     if (e.response && e.response.status === 401) {

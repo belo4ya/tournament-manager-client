@@ -8,3 +8,5 @@ export const SIGN_UP_ROUTE = '/auth/signUp';
 export const PROFILE_ROUTE = '/profile';
 export const PROFILE_TOURNAMENTS_ROUTE = '/profile/tournaments';
 export const PROFILE_TEAMS_ROUTE = '/profile/teams';
+
+export const TOURNAMENT_CREATION = 'profile/createTournament';

@@ -1,6 +1,6 @@
 import './main.scss'
 
-import React, {useEffect, useState} from 'react';
+import React, {useContext, useEffect, useState} from 'react';
 import SignInModalForm from "../../components/modals/SignInModalForm";
 import SignUpModalForm from "../../components/modals/SignUpModalForm";
 import PageSelector from "../../components/PageSelector/PageSelector";
@@ -8,6 +8,10 @@ import Button from "../../components/Button"
 import TournamentsStaticTable from "../../components/tournaments/TournamentsStaticTable";
 import {$host} from "../../http";
 import {TOURNAMENT_ENDPOINT} from "../../utils/endpoints";
+import {useHistory} from 'react-router-dom'
+import {Context} from "../../index";
+import {PROFILE_ROUTE} from "../../utils/constants";
+import {observer} from "mobx-react-lite";
 
 
 const getTournaments = async (page, size = 2) => {
@@ -31,7 +35,10 @@ const getTournaments = async (page, size = 2) => {
 }
 
 
-const Main = () => {
+const Main = observer(() => {
+    const history = useHistory()
+    const {userStore} = useContext(Context)
+    const {signUpModal} = useContext(Context)
     const [tournaments, setTournaments] = useState([])
     const [currentPage, setCurrentPage] = useState(0)
     const [lastPage, setLastPage] = useState(0)
@@ -46,9 +53,16 @@ const Main = () => {
     const nextPage = () => {
         if (currentPage < lastPage) setCurrentPage(currentPage + 1)
     }
-
     const prevPage = () => {
         if (currentPage > 0) setCurrentPage(currentPage - 1)
+    }
+
+    const handleTryButton = () => {
+        if (userStore.isAuth) {
+            history.push(PROFILE_ROUTE)
+        } else {
+            signUpModal.openModal()
+        }
     }
 
     return (
@@ -60,7 +74,7 @@ const Main = () => {
                 <div className="container">
                     <div className="content">
                         <h1>Генератор турнирных сеток и таблиц</h1>
-                        <Button class="black main">Попробовать</Button>
+                        <Button class="black main" onClick={handleTryButton}>Попробовать</Button>
                     </div>
                 </div>
             </section>
@@ -80,6 +94,6 @@ const Main = () => {
             </section>
         </div>
     )
-};
+});
 
 export default Main;

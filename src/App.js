@@ -21,9 +21,8 @@ const App = observer(() => {
 
     useEffect(() => {
         checkSession()
-            .then((data) => {
+            .then(() => {
                 userStore.isAuth = true
-                console.log(data)
             })
             .catch((e) => {
                 if (e.response && e.response.status === 401) {
