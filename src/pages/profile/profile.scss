@@ -1,0 +1,105 @@
+.profile-section {
+  margin-top: 80px;
+
+  .profile-card {
+    height: 60px;
+    display: grid;
+    grid-template-columns: 190px 1fr;
+    justify-items: start;
+    align-items: center;
+    align-content: space-between;
+    margin: 0 95px;
+
+    p {
+      font-size: 14px;
+    }
+  }
+}
+
+.tournaments-section {
+  margin-top: 80px;
+  padding-top: 20px;
+  padding-bottom: 80px;
+  position: relative;
+
+  .rect {
+    position: absolute;
+    background-color: #f3493e;
+    width: 95px;
+    height: 8px;
+  }
+
+  .first-rect {
+    top: 0;
+    left: 0;
+  }
+
+  .last-rect {
+    bottom: 0;
+    right: 0;
+  }
+
+  .my-tournaments {
+    margin: 20px 0 0 95px;
+    max-width: 825px;
+
+    h2 {
+      margin-left: 95px;
+    }
+
+    .tournaments {
+      margin-top: 40px;
+
+      .buttons {
+        margin-top: 15px;
+        display: flex;
+        justify-content: flex-end;
+
+        button {
+          margin-left: 30px;
+        }
+
+      }
+
+    }
+
+  }
+
+}
+
+.teams-section {
+  margin: 20px 95px 160px 0;
+  display: flex;
+  justify-content: flex-end;
+
+  .my-teams {
+    width: 610px;
+
+    .my-teams__title {
+      display: flex;
+      justify-content: flex-end;
+
+      h2 {
+        margin-right: 95px;
+      }
+    }
+
+    .my-teams__teams {
+      margin-top: 50px;
+
+      .buttons {
+        margin-top: 25px;
+        display: flex;
+        justify-content: flex-start;
+
+        button {
+          margin-right: 30px;
+        }
+
+      }
+
+    }
+
+  }
+
+}

@@ -5,7 +5,7 @@ import PageSelector from "../../components/PageSelector/PageSelector";
 import Button from "../../components/Button"
 import TournamentsStaticTable from "../../components/tournaments/TournamentsStaticTable";
 import {$host} from "../../http";
-import {TOURNAMENT_ENDPOINT} from "../../utils/endpoints";
+import {TOURNAMENTS_ENDPOINT} from "../../utils/endpoints";
 import {useHistory} from 'react-router-dom'
 import {Context} from "../../index";
 import {PROFILE_ROUTE} from "../../utils/constants";
@@ -14,7 +14,7 @@ import {observer} from "mobx-react-lite";
 
 const getTournaments = async (page, size = 2) => {
     return await $host.get(
-        TOURNAMENT_ENDPOINT, {
+        TOURNAMENTS_ENDPOINT, {
             params: {
                 projection: 'bracketType',
                 sort: ['createdDate', 'desc'].join(','),

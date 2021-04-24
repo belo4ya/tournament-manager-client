@@ -10,3 +10,4 @@ export const PROFILE_TOURNAMENTS_ROUTE = '/profile/tournaments';
 export const PROFILE_TEAMS_ROUTE = '/profile/teams';
 
 export const TOURNAMENT_CREATION = 'profile/createTournament';
+export const TEAM_CREATION = 'profile/createTeam';

@@ -6,14 +6,14 @@ const TournamentCard = (props) => {
     return (
         <div className="tournament-card">
             <div className="title-container">
-                <img src="" alt="" />
-                <div className="title">
-                    <h4>{props.name}</h4>
+                <img src={props.logo} alt="" />
+                <div>
+                    <h5>{props.name}</h5>
                     <span className="subtitle">{props.bracketType}</span>
                 </div>
             </div>
             <div className="teams">
-                <h4>{props.totalTeams}</h4>
+                <h5>{props.totalTeams}</h5>
                 <span className="subtitle">Teams</span>
             </div>
             <div className="date">{props.date}</div>

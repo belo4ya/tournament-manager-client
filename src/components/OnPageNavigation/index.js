@@ -11,8 +11,8 @@ export default function OnPageNavigation() {
         <div className="nav-item">Команды</div>
       </nav>
       <div className="buttons">
-        <Button class="black" text="Создать турнир" />
-        <Button class="red rounded" text="Создать команду" />
+          <Button class="black">Создать турнир</Button>
+          <Button class="red rounded">Создать команду</Button>
       </div>
     </div>
   );

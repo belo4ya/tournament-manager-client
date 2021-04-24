@@ -3,9 +3,9 @@ import "./TeamCard.scss";
 export default function TeamCard(props) {
   return (
     <div className="team-card">
-      <h4>{props.title}</h4>
+      <h6>{props.title}</h6>
       <img src="" alt="" />
-      <span>#{props.id}</span>
+      <p>#{props.id}</p>
     </div>
   );
 }

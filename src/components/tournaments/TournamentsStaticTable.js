@@ -7,14 +7,14 @@ const TournamentsStaticTable = (props) => {
     return (
         <div>
             {props.tournaments.map(t =>
-                    <TournamentItem
-                        key={t.id}
-                        logo={t.logo}
-                        name={t.name}
-                        bracketType={t.bracketType}
-                        totalTeams={t.totalTeams}
-                        date={t.createdDate}
-                    />
+                <TournamentItem
+                    key={t.id}
+                    logo={t.logo}
+                    name={t.name}
+                    bracketType={t.bracketType}
+                    totalTeams={t.totalTeams}
+                    date={t.createdDate}
+                />
             )}
         </div>
     );
