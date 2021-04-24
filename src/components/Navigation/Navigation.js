@@ -3,8 +3,9 @@ import './navigation.scss'
 import React, {useContext} from 'react';
 import Button from "../Button";
 import {Context} from "../../index";
+import {observer} from "mobx-react-lite";
 
-const Navigation = (props) => {
+const Navigation = observer((props) => {
     const {userStore} = useContext(Context)
     const {signInModal} = useContext(Context)
 
@@ -24,6 +25,6 @@ const Navigation = (props) => {
             <Button class="white" onClick={handleCreateTournament}>Создать турнир</Button>
         </nav>
     );
-};
+});
 
 export default Navigation;

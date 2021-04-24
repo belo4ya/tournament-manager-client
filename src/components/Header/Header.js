@@ -22,6 +22,7 @@ const Header = observer(() => {
         userStore.isAuth = false
         userStore.username = ''
         userStore.roles = []
+        localStorage.setItem('token', '')
     }
     const handleProfile = () => {
     }
