@@ -6,9 +6,12 @@ import Navigation from "../Navigation/Navigation";
 import Button from "../Button";
 import {Context} from "../../index";
 import {observer} from "mobx-react-lite";
+import {useHistory} from "react-router-dom";
+import {INDEX_ROUTE, PROFILE_ROUTE} from "../../utils/constants";
 
 
 const Header = observer(() => {
+    const history = useHistory()
     const {userStore} = useContext(Context)
     const {signInModal} = useContext(Context)
     const {signUpModal} = useContext(Context)
@@ -24,15 +27,17 @@ const Header = observer(() => {
         userStore.username = ''
         userStore.roles = []
         localStorage.setItem('token', '')
+        history.push(INDEX_ROUTE)
     }
     const handleProfile = () => {
+        history.push(PROFILE_ROUTE)
     }
 
-    const leftBtn = userStore.isAuth ?
+    const leftButton = userStore.isAuth ?
         {text: 'Профиль', onClick: handleProfile} :
         {text: 'Вход', onClick: handleSignIn}
 
-    const rightBtn = userStore.isAuth ?
+    const rightButton = userStore.isAuth ?
         {text: 'Выход', onClick: handleSignOut} :
         {text: 'Регистрация', onClick: handleSignUp}
 
@@ -42,8 +47,8 @@ const Header = observer(() => {
                 <Logo class="black"/>
                 <Navigation/>
                 <div className="auth">
-                    <Button onClick={leftBtn.onClick}>{leftBtn.text}</Button>
-                    <Button class="rounded black" onClick={rightBtn.onClick}>{rightBtn.text}</Button>
+                    <Button onClick={leftButton.onClick}>{leftButton.text}</Button>
+                    <Button class="rounded black" onClick={rightButton.onClick}>{rightButton.text}</Button>
                 </div>
             </div>
         </header>

@@ -1,22 +1,35 @@
 import {
+    ABOUT_ROUTE, CREATOR_ROUTE,
     INDEX_ROUTE,
     PROFILE_ROUTE,
     PROFILE_TEAMS_ROUTE,
     PROFILE_TOURNAMENTS_ROUTE,
     SIGN_IN_ROUTE,
-    SIGN_UP_ROUTE
+    SIGN_UP_ROUTE,
+    TOURNAMENT_CREATION
 } from "./utils/constants";
 import {
     Main,
     Profile,
     ProfileTournaments,
-    ProfileTeams
+    ProfileTeams,
+    TournamentCreation
 } from "./pages"
+import About from "./pages/about/About";
+import Creator from "./pages/creator/Creator";
 
 export const authRoutes = [
     {
         path: INDEX_ROUTE,
         Component: Main,
+    },
+    {
+        path: ABOUT_ROUTE,
+        Component: About,
+    },
+    {
+        path: CREATOR_ROUTE,
+        Component: Creator,
     },
     {
         path: PROFILE_ROUTE,
@@ -29,6 +42,10 @@ export const authRoutes = [
     {
         path: PROFILE_TEAMS_ROUTE,
         Component: ProfileTeams,
+    },
+    {
+        path: TOURNAMENT_CREATION,
+        Component: TournamentCreation,
     },
 ];
 
@@ -44,5 +61,13 @@ export const publicRoutes = [
     {
         path: SIGN_UP_ROUTE,
         Component: Main,
+    },
+    {
+        path: ABOUT_ROUTE,
+        Component: About,
+    },
+    {
+        path: CREATOR_ROUTE,
+        Component: Creator,
     },
 ]

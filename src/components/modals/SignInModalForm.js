@@ -64,7 +64,8 @@ const SignInModalForm = observer(() => {
                 })
         }
     }
-    const handleSignUpButton = () => {
+    const handleSignUpButton = (event) => {
+        event.preventDefault()
         handleClose()
         signUpModal.openModal()
     }

@@ -41,7 +41,10 @@ const Form = (props) => {
                 <a
                     href="/#"
                     className="forgotPassword"
-                    onClick={() => alert('Функционал в разработке')}
+                    onClick={(event) => {
+                        event.preventDefault()
+                        alert('Функционал в разработке')
+                    }}
                 >
                     Забыли пароль?
                 </a>

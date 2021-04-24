@@ -67,9 +67,6 @@ const Main = observer(() => {
 
     return (
         <div>
-            <SignInModalForm/>
-            <SignUpModalForm/>
-
             <section className="section-header">
                 <div className="container">
                     <div className="content">

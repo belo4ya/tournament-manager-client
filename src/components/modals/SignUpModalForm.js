@@ -47,7 +47,8 @@ const SignUpModalForm = observer(() => {
         setRePassword(event.target.value)
     }
 
-    const handleSignInButton = () => {
+    const handleSignInButton = (event) => {
+        event.preventDefault()
         handleClose()
         signInModal.openModal()
     }

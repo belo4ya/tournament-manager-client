@@ -9,6 +9,8 @@ import {observer} from "mobx-react-lite";
 import {Context} from "./index";
 import {$authHost} from "./http";
 import {AUTH_ENDPOINT} from "./utils/endpoints";
+import SignInModalForm from "./components/modals/SignInModalForm";
+import SignUpModalForm from "./components/modals/SignUpModalForm";
 
 
 const checkSession = async () => {
@@ -37,6 +39,8 @@ const App = observer(() => {
         <BrowserRouter>
             <div className="App">
                 <Header/>
+                <SignInModalForm/>
+                <SignUpModalForm/>
                 <AppRouter/>
                 <Footer/>
             </div>
