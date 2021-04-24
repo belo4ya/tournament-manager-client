@@ -7,11 +7,12 @@ import PageSelector from "../../components/PageSelector/PageSelector";
 import Button from "../../components/Button"
 import TournamentsStaticTable from "../../components/tournaments/TournamentsStaticTable";
 import {$host} from "../../http";
+import {TOURNAMENT_ENDPOINT} from "../../utils/endpoints";
 
 
 const getTournaments = async (page, size = 2) => {
     return await $host.get(
-        '/tournaments', {
+        TOURNAMENT_ENDPOINT, {
             params: {
                 projection: 'bracketType',
                 sort: ['createdDate', 'desc'].join(','),

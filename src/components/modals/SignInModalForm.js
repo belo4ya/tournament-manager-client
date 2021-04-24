@@ -8,6 +8,12 @@ import {SIGN_IN_ENDPOINT} from "../../utils/endpoints";
 import jwtDecode from "jwt-decode";
 
 
+const style = {
+    overlay: {display: 'flex', alignItems: 'center', justifyContent: 'center'},
+    content: {position: 'relative', inset: 0, padding: 0, borderRadius: '15px'}
+}
+
+
 const signIn = async (login, password) => {
     return (await $host.post(SIGN_IN_ENDPOINT, {username: login, password: password})).data
 }
@@ -54,11 +60,6 @@ const SignInModalForm = observer(() => {
     const handleSignUpButton = (event) => {
         handleClose()
         signUpModal.openModal()
-    }
-
-    const style = {
-        overlay: {display: 'flex', alignItems: 'center', justifyContent: 'center'},
-        content: {position: 'relative', inset: 0, padding: 0, borderRadius: '15px'}
     }
 
     return (
