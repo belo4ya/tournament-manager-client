@@ -1,8 +1,6 @@
 import './main.scss'
 
 import React, {useContext, useEffect, useState} from 'react';
-import SignInModalForm from "../../components/modals/SignInModalForm";
-import SignUpModalForm from "../../components/modals/SignUpModalForm";
 import PageSelector from "../../components/PageSelector/PageSelector";
 import Button from "../../components/Button"
 import TournamentsStaticTable from "../../components/tournaments/TournamentsStaticTable";
