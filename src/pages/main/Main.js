@@ -1,63 +1,50 @@
 import './main.scss'
 
-import React, {useState} from 'react';
-import SignInModalForm from "../../components/SignInModalForm/SignInModalForm";
-import SignUpModalForm from "../../components/SignUpModalForm/SignUpModalForm";
-import PageSelector from "../../shared/PageSelector";
+import React, {useEffect, useState} from 'react';
+import SignInModalForm from "../../components/modals/SignInModalForm";
+import SignUpModalForm from "../../components/modals/SignUpModalForm";
+import PageSelector from "../../components/PageSelector/PageSelector";
 import Button from "../../components/Button"
 import TournamentsStaticTable from "../../components/tournaments/TournamentsStaticTable";
+import {$host} from "../../http";
+
+
+const getTournaments = async (page, size = 2) => {
+    return await $host.get(
+        '/tournaments', {
+            params: {
+                projection: 'bracketType',
+                sort: ['createdDate', 'desc'].join(','),
+                page: page,
+                size: size
+            }
+        }
+    )
+        .then((response) => response.data)
+        .catch((e) => {
+            alert(e)
+        })
+}
+
 
 const Main = () => {
-    const mock = [
-        {
-            id: 0,
-            image: '',
-            title: 'BLAST Premier Spring Showdown 2021',
-            subtitle: 'Single Elimination',
-            teams: '16',
-            date: '23:11 16/04/2021'
-        },
-        {
-            id: 1,
-            image: '',
-            title: 'BLAST Premier Spring Showdown 2021',
-            subtitle: 'Single Elimination',
-            teams: '16',
-            date: '23:11 16/04/2021'
-        },
-        {
-            id: 2,
-            image: '',
-            title: 'BLAST Premier Spring Showdown 2021',
-            subtitle: 'Single Elimination',
-            teams: '16',
-            date: '23:11 16/04/2021'
-        },
-        {
-            id: 3,
-            image: '',
-            title: 'BLAST Premier Spring Showdown 2021',
-            subtitle: 'Single Elimination',
-            teams: '16',
-            date: '23:11 16/04/2021'
-        },
-        {
-            id: 4,
-            image: '',
-            title: 'BLAST Premier Spring Showdown 2021',
-            subtitle: 'Single Elimination',
-            teams: '16',
-            date: '23:11 16/04/2021'
-        }
-    ]
-    const [tournaments, setTournaments] = useState(mock)
+    const [tournaments, setTournaments] = useState([])
+    const [currentPage, setCurrentPage] = useState(0)
+    const [lastPage, setLastPage] = useState(0)
 
-    const [page, setPage] = useState(1)
+    useEffect(() => {
+        getTournaments(currentPage).then((data) => {
+            setTournaments(data._embedded.tournaments)
+            setLastPage(data.page.totalPages - 1)
+        })
+    }, [currentPage])
+
     const nextPage = () => {
-        setPage(page + 1)
+        if (currentPage < lastPage) setCurrentPage(currentPage + 1)
     }
+
     const prevPage = () => {
-        if (page > 1) setPage(page - 1)
+        if (currentPage > 0) setCurrentPage(currentPage - 1)
     }
 
     return (
@@ -82,7 +69,7 @@ const Main = () => {
                         </div>
                         <div className="tournaments">
                             <TournamentsStaticTable tournaments={tournaments}/>
-                            <PageSelector page={page} onPrevPage={prevPage} onNextPage={nextPage}/>
+                            <PageSelector page={currentPage + 1} onPrevPage={prevPage} onNextPage={nextPage}/>
                         </div>
                     </div>
                 </div>

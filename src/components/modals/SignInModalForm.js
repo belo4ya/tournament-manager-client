@@ -1,5 +1,5 @@
 import React, {useContext} from 'react';
-import Form from "../Form";
+import Form from "../Form/Form";
 import Modal from "react-modal";
 import {Context} from "../../index";
 import {observer} from "mobx-react-lite";
@@ -9,16 +9,16 @@ const SignInModalForm = observer(() => {
     const handleClose = () => {
         signInModal.closeModal()
     }
-    const modalStyle = {
+    const style = {
         overlay: {display: 'flex', alignItems: 'center', justifyContent: 'center'},
-        content: {position: 'relative', padding: 0, borderRadius: '15px'}
+        content: {position: 'relative', inset: 0, padding: 0, borderRadius: '15px'}
     }
 
     return (
         <Modal
+            style={style}
             onRequestClose={handleClose}
             isOpen={signInModal.isOpen}
-            style={modalStyle}
         >
             <Form
                 title="Вход"

@@ -6,10 +6,10 @@ const TournamentItem = (props) => {
         <div className="tournament-item">
             <TournamentCard
                 key={props.id}
-                image={props.image}
-                title={props.title}
-                subtitle={props.subtitle}
-                teams={props.teams}
+                logo={props.logo}
+                name={props.name}
+                bracketType={props.bracketType}
+                totalTeams={props.totalTeams}
                 date={props.date}
             />
         </div>

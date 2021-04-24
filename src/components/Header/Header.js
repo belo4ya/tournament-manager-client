@@ -25,7 +25,7 @@ const Header = observer(() => {
     }
 
     const leftBtn = userStore.isAuth ?
-        {text: 'Профиль', onClick: null} :
+        {text: 'Профиль', onClick: handleProfile} :
         {text: 'Вход', onClick: handleSignIn}
 
     const rightBtn = userStore.isAuth ?

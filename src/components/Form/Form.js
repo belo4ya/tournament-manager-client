@@ -1,13 +1,14 @@
-import "./Form.scss";
+import "./form.scss";
 
+import React from 'react';
 import Input from "../Input";
 import Button from "../Button";
 
-export default function Form(props) {
+const Form = (props) => {
     return (
         <form className="form">
             <div className="close" onClick={props.handleClose}>[x]</div>
-            <h2>{props.title}</h2>
+            <h3>{props.title}</h3>
             {props.image && (
                 <div className="image">
                     <label htmlFor={props.image.id}>{props.image.label}</label>
@@ -37,7 +38,7 @@ export default function Form(props) {
                 <a href="/#" className="forgotPassword">Забыли пароль?</a>
             )}
             <div className="actions">
-                <Button class="rounded red" text={props.title}/>
+                <Button class="modal-rounded red">{props.title}</Button>
                 {props.authText && (
                     <span>{props.authText.text}
                         <a href="/#">{props.authText.action}</a>
@@ -46,4 +47,6 @@ export default function Form(props) {
             </div>
         </form>
     );
-}
+};
+
+export default Form;

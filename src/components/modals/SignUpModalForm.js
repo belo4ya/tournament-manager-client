@@ -1,24 +1,24 @@
 import React, {useContext} from 'react';
-import {observer} from "mobx-react-lite";
-import {Context} from "../../index";
+import Form from "../Form/Form";
 import Modal from "react-modal";
-import Form from "../Form";
+import {Context} from "../../index";
+import {observer} from "mobx-react-lite";
 
 const SignUpModalForm = observer(() => {
     const {signUpModal} = useContext(Context)
     const handleClose = () => {
         signUpModal.closeModal()
     }
-    const modalStyle = {
+    const style = {
         overlay: {display: 'flex', alignItems: 'center', justifyContent: 'center'},
-        content: {position: 'relative', padding: 0, borderRadius: '15px'}
+        content: {position: 'relative', inset: 0, padding: 0, borderRadius: '15px'}
     }
 
     return (
         <Modal
+            style={style}
             onRequestClose={handleClose}
             isOpen={signUpModal.isOpen}
-            style={modalStyle}
         >
             <Form
                 title="Регистрация"
