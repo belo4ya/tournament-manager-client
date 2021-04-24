@@ -50,22 +50,24 @@ const SignUpModalForm = observer(() => {
     }
 
     const handleSignUpButton = (event) => {
-        signUp(login, password)
-            .then((data) => {
-                const userData = jwtDecode(data.token)
-                localStorage.setItem('token', data.token)
-                userStore.isAuth = true
-                userStore.username = userData.sub
-                userStore.roles = userData.roles
-                handleClose()
-            })
-            .catch((e) => {
-                if (e.response && e.response.status === 401) {
-                    alert('Пользователь с таким логином уже существует')
-                } else {
-                    alert(e)
-                }
-            })
+        if (isValidLogin(login) && isValidPassword(password) && isValidRePassword(password, rePassword)) {
+            signUp(login, password)
+                .then((data) => {
+                    const userData = jwtDecode(data.token)
+                    localStorage.setItem('token', data.token)
+                    userStore.isAuth = true
+                    userStore.username = userData.sub
+                    userStore.roles = userData.roles
+                    handleClose()
+                })
+                .catch((e) => {
+                    if (e.response && e.response.status === 401) {
+                        alert('Пользователь с таким логином уже существует')
+                    } else {
+                        alert(e)
+                    }
+                })
+        }
     }
 
     return (
@@ -81,6 +83,7 @@ const SignUpModalForm = observer(() => {
                 fields={[
                     {
                         label: "Логин",
+                        inputStyle: isValidLogin(login) ? 'input-secondary' : 'input-danger',
                         type: "text",
                         placeholder: "login",
                         id: "login",
@@ -89,6 +92,7 @@ const SignUpModalForm = observer(() => {
                     },
                     {
                         label: "Пароль",
+                        inputStyle: isValidPassword(password) ? 'input-secondary' : 'input-danger',
                         type: "password",
                         placeholder: "password",
                         id: "password",
@@ -97,6 +101,7 @@ const SignUpModalForm = observer(() => {
                     },
                     {
                         label: "Подтвердите пароль",
+                        inputStyle: isValidRePassword(password, rePassword) ? 'input-secondary' : 'input-danger',
                         type: "password",
                         placeholder: "confirm password",
                         id: "rePassword",
@@ -110,5 +115,21 @@ const SignUpModalForm = observer(() => {
         </Modal>
     );
 });
+
+
+const isValidLogin = (login) => {
+    return login.length > 3
+}
+
+
+const isValidPassword = (password) => {
+    return password.length > 3
+}
+
+
+const isValidRePassword = (password, rePassword) => {
+    return password === rePassword
+}
+
 
 export default SignUpModalForm;

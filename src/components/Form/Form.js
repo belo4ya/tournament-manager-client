@@ -28,6 +28,7 @@ const Form = (props) => {
                             key={field.id}
                             id={field.id}
                             label={field.label}
+                            inputStyle={field.inputStyle}
                             type={field.type}
                             placeholder={field.placeholder}
                             value={field.value}

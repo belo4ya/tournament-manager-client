@@ -15,4 +15,17 @@
     width: 100%;
     margin-top: 7px;
   }
+
+  .input-secondary {
+    border-color: #858585;
+  }
+
+  .input-danger {
+    border-color: #f3493e;
+
+    &::placeholder {
+      color: #f3493e;
+    }
+  }
+
 }
