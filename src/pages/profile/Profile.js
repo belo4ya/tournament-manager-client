@@ -1,7 +1,7 @@
 import "./profile.scss"
 
 import React, {useContext, useEffect, useState} from 'react';
-import OnPageNavigation from "../../components/OnPageNavigation";
+import OnPageNavigation from "../../components/OnPageNavigation/OnPageNavigation";
 import TournamentsStaticTable from "../../components/tournaments/TournamentsStaticTable";
 import Button from "../../components/Button";
 import TeamsList from "../../components/teams/TeamsList";
