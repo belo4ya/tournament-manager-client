@@ -1,66 +1,56 @@
 import "./profile.scss"
 
-import React from 'react';
+import React, {useContext, useEffect, useState} from 'react';
 import OnPageNavigation from "../../components/OnPageNavigation";
 import TournamentsStaticTable from "../../components/tournaments/TournamentsStaticTable";
 import Button from "../../components/Button";
 import TeamsList from "../../components/teams/TeamsList";
+import {$authHost} from "../../http";
+import {Context} from "../../index";
+import {observer} from "mobx-react-lite";
+import {MY_USER_ENDPOINT} from "../../utils/endpoints";
+import {compareDates, toDate} from "../../utils/date";
 
-const Profile = () => {
-    const username = 'belo4ya'
-    const date = '14/14/2021 15:14'
-    const tournaments = [
-        {
-            id: 1,
-            logo: '',
-            name: 'tournament 1',
-            bracketType: 'Single Elimination',
-            totalTeams: 16,
-            createdDate: '23:11 16/04/2021',
-        },
-        {
-            id: 2,
-            logo: '',
-            name: 'tournament 2',
-            bracketType: 'Single Elimination',
-            totalTeams: 16,
-            createdDate: '23:11 16/04/2021',
-        },
-        {
-            id: 3,
-            logo: '',
-            name: 'tournament 3',
-            bracketType: 'Single Elimination',
-            totalTeams: 16,
-            createdDate: '23:11 16/04/2021',
-        },
-        {
-            id: 4,
-            logo: '',
-            name: 'tournament 4',
-            bracketType: 'Single Elimination',
-            totalTeams: 16,
-            createdDate: '23:11 16/04/2021',
-        },
-    ]
-    const teams = [
-        {
-            id: 1,
-            title: 'Liquid',
-        },
-        {
-            id: 2,
-            title: 'Liquid',
-        },
-        {
-            id: 3,
-            title: 'Liquid',
-        },
-        {
-            id: 4,
-            title: 'Liquid',
-        },
-    ]
+
+const Profile = observer(() => {
+    const {userStore} = useContext(Context)
+    const [tournaments, setTournaments] = useState([])
+    const [teams, setTeams] = useState([])
+
+    useEffect(() => {
+        $authHost.get(MY_USER_ENDPOINT)
+            .then((response) => {
+                const userData = response.data._embedded.users[0]
+                userStore.id = userData.id
+                userStore.createdDate = userData.createdDate
+                userStore.username = userData.username
+
+                $authHost.get(`/users/${userStore.id}/tournaments`)
+                    .then((response) => {
+                        const tournaments = response.data._embedded.tournaments.slice(0, 4)
+                        setTournaments(tournaments.sort(compareDates).map((t) => {
+                            t.date = t.lastModifiedDate
+                            return t
+                        }))
+                    })
+                    .catch((e) => {
+                        alert(e)
+                    })
+
+                $authHost.get(`/users/${userStore.id}/teams`)
+                    .then((response) => {
+                        const teams = response.data._embedded.teams.slice(0, 4)
+                        console.log(teams)
+                        setTeams(teams.sort(compareDates))
+                    })
+                    .catch((e) => {
+                        alert(e)
+                    })
+            })
+            .catch((e) => {
+                alert(e)
+            })
+    }, [])
 
     return (
         <div className="container">
@@ -68,9 +58,9 @@ const Profile = () => {
             <div className="profile-section">
                 <div className="profile-card">
                     <h4>Логин</h4>
-                    <p>{username}</p>
+                    <p>{userStore.username}</p>
                     <h4>Дата регистрации</h4>
-                    <p>{date}</p>
+                    <p>{userStore.createdDate}</p>
                 </div>
             </div>
 
@@ -106,6 +96,6 @@ const Profile = () => {
 
         </div>
     );
-};
+});
 
 export default Profile;

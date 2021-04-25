@@ -6,7 +6,7 @@ import {
     PROFILE_TOURNAMENTS_ROUTE,
     SIGN_IN_ROUTE,
     SIGN_UP_ROUTE,
-    TOURNAMENT_CREATION
+    TOURNAMENT_CREATION_ROUTE
 } from "./utils/constants";
 import {
     Main,
@@ -44,7 +44,7 @@ export const authRoutes = [
         Component: ProfileTeams,
     },
     {
-        path: TOURNAMENT_CREATION,
+        path: TOURNAMENT_CREATION_ROUTE,
         Component: TournamentCreation,
     },
 ];

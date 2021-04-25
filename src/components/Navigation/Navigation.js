@@ -5,7 +5,7 @@ import Button from "../Button";
 import {Context} from "../../index";
 import {observer} from "mobx-react-lite";
 import {useHistory} from "react-router-dom";
-import {ABOUT_ROUTE, CREATOR_ROUTE, INDEX_ROUTE, TOURNAMENT_CREATION} from "../../utils/constants";
+import {ABOUT_ROUTE, CREATOR_ROUTE, INDEX_ROUTE, TOURNAMENT_CREATION_ROUTE} from "../../utils/constants";
 
 const Navigation = observer((props) => {
     const history = useHistory()
@@ -14,7 +14,7 @@ const Navigation = observer((props) => {
 
     const handleCreateTournamentButton = () => {
         if (userStore.isAuth) {
-            history.push(TOURNAMENT_CREATION)
+            history.push(TOURNAMENT_CREATION_ROUTE)
         } else {
             signInModal.openModal()
         }

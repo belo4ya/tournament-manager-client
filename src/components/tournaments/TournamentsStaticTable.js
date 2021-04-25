@@ -13,7 +13,7 @@ const TournamentsStaticTable = (props) => {
                     name={t.name}
                     bracketType={t.bracketType}
                     totalTeams={t.totalTeams}
-                    date={t.createdDate}
+                    date={t.date}
                 />
             )}
         </div>

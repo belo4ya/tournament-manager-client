@@ -9,8 +9,9 @@ const TeamsList = (props) => {
             {props.teams.map((t) =>
                 <TeamCard
                     key={t.id}
-                    id={t.id}
-                    title={t.title}
+                    name={t.name}
+                    logo={t.logo}
+                    rating={t.rating}
                 />
             )}
         </div>

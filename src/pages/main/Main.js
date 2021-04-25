@@ -43,7 +43,10 @@ const Main = observer(() => {
 
     useEffect(() => {
         getTournaments(currentPage).then((data) => {
-            setTournaments(data._embedded.tournaments)
+            setTournaments(data._embedded.tournaments.map((t) => {
+                t.date = t.createdDate
+                return t
+            }))
             setLastPage(data.page.totalPages - 1)
         })
     }, [currentPage])

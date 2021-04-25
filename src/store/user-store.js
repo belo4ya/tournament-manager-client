@@ -2,10 +2,28 @@ import {makeAutoObservable} from "mobx";
 
 export default class UserStore {
     constructor() {
-        this._username = ''
-        this._roles = []
-        this._isAuth = false
+        this._id = null
+        this._createdDate = null
+        this._username = null
+        this._roles = null
+        this._isAuth = null
         makeAutoObservable(this)
+    }
+
+    get id() {
+        return this._id;
+    }
+
+    set id(value) {
+        this._id = value;
+    }
+
+    get createdDate() {
+        return this._createdDate;
+    }
+
+    set createdDate(value) {
+        this._createdDate = value;
     }
 
     get username() {

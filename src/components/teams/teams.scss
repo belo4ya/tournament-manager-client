@@ -1,4 +1,13 @@
 .teams-list {
   display: flex;
-  justify-content: space-between;
+  justify-content: flex-end;
+
+  .team-card {
+    margin-right: 30px;
+
+    &:last-child {
+      margin-right: 0;
+    }
+  }
+
 }
