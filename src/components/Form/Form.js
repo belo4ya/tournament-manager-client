@@ -1,7 +1,7 @@
 import "./form.scss";
 
 import React from 'react';
-import Input from "../Input";
+import Input from "../Input/Input";
 import Button from "../Button";
 
 const Form = (props) => {

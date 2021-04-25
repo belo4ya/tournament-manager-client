@@ -4,7 +4,7 @@ import React, {useContext, useEffect, useState} from 'react';
 import OnPageNavigation from "../../components/OnPageNavigation/OnPageNavigation";
 import TournamentsStaticTable from "../../components/tournaments/TournamentsStaticTable";
 import Button from "../../components/Button";
-import TeamsList from "../../components/teams/TeamsList";
+import TeamsRow from "../../components/teams/TeamsRow";
 import {$authHost} from "../../http";
 import {Context} from "../../index";
 import {observer} from "mobx-react-lite";
@@ -69,7 +69,6 @@ const Profile = observer(() => {
             setTournaments(tournaments)
         })
         getTeams().then((data) => {
-            console.log(data._embedded.teams)
             setTeams(data._embedded.teams)
         })
     }, [])
@@ -107,7 +106,7 @@ const Profile = observer(() => {
                         <h2>Мои команды</h2>
                     </div>
                     <div className="my-teams__teams">
-                        <TeamsList teams={teams}/>
+                        <TeamsRow teams={teams}/>
                         <div className="buttons">
                             <Button class="red">Создать команду</Button>
                             <Button class="black">Показать все</Button>

@@ -1,0 +1,34 @@
+.search {
+  display: flex;
+  justify-content: space-between;
+  max-width: 273px;
+  height: 42px;
+
+  .search-input {
+    max-width: 226px;
+    width: 100%;
+    margin-right: 5px;
+    padding: 14px 12px;
+    border: 1px solid #858585;
+    font-size: 14px;
+    outline: none;
+  }
+
+  .search-btn {
+    width: 42px;
+    padding: 11px;
+    background-color: #f3493e;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    img {
+      width: 20px;
+      height: 20px;
+      -webkit-filter: invert(100%);
+      filter: invert(100%);
+    }
+
+  }
+}

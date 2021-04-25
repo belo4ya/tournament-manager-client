@@ -1,9 +1,9 @@
 import "./teams.scss"
 
 import React from 'react';
-import TeamCard from "../TeamCard/TeamCard";
+import TeamCard from "./TeamCard";
 
-const TeamsList = (props) => {
+const TeamsRow = (props) => {
     return (
         <div className="teams-list">
             {props.teams.map((t) =>
@@ -18,4 +18,4 @@ const TeamsList = (props) => {
     );
 };
 
-export default TeamsList;
+export default TeamsRow;

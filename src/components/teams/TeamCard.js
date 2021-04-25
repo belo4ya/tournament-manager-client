@@ -1,4 +1,4 @@
-import "./team-card.scss"
+import "./teams.scss"
 
 import React from 'react';
 

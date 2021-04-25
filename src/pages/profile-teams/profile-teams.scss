@@ -1,0 +1,43 @@
+.filter-section {
+  margin-top: 80px;
+
+  h2 {
+    margin-left: 95px;
+  }
+
+  .search {
+    margin-top: 50px;
+  }
+}
+
+.table-section {
+  .teams-table {
+    position: relative;
+    margin: 50px 95px 180px 95px;
+    border-top: 3px solid #f3493e;
+
+    .content {
+      margin-top: 20px;
+      display: grid;
+      grid-template: 1fr 1fr 1fr / 1fr 1fr 1fr 1fr 1fr;
+      column-gap: 5px;
+      row-gap: 67px;
+      justify-items: center;
+      justify-content: space-between;
+      align-content: space-between;
+    }
+
+    .actions {
+      margin-top: 50px;
+
+      .button {
+        position: absolute;
+        bottom: -16px;
+        right: 0;
+      }
+    }
+
+  }
+
+}
+
