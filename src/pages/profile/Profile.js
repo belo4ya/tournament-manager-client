@@ -8,8 +8,46 @@ import TeamsList from "../../components/teams/TeamsList";
 import {$authHost} from "../../http";
 import {Context} from "../../index";
 import {observer} from "mobx-react-lite";
-import {MY_USER_ENDPOINT} from "../../utils/endpoints";
-import {compareDates, toDate} from "../../utils/date";
+
+
+const getProfile = async () => {
+    return await $authHost.get('/users/search/my')
+        .then((response) => response.data)
+        .catch((e) => {
+            console.log(e)
+        })
+}
+
+
+const getTournaments = async () => {
+    return await $authHost.get('/tournaments/search/my', {
+        params: {
+            projection: 'bracketType',
+            sort: ['lastModifiedDate', 'desc'].join(','),
+            page: 0,
+            size: 4
+        }
+    })
+        .then((response) => response.data)
+        .catch((e) => {
+            console.log(e)
+        })
+}
+
+
+const getTeams = async () => {
+    return await $authHost.get('/teams/search/my', {
+        params: {
+            sort: ['lastModifiedDate', 'desc'].join(','),
+            page: 0,
+            size: 4
+        }
+    })
+        .then((response) => response.data)
+        .catch((e) => {
+            console.log(e)
+        })
+}
 
 
 const Profile = observer(() => {
@@ -18,38 +56,21 @@ const Profile = observer(() => {
     const [teams, setTeams] = useState([])
 
     useEffect(() => {
-        $authHost.get(MY_USER_ENDPOINT)
-            .then((response) => {
-                const userData = response.data._embedded.users[0]
-                userStore.id = userData.id
-                userStore.createdDate = userData.createdDate
-                userStore.username = userData.username
-
-                $authHost.get(`/users/${userStore.id}/tournaments`)
-                    .then((response) => {
-                        const tournaments = response.data._embedded.tournaments.slice(0, 4)
-                        setTournaments(tournaments.sort(compareDates).map((t) => {
-                            t.date = t.lastModifiedDate
-                            return t
-                        }))
-                    })
-                    .catch((e) => {
-                        alert(e)
-                    })
-
-                $authHost.get(`/users/${userStore.id}/teams`)
-                    .then((response) => {
-                        const teams = response.data._embedded.teams.slice(0, 4)
-                        console.log(teams)
-                        setTeams(teams.sort(compareDates))
-                    })
-                    .catch((e) => {
-                        alert(e)
-                    })
+        getProfile().then((data) => {
+            userStore.id = data.id
+            userStore.createdDate = data.createdDate
+            userStore.username = data.username
+        })
+        getTournaments().then((data) => {
+            const tournaments = data._embedded.tournaments.map((t) => {
+                t.date = t.lastModifiedDate
+                return t
             })
-            .catch((e) => {
-                alert(e)
-            })
+            setTournaments(tournaments)
+        })
+        getTeams().then((data) => {
+            setTeams(data._embedded.teams)
+        })
     }, [])
 
     return (
