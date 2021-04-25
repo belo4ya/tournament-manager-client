@@ -1,6 +1,6 @@
 import "./App.css"
 
-import React, {useContext, useEffect} from 'react';
+import React, {useContext, useEffect, useState} from 'react';
 import {BrowserRouter} from "react-router-dom";
 import AppRouter from "./components/AppRouter";
 import Header from "./components/Header/Header";
@@ -20,6 +20,7 @@ const checkSession = async () => {
 
 const App = observer(() => {
     const {userStore} = useContext(Context)
+    const [loading, setLoading] = useState(true)
 
     useEffect(() => {
         checkSession()
@@ -33,7 +34,12 @@ const App = observer(() => {
                     console.log(e)
                 }
             })
-    })
+            .finally(() => setLoading(false))
+    }, [])
+
+    if (loading) {
+        return <h1>LOADING</h1>
+    }
 
     return (
         <BrowserRouter>
