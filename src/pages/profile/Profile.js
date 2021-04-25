@@ -69,6 +69,7 @@ const Profile = observer(() => {
             setTournaments(tournaments)
         })
         getTeams().then((data) => {
+            console.log(data._embedded.teams)
             setTeams(data._embedded.teams)
         })
     }, [])

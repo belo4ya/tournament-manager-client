@@ -5,12 +5,14 @@
   align-items: center;
   flex-direction: column;
   width: max-content;
-}
-.team-card img {
-  margin: 10px 0;
-  background: #c4c4c4;
-  width: 90px;
-  height: 90px;
-}
 
-/*# sourceMappingURL=TeamCard.css.map */
+  p {
+    font-size: 12px;
+  }
+
+  img {
+    margin: 10px 0;
+    width: 90px;
+    height: 90px;
+  }
+}

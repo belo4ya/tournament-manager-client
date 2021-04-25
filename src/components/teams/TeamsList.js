@@ -1,7 +1,7 @@
 import "./teams.scss"
 
 import React from 'react';
-import TeamCard from "../TeamCard";
+import TeamCard from "../TeamCard/TeamCard";
 
 const TeamsList = (props) => {
     return (
