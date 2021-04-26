@@ -14,7 +14,7 @@ const getProfile = async () => {
     return await $authHost.get('/users/search/my')
         .then((response) => response.data)
         .catch((e) => {
-            console.log(e)
+            alert(e)
         })
 }
 
@@ -30,7 +30,7 @@ const getTournaments = async () => {
     })
         .then((response) => response.data)
         .catch((e) => {
-            console.log(e)
+            alert(e)
         })
 }
 
@@ -45,7 +45,7 @@ const getTeams = async () => {
     })
         .then((response) => response.data)
         .catch((e) => {
-            console.log(e)
+            alert(e)
         })
 }
 

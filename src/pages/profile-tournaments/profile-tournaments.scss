@@ -1,0 +1,51 @@
+.filter-section {
+  margin-top: 80px;
+
+  h2 {
+    margin-left: 95px;
+  }
+
+  .search {
+    margin-top: 50px;
+  }
+
+  .filters {
+    margin-top: 50px;
+
+    .filters-row {
+      margin-top: 24px;
+      display: flex;
+
+      .tournament-format {
+        max-width: 350px;
+        width: 100%;
+
+        .tournament-format__checkboxes {
+          margin-top: 15px;
+
+          .checkbox {
+            margin-top: 15px;
+
+            &:first-child {
+              margin-top: 0;
+            }
+          }
+        }
+      }
+
+      .teams-range {
+
+      }
+    }
+
+    .button {
+      margin-top: 24px;
+      padding: 12px 21px;
+    }
+  }
+}
+
+.table-section {
+  margin-top: 50px;
+  margin-bottom: 160px;
+}

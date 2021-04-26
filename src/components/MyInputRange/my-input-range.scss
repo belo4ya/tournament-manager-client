@@ -1,0 +1,38 @@
+.react-input-range {
+  width: 210px;
+  margin-top: 49px;
+  position: relative;
+}
+
+$input-range-primary-color: #f3493e;
+$input-range-neutral-color: #000000;
+$input-range-neutral-light-color: #c4c4c4;
+$input-range-disabled-color: #c4c4c4;
+
+// input-range-slider
+$input-range-slider-background: $input-range-primary-color;
+$input-range-slider-border: 1px solid $input-range-primary-color;
+$input-range-slider-focus-box-shadow-radius: 5px;
+$input-range-slider-focus-box-shadow-color: transparentize($input-range-slider-background, 0.8);
+$input-range-slider-height: 0.8rem;
+$input-range-slider-width: 0.8rem;
+$input-range-slider-transition: transform 0.3s ease-out, box-shadow 0.3s ease-out;
+$input-range-slider-container-transition: left 0.3s ease-out;
+$input-range-slider-active-transform: scale(1.3);
+$input-range-slider-disabled-background: $input-range-disabled-color;
+$input-range-slider-disabled-border: 1px solid $input-range-disabled-color;
+
+// input-range-label
+$input-range-label-color: $input-range-neutral-color;
+$input-range-label-font-size: 0.8rem;
+$input-range-label-position-bottom: -1.4rem;
+$input-range-label-value-position-top: -1.8rem;
+
+// input-range-track
+$input-range-track-background: $input-range-neutral-light-color;
+$input-range-track-height: 0.2rem;
+$input-range-track-transition: left 0.3s ease-out, width 0.3s ease-out;
+$input-range-track-active-background: $input-range-primary-color;
+$input-range-track-disabled-background: $input-range-neutral-light-color;
+
+@import "~react-input-range/src/scss/index";
