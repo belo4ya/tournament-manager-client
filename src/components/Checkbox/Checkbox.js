@@ -15,13 +15,17 @@ const Checkbox = (props) => {
         >
             <input
                 type="checkbox"
+                id={props.id}
                 name={props.name}
-                id={props.name}
                 value={props.value}
                 checked={props.checked}
                 onChange={props.onChange}
             />
-            <label htmlFor={props.name} className="text-2">
+            <label
+                htmlFor={props.name}
+                className="text-2"
+                onClick={props.onChange}
+            >
                 {props.value}
             </label>
         </div>

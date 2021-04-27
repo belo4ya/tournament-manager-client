@@ -3,7 +3,7 @@ import Checkbox from "./Checkbox";
 
 const CheckboxList = (props) => {
     return (
-        <div>
+        <div onClick={props.onClick}>
             {props.checkboxList.map((checkbox) =>
                 <Checkbox
                     key={checkbox.id}
