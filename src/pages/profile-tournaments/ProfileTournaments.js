@@ -8,6 +8,7 @@ import MyInputRange from "../../components/MyInputRange/MyInputRange"
 import TournamentsDynamicTable from "../../components/tournaments/TournamentsDynamicTable";
 import {$authHost} from "../../http";
 import CheckboxList from "../../components/Checkbox/CheckboxList";
+import Alert from "../../components/Alert/Alert";
 
 
 const fetchTypes = async () => {
@@ -123,45 +124,48 @@ class ProfileTournaments extends React.Component {
 
     render() {
         return (
-            <div className="container">
-                <OnPageNavigation/>
-                <div className="filter-section">
-                    <h2>Мои турниры</h2>
-                    <Search
-                        value={this.state.searchValue}
-                        onChange={this.handleSearchInput}
-                        onSubmit={this.handleApplyOrSearchButton}
-                    />
-                    <div className="filters">
-                        <h4>Фильтры</h4>
-                        <div className="filters-row">
-                            <div className="tournament-format">
-                                <h6>Формат турнира</h6>
-                                <div className="tournament-format__checkboxes">
-                                    <CheckboxList checkboxList={this.state.checkboxList}/>
+            <div>
+                <Alert/>
+                <div className="container">
+                    <OnPageNavigation/>
+                    <div className="filter-section">
+                        <h2>Мои турниры</h2>
+                        <Search
+                            value={this.state.searchValue}
+                            onChange={this.handleSearchInput}
+                            onSubmit={this.handleApplyOrSearchButton}
+                        />
+                        <div className="filters">
+                            <h4>Фильтры</h4>
+                            <div className="filters-row">
+                                <div className="tournament-format">
+                                    <h6>Формат турнира</h6>
+                                    <div className="tournament-format__checkboxes">
+                                        <CheckboxList checkboxList={this.state.checkboxList}/>
+                                    </div>
+                                </div>
+                                <div className="teams-range">
+                                    <h6>Количество участников</h6>
+                                    <MyInputRange
+                                        maxValue={this.MAX_RANGE_VALUE}
+                                        minValue={this.MIN_RANGE_VALUE}
+                                        step={this.RANGE_STEP}
+                                        value={this.state.rangeValue}
+                                        onChange={this.handleRangeInput}
+                                    />
                                 </div>
                             </div>
-                            <div className="teams-range">
-                                <h6>Количество участников</h6>
-                                <MyInputRange
-                                    maxValue={this.MAX_RANGE_VALUE}
-                                    minValue={this.MIN_RANGE_VALUE}
-                                    step={this.RANGE_STEP}
-                                    value={this.state.rangeValue}
-                                    onChange={this.handleRangeInput}
-                                />
-                            </div>
+                            <Button class="red" onClick={this.handleApplyOrSearchButton}>Применить</Button>
                         </div>
-                        <Button class="red" onClick={this.handleApplyOrSearchButton}>Применить</Button>
                     </div>
-                </div>
-                <div className="table-section">
-                    <TournamentsDynamicTable
-                        tournaments={this.state.tournaments}
-                        page={this.state.currentPage}
-                        prevPage={this.handlePrevPage}
-                        nextPage={this.handleNextPage}
-                    />
+                    <div className="table-section">
+                        <TournamentsDynamicTable
+                            tournaments={this.state.tournaments}
+                            page={this.state.currentPage}
+                            prevPage={this.handlePrevPage}
+                            nextPage={this.handleNextPage}
+                        />
+                    </div>
                 </div>
             </div>
         );
