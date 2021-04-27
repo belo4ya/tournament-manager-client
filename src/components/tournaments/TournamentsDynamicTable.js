@@ -143,7 +143,7 @@ class TournamentsDynamicTable extends React.Component {
     }
 
     /*
-    * Пока не работает как надо
+    * TODO: Пока не работает как надо
     * */
     _sort_with_priority(target, filters) {
         filters = filters.filter((f) => f.state !== 0).sort((a, b) => {

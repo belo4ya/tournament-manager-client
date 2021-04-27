@@ -5,6 +5,7 @@ import TournamentCard from "./TournamentCard";
 import pencil from "../../assets/icn_pencil.svg";
 import cross from "../../assets/icn_cross.svg";
 
+
 const EditableTournamentItem = (props) => {
     return (
         <div className="tournament">
