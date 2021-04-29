@@ -18,9 +18,21 @@ class TournamentsDynamicTable extends React.Component {
     constructor(props) {
         super(props);
         this.state = {
-            nameFilter: {state: 0, priority: 0, _name: 'nameFilter'},
-            teamsFilter: {state: 0, priority: 0, _name: 'teamsFilter'},
-            createdDateFilter: {state: 2, priority: 1, _name: 'createdDateFilter'}
+            nameFilter: {
+                state: 0,
+                priority: 0,
+                comparator: (a, b, reverse) => this._compare(a.name.toLowerCase(), b.name.toLowerCase(), reverse)
+            },
+            teamsFilter: {
+                state: 0,
+                priority: 0,
+                comparator: (a, b, reverse) => this._compare(a.totalTeams, b.totalTeams, reverse)
+            },
+            createdDateFilter: {
+                state: 2,
+                priority: 1,
+                comparator: (a, b, reverse) => this._compare(toDate(a.date), toDate(b.date), reverse)
+            }
         }
         this.arrowPos = {
             0: 'head-item',
@@ -142,36 +154,23 @@ class TournamentsDynamicTable extends React.Component {
         return [target, context]
     }
 
-    /*
-    * TODO: Пока не работает как надо
-    * */
     _sort_with_priority(target, filters) {
-        filters = filters.filter((f) => f.state !== 0).sort((a, b) => {
-            if (a.priority < b.priority) return 1
-            if (a.priority > b.priority) return -1
-            return 0
-        })
-
-        return target.sort((a, b) => {
-            if (filters[0]?._name === 'nameFilter') {
-                const comparison = this._compare(a.name, b.name, filters[0].state === 2 ? 1 : -1)
-                if (comparison) return comparison
-            } else if (filters[1]?._name === 'teamsFilter') {
-                const comparison = this._compare(a.totalTeams, b.totalTeams, filters[1].state === 2 ? 1 : -1)
-                if (comparison) return comparison
-            } else if (filters[2]?._name === 'createdDateFilter') {
-                const comparison = this._compare(toDate(a.createdDate), toDate(b.createdDate), filters[2].state === 2 ? 1 : -1)
-                if (comparison) return comparison
-            }
-
-            return 0
-        })
+        filters = filters.filter((f) => f.state !== 0).sort((a, b) => this._compare(a.priority, b.priority))
+        if (filters) {
+            return target.sort((a, b) => {
+                // return filters.map((f) => f.comparator(a, b, f.state === 1)).reduce((a, b) => a || b, 0)
+                return (
+                    filters[0]?.comparator(a, b, filters[0].state === 1) ||
+                    filters[1]?.comparator(a, b, filters[1].state === 1) ||
+                    filters[2]?.comparator(a, b, filters[2].state === 1)
+                )
+            })
+        }
+        return target
     }
 
-    _compare = (a, b, predicate) => {
-        if (a > b) return predicate
-        if (a < b) return -predicate
-        return 0
+    _compare = (a, b, reverse = false) => {
+        return reverse ? (a < b) - (b < a) : (b < a) - (a < b)
     }
 
     _next = (value) => {
