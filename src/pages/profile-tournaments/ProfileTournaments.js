@@ -61,7 +61,7 @@ class ProfileTournaments extends React.Component {
             rangeValue: {min: 0, max: 128},
             tournaments: [],
             currentPage: 0,
-            lastPage: 0
+            lastPage: 0,
         }
     }
 
