@@ -1,13 +1,13 @@
-export const INDEX_ROUTE = '/';
-export const ABOUT_ROUTE = '/about';
-export const CREATOR_ROUTE = '/creator';
+export const INDEX_ROUTE = process.env.PUBLIC_URL + '/';
+export const ABOUT_ROUTE = process.env.PUBLIC_URL + '/about';
+export const CREATOR_ROUTE = process.env.PUBLIC_URL + '/creator';
 
-export const SIGN_IN_ROUTE = '/auth/signIn';
-export const SIGN_UP_ROUTE = '/auth/signUp';
+export const SIGN_IN_ROUTE = process.env.PUBLIC_URL + '/auth/signIn';
+export const SIGN_UP_ROUTE = process.env.PUBLIC_URL + '/auth/signUp';
 
-export const PROFILE_ROUTE = '/profile';
-export const PROFILE_TOURNAMENTS_ROUTE = '/profile/tournaments';
-export const PROFILE_TEAMS_ROUTE = '/profile/teams';
+export const PROFILE_ROUTE = process.env.PUBLIC_URL + '/profile';
+export const PROFILE_TOURNAMENTS_ROUTE = process.env.PUBLIC_URL + '/profile/tournaments';
+export const PROFILE_TEAMS_ROUTE = process.env.PUBLIC_URL + '/profile/teams';
 
-export const TOURNAMENT_CREATION_ROUTE = 'profile/createTournament';
-export const TEAM_CREATION_ROUTE = 'profile/createTeam';
+export const TOURNAMENT_CREATION_ROUTE = process.env.PUBLIC_URL + '/profile/createTournament';
+export const TEAM_CREATION_ROUTE = process.env.PUBLIC_URL + '/profile/createTeam';

@@ -8,14 +8,11 @@ import UserStore from "./store/user-store";
 import TournamentStore from "./store/tournament-store";
 import TeamStore from "./store/team-store";
 import ModalDialog from "./store/modal-dialog";
-// import {createBrowserHistory} from "history";
 
-// export const history = createBrowserHistory({
-//     basename: process.env.PUBLIC_URL
-// })
-export const Context = createContext(null);
 
 Modal.setAppElement('#root')
+export const Context = createContext(null);
+
 ReactDOM.render(
     <Context.Provider value={{
         userStore: new UserStore(),
