@@ -57,6 +57,7 @@ const ProfileTeams = () => {
             setTeams(data._embedded.teams)
             setLastPage(data.page.totalPages - 1)
         })
+        // eslint-disable-next-line react-hooks/exhaustive-deps
     }, [])
 
     return (

@@ -71,6 +71,7 @@ const Profile = observer(() => {
         getTeams().then((data) => {
             setTeams(data._embedded.teams)
         })
+        // eslint-disable-next-line react-hooks/exhaustive-deps
     }, [])
 
     return (
