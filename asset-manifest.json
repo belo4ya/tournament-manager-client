@@ -1,23 +1,23 @@
 {
   "files": {
     "main.css": "/tournament-manager-client/static/css/main.20fb3c60.chunk.css",
-    "main.js": "/tournament-manager-client/static/js/main.77c4e86e.chunk.js",
-    "main.js.map": "/tournament-manager-client/static/js/main.77c4e86e.chunk.js.map",
+    "main.js": "/tournament-manager-client/static/js/main.d6496667.chunk.js",
+    "main.js.map": "/tournament-manager-client/static/js/main.d6496667.chunk.js.map",
     "runtime-main.js": "/tournament-manager-client/static/js/runtime-main.13d48529.js",
     "runtime-main.js.map": "/tournament-manager-client/static/js/runtime-main.13d48529.js.map",
-    "static/js/2.51adfb72.chunk.js": "/tournament-manager-client/static/js/2.51adfb72.chunk.js",
-    "static/js/2.51adfb72.chunk.js.map": "/tournament-manager-client/static/js/2.51adfb72.chunk.js.map",
+    "static/js/2.5da6cb0d.chunk.js": "/tournament-manager-client/static/js/2.5da6cb0d.chunk.js",
+    "static/js/2.5da6cb0d.chunk.js.map": "/tournament-manager-client/static/js/2.5da6cb0d.chunk.js.map",
     "index.html": "/tournament-manager-client/index.html",
     "static/css/main.20fb3c60.chunk.css.map": "/tournament-manager-client/static/css/main.20fb3c60.chunk.css.map",
-    "static/js/2.51adfb72.chunk.js.LICENSE.txt": "/tournament-manager-client/static/js/2.51adfb72.chunk.js.LICENSE.txt",
+    "static/js/2.5da6cb0d.chunk.js.LICENSE.txt": "/tournament-manager-client/static/js/2.5da6cb0d.chunk.js.LICENSE.txt",
     "static/media/icn_cross.6ada0a65.svg": "/tournament-manager-client/static/media/icn_cross.6ada0a65.svg",
     "static/media/icn_pencil.5480220a.svg": "/tournament-manager-client/static/media/icn_pencil.5480220a.svg",
     "static/media/icn_search.6095cc55.svg": "/tournament-manager-client/static/media/icn_search.6095cc55.svg"
   },
   "entrypoints": [
     "static/js/runtime-main.13d48529.js",
-    "static/js/2.51adfb72.chunk.js",
+    "static/js/2.5da6cb0d.chunk.js",
     "static/css/main.20fb3c60.chunk.css",
-    "static/js/main.77c4e86e.chunk.js"
+    "static/js/main.d6496667.chunk.js"
   ]
 }
