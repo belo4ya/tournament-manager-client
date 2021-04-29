@@ -1,9 +1,0 @@
-{
-  "actions" : {
-    "run" : {
-      "enabled" : true,
-      "script" : "#!\/bin\/sh\nnpm start"
-    }
-  },
-  "identifier" : "970001D2-A748-4867-9264-60F28353CFDA"
-}
