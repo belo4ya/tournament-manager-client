@@ -1,11 +1,19 @@
-import React from 'react';
+import React, {Component} from 'react';
 
-const TournamentCreation = () => {
-    return (
-        <div>
-            
-        </div>
-    );
-};
+
+class TournamentCreation extends Component {
+    constructor(props) {
+        super(props);
+        this.state = {}
+    }
+
+    render() {
+        return (
+            <div>
+
+            </div>
+        );
+    }
+}
 
 export default TournamentCreation;
