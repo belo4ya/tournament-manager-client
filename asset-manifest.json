@@ -1,23 +1,23 @@
 {
   "files": {
-    "main.css": "/static/css/main.20fb3c60.chunk.css",
-    "main.js": "/static/js/main.ec8377a6.chunk.js",
-    "main.js.map": "/static/js/main.ec8377a6.chunk.js.map",
-    "runtime-main.js": "/static/js/runtime-main.57d0ed20.js",
-    "runtime-main.js.map": "/static/js/runtime-main.57d0ed20.js.map",
-    "static/js/2.70d2e8ef.chunk.js": "/static/js/2.70d2e8ef.chunk.js",
-    "static/js/2.70d2e8ef.chunk.js.map": "/static/js/2.70d2e8ef.chunk.js.map",
-    "index.html": "/index.html",
-    "static/css/main.20fb3c60.chunk.css.map": "/static/css/main.20fb3c60.chunk.css.map",
-    "static/js/2.70d2e8ef.chunk.js.LICENSE.txt": "/static/js/2.70d2e8ef.chunk.js.LICENSE.txt",
-    "static/media/icn_cross.6ada0a65.svg": "/static/media/icn_cross.6ada0a65.svg",
-    "static/media/icn_pencil.5480220a.svg": "/static/media/icn_pencil.5480220a.svg",
-    "static/media/icn_search.6095cc55.svg": "/static/media/icn_search.6095cc55.svg"
+    "main.css": "/tournament-manager-client/static/css/main.20fb3c60.chunk.css",
+    "main.js": "/tournament-manager-client/static/js/main.77c4e86e.chunk.js",
+    "main.js.map": "/tournament-manager-client/static/js/main.77c4e86e.chunk.js.map",
+    "runtime-main.js": "/tournament-manager-client/static/js/runtime-main.13d48529.js",
+    "runtime-main.js.map": "/tournament-manager-client/static/js/runtime-main.13d48529.js.map",
+    "static/js/2.51adfb72.chunk.js": "/tournament-manager-client/static/js/2.51adfb72.chunk.js",
+    "static/js/2.51adfb72.chunk.js.map": "/tournament-manager-client/static/js/2.51adfb72.chunk.js.map",
+    "index.html": "/tournament-manager-client/index.html",
+    "static/css/main.20fb3c60.chunk.css.map": "/tournament-manager-client/static/css/main.20fb3c60.chunk.css.map",
+    "static/js/2.51adfb72.chunk.js.LICENSE.txt": "/tournament-manager-client/static/js/2.51adfb72.chunk.js.LICENSE.txt",
+    "static/media/icn_cross.6ada0a65.svg": "/tournament-manager-client/static/media/icn_cross.6ada0a65.svg",
+    "static/media/icn_pencil.5480220a.svg": "/tournament-manager-client/static/media/icn_pencil.5480220a.svg",
+    "static/media/icn_search.6095cc55.svg": "/tournament-manager-client/static/media/icn_search.6095cc55.svg"
   },
   "entrypoints": [
-    "static/js/runtime-main.57d0ed20.js",
-    "static/js/2.70d2e8ef.chunk.js",
+    "static/js/runtime-main.13d48529.js",
+    "static/js/2.51adfb72.chunk.js",
     "static/css/main.20fb3c60.chunk.css",
-    "static/js/main.ec8377a6.chunk.js"
+    "static/js/main.77c4e86e.chunk.js"
   ]
 }
