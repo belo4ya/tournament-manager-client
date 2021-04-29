@@ -8,7 +8,6 @@ import MyInputRange from "../../components/MyInputRange/MyInputRange"
 import TournamentsDynamicTable from "../../components/tournaments/TournamentsDynamicTable";
 import {$authHost} from "../../http";
 import CheckboxList from "../../components/Checkbox/CheckboxList";
-import Alert from "../../components/Alert/Alert";
 
 
 const fetchTypes = async () => {
@@ -125,7 +124,6 @@ class ProfileTournaments extends React.Component {
     render() {
         return (
             <div>
-                <Alert/>
                 <div className="container">
                     <OnPageNavigation/>
                     <div className="filter-section">
