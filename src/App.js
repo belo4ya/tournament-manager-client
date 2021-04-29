@@ -41,7 +41,7 @@ const App = observer(() => {
     }
 
     return (
-        <BrowserRouter>
+        <BrowserRouter basename="/tournament-manager-client">
             <div className="App">
                 <Header/>
                 <SignInModalForm/>
