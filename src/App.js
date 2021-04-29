@@ -41,7 +41,7 @@ const App = observer(() => {
     }
 
     return (
-        <BrowserRouter>
+        <BrowserRouter basename={process.env.PUBLIC_URL}>
             <div className="App">
                 <Header/>
                 <SignInModalForm/>
