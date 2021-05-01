@@ -8,6 +8,7 @@ import {SIGN_IN_ENDPOINT} from "../../utils/endpoints";
 import jwtDecode from "jwt-decode";
 import {useHistory} from "react-router-dom";
 import {PROFILE_ROUTE} from "../../utils/constants";
+import {alertError, alertMessage} from "../../utils/utils";
 
 
 const style = {
@@ -57,9 +58,9 @@ const SignInModalForm = observer(() => {
                 })
                 .catch((e) => {
                     if (e.response && e.response.status === 401) {
-                        alert('Неверный логин или пароль')
+                        alertMessage('Ошибка', 'Неверный логин или пароль')
                     } else {
-                        alert(e)
+                        alertError(e)
                     }
                 })
         }

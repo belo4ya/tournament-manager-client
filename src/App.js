@@ -33,8 +33,7 @@ const App = observer(() => {
                 }
             })
             .finally(() => setLoading(false))
-        // eslint-disable-next-line react-hooks/exhaustive-deps
-    }, [])
+    }, [userStore])
 
     if (loading) {
         return <h1>LOADING</h1>

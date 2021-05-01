@@ -8,16 +8,14 @@ import TeamsRow from "../../components/teams/TeamsRow";
 import {$authHost} from "../../http";
 import {Context} from "../../index";
 import {observer} from "mobx-react-lite";
+import {alertError} from "../../utils/utils";
 
 
 const getProfile = async () => {
     return await $authHost.get('/users/search/my')
         .then((response) => response.data)
-        .catch((e) => {
-            alert(e)
-        })
+        .catch((e) => alertError(e))
 }
-
 
 const getTournaments = async () => {
     return await $authHost.get('/tournaments/search/my', {
@@ -29,11 +27,8 @@ const getTournaments = async () => {
         }
     })
         .then((response) => response.data)
-        .catch((e) => {
-            alert(e)
-        })
+        .catch((e) => alertError(e))
 }
-
 
 const getTeams = async () => {
     return await $authHost.get('/teams/search/my', {
@@ -44,11 +39,8 @@ const getTeams = async () => {
         }
     })
         .then((response) => response.data)
-        .catch((e) => {
-            alert(e)
-        })
+        .catch((e) => alertError(e))
 }
-
 
 const Profile = observer(() => {
     const {userStore} = useContext(Context)
@@ -71,8 +63,7 @@ const Profile = observer(() => {
         getTeams().then((data) => {
             setTeams(data._embedded.teams)
         })
-        // eslint-disable-next-line react-hooks/exhaustive-deps
-    }, [])
+    }, [userStore])
 
     return (
         <div className="container">

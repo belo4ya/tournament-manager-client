@@ -8,6 +8,7 @@ import MyInputRange from "../../components/MyInputRange/MyInputRange"
 import TournamentsDynamicTable from "../../components/tournaments/TournamentsDynamicTable";
 import {$authHost} from "../../http";
 import CheckboxList from "../../components/Checkbox/CheckboxList";
+import {alertError} from "../../utils/utils";
 
 
 const fetchTypes = async () => {
@@ -17,7 +18,7 @@ const fetchTypes = async () => {
         }
     })
         .then((response) => response.data)
-        .catch((e) => alert(e))
+        .catch((e) => alertError(e))
 }
 
 
@@ -42,7 +43,7 @@ const fetchTournaments = async (page, size, filters) => {
 
     return await $authHost.get(url, {params: params})
         .then((response) => response.data)
-        .catch((e) => alert(e))
+        .catch((e) => alertError(e))
 }
 
 

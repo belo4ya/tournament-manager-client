@@ -9,5 +9,5 @@ export {
     Profile,
     ProfileTeams,
     ProfileTournaments,
-    TournamentCreation
+    TournamentCreation,
 };

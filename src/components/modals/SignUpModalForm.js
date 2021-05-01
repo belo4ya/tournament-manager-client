@@ -8,6 +8,7 @@ import {SIGN_UP_ENDPOINT} from "../../utils/endpoints";
 import jwtDecode from "jwt-decode";
 import {useHistory} from "react-router-dom";
 import {PROFILE_ROUTE} from "../../utils/constants";
+import {alertError, alertMessage} from "../../utils/utils";
 
 
 const style = {
@@ -68,9 +69,9 @@ const SignUpModalForm = observer(() => {
                 })
                 .catch((e) => {
                     if (e.response && e.response.status === 401) {
-                        alert('Пользователь с таким логином уже существует')
+                        alertMessage('Ошибка', 'Пользователь с таким логином уже существует')
                     } else {
-                        alert(e)
+                        alertError(e)
                     }
                 })
         }

@@ -9,7 +9,7 @@ import {useHistory} from 'react-router-dom'
 import {Context} from "../../index";
 import {PROFILE_ROUTE} from "../../utils/constants";
 import {observer} from "mobx-react-lite";
-
+import {alertError} from "../../utils/utils";
 
 const getTournaments = async (page, size = 2) => {
     return await $host.get(
@@ -26,16 +26,14 @@ const getTournaments = async (page, size = 2) => {
             return response.data
         })
         .catch((e) => {
-            alert(e)
+            alertError(e)
             return {_embedded: {tournaments: []}, page: {totalPages: 1}}
         })
 }
 
-
 const Main = observer(() => {
     const history = useHistory()
-    const {userStore} = useContext(Context)
-    const {signUpModal} = useContext(Context)
+    const {userStore, signUpModal} = useContext(Context)
     const [tournaments, setTournaments] = useState([])
     const [currentPage, setCurrentPage] = useState(0)
     const [lastPage, setLastPage] = useState(0)

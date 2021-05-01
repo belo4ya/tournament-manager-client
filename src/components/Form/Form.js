@@ -3,6 +3,7 @@ import "./form.scss";
 import React from 'react';
 import Input from "../Input/Input";
 import Button from "../Button";
+import {alertMessage} from "../../utils/utils";
 
 const Form = (props) => {
     return (
@@ -43,7 +44,7 @@ const Form = (props) => {
                     className="forgotPassword"
                     onClick={(event) => {
                         event.preventDefault()
-                        alert('Функционал в разработке')
+                        alertMessage('Предупреждение', 'Функционал в разработке')
                     }}
                 >
                     Забыли пароль?

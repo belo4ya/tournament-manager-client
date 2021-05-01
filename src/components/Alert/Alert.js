@@ -1,42 +1,25 @@
-import "./alert.scss"
-
-import React, {useState} from 'react';
+import React, {useContext} from 'react';
 import Modal from "react-modal";
+import {Context} from "../../index";
+import {observer} from "mobx-react-lite";
 
 const style = {
     overlay: {display: 'flex', alignItems: 'center', justifyContent: 'center'},
     content: {position: 'relative', inset: 0, padding: 0, borderRadius: '15px'}
 }
 
-const Alert = (props) => {
-    const [isOpen, setIsOpen] = useState(true)
-
-    const handleClose = () => {
-        setIsOpen(false)
-    }
+const Alert = observer(() => {
+    const {alertStore} = useContext(Context)
 
     return (
         <Modal
             style={style}
-            onRequestClose={handleClose}
-            isOpen={isOpen}
+            isOpen={alertStore.isOpen}
+            onRequestClose={() => alertStore.closeAlert()}
         >
-            <form className="alert">
-                <div className="header">
-                    <h3>Предупреждение</h3>
-                    <div className="close" onClick={props.handleClose}>[x]</div>
-                </div>
-                <div className="content">
-                    <p>Выдействительно хотите удалить данный турнир?</p>
-                    <div className="delimiter"/>
-                </div>
-                <div className="actions">
-                    <button className="action-btn">Удалить</button>
-                    <button className="action-btn">Отмена</button>
-                </div>
-            </form>
+            {alertStore.body}
         </Modal>
     );
-};
+});
 
 export default Alert;

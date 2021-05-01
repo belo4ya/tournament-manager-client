@@ -5,6 +5,7 @@ import OnPageNavigation from "../../components/OnPageNavigation/OnPageNavigation
 import Search from "../../components/Search/Search";
 import TeamsTable from "../../components/teams/TeamsTable";
 import {$authHost} from "../../http";
+import {alertError} from "../../utils/utils";
 
 
 const getTeams = async (page, teamName) => {
@@ -17,7 +18,7 @@ const getTeams = async (page, teamName) => {
         }
     })
         .then((response) => response.data)
-        .catch((e) => alert(e))
+        .catch((e) => alertError(e))
 }
 
 
