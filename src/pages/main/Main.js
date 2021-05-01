@@ -11,7 +11,7 @@ import {PROFILE_ROUTE} from "../../utils/constants";
 import {observer} from "mobx-react-lite";
 import {alertError} from "../../utils/utils";
 
-const getTournaments = async (page, size = 2) => {
+const getTournaments = async (page, size = 5) => {
     return await $host.get(
         '/tournaments', {
             params: {
