@@ -9,12 +9,11 @@ import {$authHost} from "./http";
 import {AUTH_ENDPOINT} from "./utils/endpoints";
 import SignInModalForm from "./components/modals/SignInModalForm";
 import SignUpModalForm from "./components/modals/SignUpModalForm";
-
+import {alertError} from "./utils/utils";
 
 const checkSession = async () => {
     return (await $authHost.get(AUTH_ENDPOINT)).data;
 }
-
 
 const App = observer(() => {
     const {userStore} = useContext(Context)
@@ -29,7 +28,7 @@ const App = observer(() => {
                 if (e.response && e.response.status === 401) {
                     userStore.isAuth = false
                 } else {
-                    console.log(e)
+                    alertError(e)
                 }
             })
             .finally(() => setLoading(false))

@@ -22,37 +22,42 @@ const getTournaments = async (page, size = 2) => {
             }
         }
     )
-        .then((response) => {
-            return response.data
-        })
-        .catch((e) => {
-            alertError(e)
-            return {_embedded: {tournaments: []}, page: {totalPages: 1}}
-        })
+        .then((response) => response.data)
+        .catch((e) => alertError(e))
 }
 
 const Main = observer(() => {
     const history = useHistory()
     const {userStore, signUpModal} = useContext(Context)
-    const [tournaments, setTournaments] = useState([])
-    const [currentPage, setCurrentPage] = useState(0)
-    const [lastPage, setLastPage] = useState(0)
+    const [state, setState] = useState({tournaments: [], currentPage: 0, lastPage: 0})
+    
+    const updateTournamentPage = (page) => {
+        getTournaments(page).then((data) => {
+            setState({
+                tournaments: data?._embedded.tournaments.map((t) => {
+                    t.date = t.createdDate
+                    return t
+                }) || [],
+                currentPage: page,
+                lastPage: (data?.page.totalPages - 1) || 0
+            })
+        })
+    }
 
     useEffect(() => {
-        getTournaments(currentPage).then((data) => {
-            setTournaments(data._embedded.tournaments.map((t) => {
-                t.date = t.createdDate
-                return t
-            }))
-            setLastPage(data.page.totalPages - 1)
-        })
-    }, [currentPage])
+        updateTournamentPage(0)
+    }, [])
 
     const nextPage = () => {
-        if (currentPage < lastPage) setCurrentPage(currentPage + 1)
+        if (state.currentPage < state.lastPage) {
+            updateTournamentPage(state.currentPage + 1)
+        }
     }
+
     const prevPage = () => {
-        if (currentPage > 0) setCurrentPage(currentPage - 1)
+        if (state.currentPage > 0) {
+            updateTournamentPage(state.currentPage - 1)
+        }
     }
 
     const handleTryButton = () => {
@@ -81,8 +86,8 @@ const Main = observer(() => {
                             <h2>Последние турниры</h2>
                         </div>
                         <div className="tournaments">
-                            <TournamentsStaticTable tournaments={tournaments}/>
-                            <PageSelector page={currentPage + 1} onPrevPage={prevPage} onNextPage={nextPage}/>
+                            <TournamentsStaticTable tournaments={state.tournaments}/>
+                            <PageSelector page={state.currentPage + 1} onPrevPage={prevPage} onNextPage={nextPage}/>
                         </div>
                     </div>
                 </div>
