@@ -27,7 +27,7 @@ export const signIn = async (login, password) => {
             return authorize(response.data.token)
         })
         .catch((e) => {
-            if (e?.response.status === 401) {
+            if (e?.response?.status === 401) {
                 alertMessage('Ошибка', 'Неверный логин или пароль')
                 return false
             } else {
@@ -42,7 +42,7 @@ export const signUp = async (login, password) => {
             return authorize(response.data.token)
         })
         .catch(e => {
-            if (e?.response.status === 401) {
+            if (e?.response?.status === 401) {
                 alertMessage('Ошибка', 'Пользователь с таким логином уже существует')
                 return false
             } else {

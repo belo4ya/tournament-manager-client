@@ -20,15 +20,22 @@ const ProfileTeams = () => {
     }
 
     const handleSearchInput = (event) => {
-        setSearch({value: event.target.value, isApplied: false})
-        if (!event.target.value) {
+        const value = event.target.value
+
+        if (value.length < 32) {
+            setSearch({value: value, isApplied: false})
+        }
+
+        if (!value) {
             updateTeamsPage(state.currentPage)
         }
     }
 
     const handleSearchButton = () => {
-        setSearch({value: search.value, isApplied: true})
-        updateTeamsPage(0, search.value)
+        if (!loading) {
+            setSearch({value: search.value, isApplied: true})
+            updateTeamsPage(0, search.value)
+        }
     }
 
     const nextPage = () => {

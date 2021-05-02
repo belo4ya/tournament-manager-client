@@ -27,7 +27,7 @@ const App = observer(() => {
                 userStore.isAuth = true
             })
             .catch((e) => {
-                if (e.response && e.response.status === 401) {
+                if (e?.response?.status === 401) {
                     userStore.isAuth = false
                 } else {
                     alertError(e)
