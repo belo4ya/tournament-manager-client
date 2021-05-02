@@ -1,15 +1,15 @@
 {
   "files": {
     "main.css": "/tournament-manager-client/static/css/main.46107e94.chunk.css",
-    "main.js": "/tournament-manager-client/static/js/main.a2c5cffa.chunk.js",
-    "main.js.map": "/tournament-manager-client/static/js/main.a2c5cffa.chunk.js.map",
+    "main.js": "/tournament-manager-client/static/js/main.10ac20ee.chunk.js",
+    "main.js.map": "/tournament-manager-client/static/js/main.10ac20ee.chunk.js.map",
     "runtime-main.js": "/tournament-manager-client/static/js/runtime-main.13d48529.js",
     "runtime-main.js.map": "/tournament-manager-client/static/js/runtime-main.13d48529.js.map",
-    "static/js/2.60f883d3.chunk.js": "/tournament-manager-client/static/js/2.60f883d3.chunk.js",
-    "static/js/2.60f883d3.chunk.js.map": "/tournament-manager-client/static/js/2.60f883d3.chunk.js.map",
+    "static/js/2.25adebb9.chunk.js": "/tournament-manager-client/static/js/2.25adebb9.chunk.js",
+    "static/js/2.25adebb9.chunk.js.map": "/tournament-manager-client/static/js/2.25adebb9.chunk.js.map",
     "index.html": "/tournament-manager-client/index.html",
     "static/css/main.46107e94.chunk.css.map": "/tournament-manager-client/static/css/main.46107e94.chunk.css.map",
-    "static/js/2.60f883d3.chunk.js.LICENSE.txt": "/tournament-manager-client/static/js/2.60f883d3.chunk.js.LICENSE.txt",
+    "static/js/2.25adebb9.chunk.js.LICENSE.txt": "/tournament-manager-client/static/js/2.25adebb9.chunk.js.LICENSE.txt",
     "static/media/icn_cross.6ada0a65.svg": "/tournament-manager-client/static/media/icn_cross.6ada0a65.svg",
     "static/media/icn_pencil.5480220a.svg": "/tournament-manager-client/static/media/icn_pencil.5480220a.svg",
     "static/media/icn_search.6095cc55.svg": "/tournament-manager-client/static/media/icn_search.6095cc55.svg",
@@ -17,8 +17,8 @@
   },
   "entrypoints": [
     "static/js/runtime-main.13d48529.js",
-    "static/js/2.60f883d3.chunk.js",
+    "static/js/2.25adebb9.chunk.js",
     "static/css/main.46107e94.chunk.css",
-    "static/js/main.a2c5cffa.chunk.js"
+    "static/js/main.10ac20ee.chunk.js"
   ]
 }
