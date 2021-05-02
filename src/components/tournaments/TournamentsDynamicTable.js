@@ -30,21 +30,21 @@ const TournamentsDynamicTable = observer((props) => {
     const {alertStore} = useContext(Context)
 
     const handleNameFilter = () => {
-        const [nameFilter, otherFilters] = manage_priority(filters.nameFilter, [filters.teamsFilter, filters.createdDateFilter])
+        const [nameFilter, otherFilters] = managePriority(filters.nameFilter, [filters.teamsFilter, filters.createdDateFilter])
         const [teamsFilter, createdDateFilter] = otherFilters
 
         setFilters({nameFilter, teamsFilter, createdDateFilter})
     }
 
     const handleTeamsFilter = () => {
-        const [teamsFilter, otherFilters] = manage_priority(filters.teamsFilter, [filters.nameFilter, filters.createdDateFilter])
+        const [teamsFilter, otherFilters] = managePriority(filters.teamsFilter, [filters.nameFilter, filters.createdDateFilter])
         const [nameFilter, createdDateFilter] = otherFilters
 
         setFilters({nameFilter, teamsFilter, createdDateFilter})
     }
 
     const handleCreatedDateFilter = () => {
-        const [createdDateFilter, otherFilters] = manage_priority(filters.createdDateFilter, [filters.nameFilter, filters.teamsFilter])
+        const [createdDateFilter, otherFilters] = managePriority(filters.createdDateFilter, [filters.nameFilter, filters.teamsFilter])
         const [nameFilter, teamsFilter] = otherFilters
 
         setFilters({nameFilter, teamsFilter, createdDateFilter})
@@ -102,7 +102,7 @@ const TournamentsDynamicTable = observer((props) => {
                 <div className="head-item bold">Действие</div>
             </div>
             <div className="content">
-                {sort_with_priority(props.tournaments, [filters.nameFilter, filters.teamsFilter, filters.createdDateFilter])
+                {sortWithPriority(props.tournaments, [filters.nameFilter, filters.teamsFilter, filters.createdDateFilter])
                     .map((t) => {
                         return (
                             <EditableTournamentItem
@@ -134,7 +134,7 @@ const TournamentsDynamicTable = observer((props) => {
 export default TournamentsDynamicTable;
 
 
-const manage_priority = (target, context: Array) => {
+const managePriority = (target, context: Array) => {
     target.state = next(target.state)
 
     if (target.state === 1) {
@@ -151,7 +151,7 @@ const manage_priority = (target, context: Array) => {
     return [target, context]
 }
 
-const sort_with_priority = (target, filters) => {
+const sortWithPriority = (target, filters) => {
     filters = filters.filter((f) => f.state !== 0).sort((a, b) => compare(a.priority, b.priority))
     if (filters) {
         return target.sort((a, b) => {

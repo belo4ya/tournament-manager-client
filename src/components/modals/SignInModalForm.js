@@ -3,28 +3,17 @@ import Form from "../Form/Form";
 import Modal from "react-modal";
 import {Context} from "../../index";
 import {observer} from "mobx-react-lite";
-import {$host} from "../../http";
-import {SIGN_IN_ENDPOINT} from "../../utils/endpoints";
-import jwtDecode from "jwt-decode";
 import {useHistory} from "react-router-dom";
 import {PROFILE_ROUTE} from "../../utils/constants";
-import {alertError, alertMessage} from "../../utils/utils";
-
+import {signIn} from "../../http/public";
 
 const style = {
     overlay: {display: 'flex', alignItems: 'center', justifyContent: 'center'},
     content: {position: 'relative', inset: 0, padding: 0, borderRadius: '15px'}
 }
 
-
-const signIn = async (login, password) => {
-    return (await $host.post(SIGN_IN_ENDPOINT, {username: login, password: password})).data
-}
-
-
 const SignInModalForm = observer(() => {
     const history = useHistory()
-    const {userStore} = useContext(Context)
     const {signInModal} = useContext(Context)
     const {signUpModal} = useContext(Context)
     const [login, setLogin] = useState('');
@@ -39,34 +28,23 @@ const SignInModalForm = observer(() => {
     const handleChangeLoginInput = (event) => {
         setLogin(event.target.value)
     }
+
     const handleChangePasswordInput = (event) => {
         setPassword(event.target.value)
     }
 
-    const handleSignInButton = (event) => {
-        event.preventDefault()
+    const handleSignInButton = () => {
         if (isValidLogin(login) && isValidPassword(password)) {
-            signIn(login, password)
-                .then((data) => {
-                    const userData = jwtDecode(data.token)
-                    localStorage.setItem('token', data.token)
-                    userStore.isAuth = true
-                    userStore.username = userData.sub
-                    userStore.roles = userData.roles
+            signIn(login, password).then((status) => {
+                if (status) {
                     handleClose()
                     history.push(PROFILE_ROUTE)
-                })
-                .catch((e) => {
-                    if (e.response && e.response.status === 401) {
-                        alertMessage('Ошибка', 'Неверный логин или пароль')
-                    } else {
-                        alertError(e)
-                    }
-                })
+                }
+            })
         }
     }
-    const handleSignUpButton = (event) => {
-        event.preventDefault()
+
+    const handleSignUpButton = () => {
         handleClose()
         signUpModal.openModal()
     }
@@ -108,15 +86,13 @@ const SignInModalForm = observer(() => {
     );
 });
 
+export default SignInModalForm;
+
 
 const isValidLogin = (login) => {
     return login.length > 3
 }
 
-
 const isValidPassword = (password) => {
     return password.length > 3
 }
-
-
-export default SignInModalForm;

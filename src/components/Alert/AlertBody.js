@@ -18,8 +18,24 @@ const AlertBody = observer((props) => {
             </div>
             {props.actions && (
                 <div className="actions">
-                    <button className="action-btn">{props.actions.ok.text}</button>
-                    <button className="action-btn">{props.actions.cancel.text}</button>
+                    <button
+                        className="action-btn"
+                        onClick={(event) => {
+                            event.preventDefault()
+                            props.onClick(event)
+                        }}
+                    >
+                        {props.actions.ok.text}
+                    </button>
+                    <button
+                        className="action-btn"
+                        onClick={(event) => {
+                            event.preventDefault()
+                            props.onClick(event)
+                        }}
+                    >
+                        {props.actions.cancel.text}
+                    </button>
                 </div>
             )}
         </form>

@@ -6,7 +6,10 @@ const Button = (props) => {
     return (
         <button
             className={["button", props.class].join(" ")}
-            onClick={props.onClick}
+            onClick={(event) => {
+                event.preventDefault()
+                props.onClick(event)
+            }}
         >
             {props.children}
         </button>

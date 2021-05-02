@@ -10,9 +10,10 @@ import {AUTH_ENDPOINT} from "./utils/endpoints";
 import SignInModalForm from "./components/modals/SignInModalForm";
 import SignUpModalForm from "./components/modals/SignUpModalForm";
 import {alertError} from "./utils/utils";
+import Alert from "./components/Alert/Alert";
 
 const checkSession = async () => {
-    return (await $authHost.get(AUTH_ENDPOINT)).data;
+    return await $authHost.get(AUTH_ENDPOINT).then((response) => response.data);
 }
 
 const App = observer(() => {
@@ -46,6 +47,7 @@ const App = observer(() => {
                 <SignUpModalForm/>
                 <AppRouter/>
                 <Footer/>
+                <Alert/>
             </div>
         </BrowserRouter>
     );

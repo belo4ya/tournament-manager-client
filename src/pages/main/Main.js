@@ -4,27 +4,12 @@ import React, {useContext, useEffect, useState} from 'react';
 import PageSelector from "../../components/PageSelector/PageSelector";
 import Button from "../../components/Button"
 import TournamentsStaticTable from "../../components/tournaments/TournamentsStaticTable";
-import {$host} from "../../http";
 import {useHistory} from 'react-router-dom'
 import {Context} from "../../index";
 import {PROFILE_ROUTE} from "../../utils/constants";
 import {observer} from "mobx-react-lite";
-import {alertError} from "../../utils/utils";
+import {fetchTournamentsPage} from "../../http/public";
 
-const getTournaments = async (page, size = 5) => {
-    return await $host.get(
-        '/tournaments', {
-            params: {
-                projection: 'bracketType',
-                sort: ['createdDate', 'desc'].join(','),
-                page: page,
-                size: size
-            }
-        }
-    )
-        .then((response) => response.data)
-        .catch((e) => alertError(e))
-}
 
 const Main = observer(() => {
     const history = useHistory()
@@ -32,7 +17,7 @@ const Main = observer(() => {
     const [state, setState] = useState({tournaments: [], currentPage: 0, lastPage: 0})
     
     const updateTournamentPage = (page) => {
-        getTournaments(page).then((data) => {
+        fetchTournamentsPage(page).then((data) => {
             setState({
                 tournaments: data?._embedded.tournaments.map((t) => {
                     t.date = t.createdDate
