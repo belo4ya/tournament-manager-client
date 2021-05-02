@@ -8,6 +8,7 @@ const Input = (props) => {
             <label htmlFor={props.id}>{props.label}</label>
             <input
                 className={props.inputStyle || "input-secondary"}
+                disabled={props.disabled || false}
                 type={props.type}
                 id={props.id}
                 placeholder={props.placeholder}

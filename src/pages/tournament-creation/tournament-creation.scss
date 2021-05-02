@@ -1,0 +1,38 @@
+.input-section {
+  margin-top: 80px;
+
+  .button {
+    margin-bottom: 160px;
+  }
+
+  .input-subsection {
+    margin-top: 25px;
+  }
+
+  .logo-input {
+    color: #858585;
+  }
+
+  .participants {
+    .select-input {
+      max-width: 665px;
+    }
+  }
+
+  h2 {
+    margin-left: 95px;
+  }
+
+  h5 {
+    margin-bottom: 10px;
+  }
+
+  .choice-box-list {
+    display: flex;
+
+    .checkbox {
+      margin-right: 30px;
+    }
+  }
+
+}
