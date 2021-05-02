@@ -11,6 +11,7 @@ import SignInModalForm from "./components/modals/SignInModalForm";
 import SignUpModalForm from "./components/modals/SignUpModalForm";
 import {alertError} from "./utils/utils";
 import Alert from "./components/Alert/Alert";
+import ScrollToTop from "./components/ScrollToTop/ScrollToTop";
 
 const checkSession = async () => {
     return await $authHost.get(AUTH_ENDPOINT).then((response) => response.data);
@@ -45,6 +46,7 @@ const App = observer(() => {
                 <Header/>
                 <SignInModalForm/>
                 <SignUpModalForm/>
+                <ScrollToTop/>
                 <AppRouter/>
                 <Footer/>
                 <Alert/>

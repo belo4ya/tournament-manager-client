@@ -4,60 +4,47 @@ import React, {useEffect, useState} from 'react';
 import OnPageNavigation from "../../components/OnPageNavigation/OnPageNavigation";
 import Search from "../../components/Search/Search";
 import TeamsTable from "../../components/teams/TeamsTable";
-import {$authHost} from "../../http";
-import {alertError} from "../../utils/utils";
-
-
-const getTeams = async (page, teamName) => {
-    const url = teamName ? `/teams/search/like?team=${teamName}` : '/teams/search/my'
-    return await $authHost(url, {
-        params: {
-            sort: ['rating', 'desc'].join(','),
-            page: page,
-            size: 15
-        }
-    })
-        .then((response) => response.data)
-        .catch((e) => alertError(e))
-}
-
+import {fetchTeams} from "../../http/authorized";
 
 const ProfileTeams = () => {
-    const [searchWord, setSearchWord] = useState()
-    const [teams, setTeams] = useState([])
-    const [currentPage, setCurrentPage] = useState(0)
-    const [lastPage, setLastPage] = useState(0)
+    const [search, setSearch] = useState({value: '', isApplied: false})
+    const [state, setState] = useState({teams: [], currentPage: 0, lastPage: 0})
+    let loading = false
 
-    const handleChangeTeamInput = (event) => {
-        setSearchWord(event.target.value)
+    const updateTeamsPage = (page, teamName) => {
+        loading = true
+        fetchTeams(page, teamName).then(([teams, pageData]) => {
+            setState({teams: teams, currentPage: page, lastPage: pageData.totalPages - 1})
+            loading = false
+        })
+    }
+
+    const handleSearchInput = (event) => {
+        setSearch({value: event.target.value, isApplied: false})
         if (!event.target.value) {
-            getTeams(currentPage).then((data) => {
-                setTeams(data._embedded.teams)
-                setLastPage(data.page.totalPages - 1)
-            })
+            updateTeamsPage(state.currentPage)
         }
     }
 
-    const handleSearchButton = (event) => {
-        event.preventDefault()
-        getTeams(0, searchWord).then((data) => {
-            setTeams(data._embedded.teams)
-            setLastPage(data.page.totalPages - 1)
-        })
+    const handleSearchButton = () => {
+        setSearch({value: search.value, isApplied: true})
+        updateTeamsPage(0, search.value)
     }
 
     const nextPage = () => {
-        if (currentPage < lastPage) setCurrentPage(currentPage + 1)
+        if (state.currentPage < state.lastPage && !loading) {
+            updateTeamsPage(state.currentPage + 1, search.isApplied ? search.value : '')
+        }
     }
+
     const prevPage = () => {
-        if (currentPage > 0) setCurrentPage(currentPage - 1)
+        if (state.currentPage > 0 && !loading) {
+            updateTeamsPage(state.currentPage - 1, search.isApplied ? search.value : '')
+        }
     }
 
     useEffect(() => {
-        getTeams(currentPage).then((data) => {
-            setTeams(data._embedded.teams)
-            setLastPage(data.page.totalPages - 1)
-        })
+        updateTeamsPage(0)
         // eslint-disable-next-line react-hooks/exhaustive-deps
     }, [])
 
@@ -67,15 +54,15 @@ const ProfileTeams = () => {
             <div className="filter-section">
                 <h2>Мои команды</h2>
                 <Search
-                    value={searchWord}
-                    onChange={handleChangeTeamInput}
+                    value={search.value}
+                    onChange={handleSearchInput}
                     onSubmit={handleSearchButton}
                 />
             </div>
             <div className="table-section">
                 <TeamsTable
-                    teams={teams}
-                    currentPage={currentPage}
+                    teams={state.teams}
+                    currentPage={state.currentPage}
                     prevPage={prevPage}
                     nextPage={nextPage}
                 />

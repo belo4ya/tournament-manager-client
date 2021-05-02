@@ -5,10 +5,8 @@ import OnPageNavigation from "../../components/OnPageNavigation/OnPageNavigation
 import TournamentsStaticTable from "../../components/tournaments/TournamentsStaticTable";
 import Button from "../../components/Button";
 import TeamsRow from "../../components/teams/TeamsRow";
-import {$authHost} from "../../http";
 import {Context} from "../../index";
 import {observer} from "mobx-react-lite";
-import {alertError} from "../../utils/utils";
 import {useHistory} from "react-router-dom";
 import {
     PROFILE_TEAMS_ROUTE,
@@ -16,37 +14,7 @@ import {
     TEAM_CREATION_ROUTE,
     TOURNAMENT_CREATION_ROUTE
 } from "../../utils/constants";
-
-const getProfile = async () => {
-    return await $authHost.get('/users/search/my')
-        .then((response) => response.data)
-        .catch((e) => alertError(e))
-}
-
-const getTournaments = async () => {
-    return await $authHost.get('/tournaments/search/my', {
-        params: {
-            projection: 'bracketType',
-            sort: ['lastModifiedDate', 'desc'].join(','),
-            page: 0,
-            size: 4
-        }
-    })
-        .then((response) => response.data)
-        .catch((e) => alertError(e))
-}
-
-const getTeams = async () => {
-    return await $authHost.get('/teams/search/my', {
-        params: {
-            sort: ['lastModifiedDate', 'desc'].join(','),
-            page: 0,
-            size: 4
-        }
-    })
-        .then((response) => response.data)
-        .catch((e) => alertError(e))
-}
+import {fetchProfileData, fetchProfileTeams, fetchProfileTournaments} from "../../http/authorized";
 
 const Profile = observer(() => {
     const history = useHistory()
@@ -55,20 +23,19 @@ const Profile = observer(() => {
     const [teams, setTeams] = useState([])
 
     useEffect(() => {
-        getProfile().then((data) => {
+        fetchProfileData().then((data) => {
             userStore.id = data?.id
             userStore.createdDate = data?.createdDate
             userStore.username = data?.username
         })
-        getTournaments().then((data) => {
-            const tournaments = data?._embedded.tournaments.map((t) => {
+        fetchProfileTournaments().then((tournaments) => {
+            setTournaments(tournaments.map((t) => {
                 t.date = t.lastModifiedDate
                 return t
-            }) || []
-            setTournaments(tournaments)
+            }))
         })
-        getTeams().then((data) => {
-            setTeams(data?._embedded.teams || [])
+        fetchProfileTeams().then((teams) => {
+            setTeams(teams)
         })
     }, [userStore])
 
@@ -91,8 +58,10 @@ const Profile = observer(() => {
                     <div className="tournaments">
                         <TournamentsStaticTable tournaments={tournaments}/>
                         <div className="buttons">
-                            <Button class="black" onClick={() => history.push(PROFILE_TOURNAMENTS_ROUTE)}>Показать все</Button>
-                            <Button class="red" onClick={() => history.push(TOURNAMENT_CREATION_ROUTE)}>Создать турнир</Button>
+                            <Button class="black" onClick={() => history.push(PROFILE_TOURNAMENTS_ROUTE)}>Показать
+                                все</Button>
+                            <Button class="red" onClick={() => history.push(TOURNAMENT_CREATION_ROUTE)}>Создать
+                                турнир</Button>
                         </div>
                     </div>
                 </div>
@@ -107,8 +76,10 @@ const Profile = observer(() => {
                     <div className="my-teams__teams">
                         <TeamsRow teams={teams}/>
                         <div className="buttons">
-                            <Button class="red" onClick={() => history.push(TEAM_CREATION_ROUTE)}>Создать команду</Button>
-                            <Button class="black" onClick={() => history.push(PROFILE_TEAMS_ROUTE)}>Показать все</Button>
+                            <Button class="red" onClick={() => history.push(TEAM_CREATION_ROUTE)}>Создать
+                                команду</Button>
+                            <Button class="black" onClick={() => history.push(PROFILE_TEAMS_ROUTE)}>Показать
+                                все</Button>
                         </div>
                     </div>
                 </div>

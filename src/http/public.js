@@ -4,7 +4,7 @@ import {SIGN_IN_ENDPOINT, SIGN_UP_ENDPOINT} from "../utils/endpoints";
 import jwtDecode from "jwt-decode";
 import {globalStorage} from "../index";
 
-export const fetchData = async (url, params) => {
+const fetchData = async (url, params) => {
     return await $host.get(url, {params: params})
         .then((response) => response.data)
         .catch((e) => alertError(e))

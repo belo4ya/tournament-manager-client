@@ -15,8 +15,10 @@ const Main = observer(() => {
     const history = useHistory()
     const {userStore, signUpModal} = useContext(Context)
     const [state, setState] = useState({tournaments: [], currentPage: 0, lastPage: 0})
+    let loading = false
     
-    const updateTournamentPage = (page) => {
+    const updateTournamentsPage = (page) => {
+        loading = true
         fetchTournamentsPage(page).then((data) => {
             setState({
                 tournaments: data?._embedded.tournaments.map((t) => {
@@ -26,22 +28,24 @@ const Main = observer(() => {
                 currentPage: page,
                 lastPage: (data?.page.totalPages - 1) || 0
             })
+            loading = false
         })
     }
 
     useEffect(() => {
-        updateTournamentPage(0)
+        updateTournamentsPage(0)
+        // eslint-disable-next-line react-hooks/exhaustive-deps
     }, [])
 
     const nextPage = () => {
-        if (state.currentPage < state.lastPage) {
-            updateTournamentPage(state.currentPage + 1)
+        if (state.currentPage < state.lastPage && !loading) {
+            updateTournamentsPage(state.currentPage + 1)
         }
     }
 
     const prevPage = () => {
-        if (state.currentPage > 0) {
-            updateTournamentPage(state.currentPage - 1)
+        if (state.currentPage > 0 && !loading) {
+            updateTournamentsPage(state.currentPage - 1)
         }
     }
 
