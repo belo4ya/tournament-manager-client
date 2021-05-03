@@ -9,7 +9,7 @@ const fetchData = async (url, params) => {
             if (e?.response?.status === 401) {
                 alertMessage(
                     'Предупреждение',
-                    'Время сессии истекло. Пожалуйста обновите страницу и авторизуйтесь заново.'
+                    'Время сессии истекло. Пожалуйста, авторизуйтесь снова.'
                 )
                 globalStorage.userStore.isAuth = false
             } else {
@@ -121,4 +121,23 @@ export const fetchAllTeams = async () => {
     }
 
     return teams
+}
+
+export const createTournament = async (data) => {
+    const url = '/tournaments/withBracket'
+    return await $authHost.post(url, data)
+        .then((response) => response.data.id)
+        .catch(e => {
+            if (e?.response?.status === 401) {
+                alertMessage(
+                    'Предупреждение',
+                    'Время сессии истекло. Пожалуйста, авторизуйтесь снова.'
+                )
+                globalStorage.userStore.isAuth = false
+            } else if (e?.response?.status === 400) {
+                alertMessage('Ошибка', 'Турнир с таким названием уже существует')
+            } else {
+                alertError(e)
+            }
+        })
 }

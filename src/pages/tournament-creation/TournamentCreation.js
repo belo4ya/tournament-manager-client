@@ -6,11 +6,14 @@ import Button from "../../components/Button";
 import Input from "../../components/Input/Input";
 import Select from "react-select";
 import ChoiceBoxList from "../../components/Checkbox/ChoiceBoxList";
-import {fetchAllTeams, fetchTournamentTypes} from "../../http/authorized";
+import {createTournament, fetchAllTeams, fetchTournamentTypes} from "../../http/authorized";
 import {alertMessage} from "../../utils/utils";
+import {useHistory} from "react-router-dom";
+import {PROFILE_TOURNAMENTS_ROUTE} from "../../utils/constants";
 
 
 const TournamentCreation = () => {
+    const history = useHistory()
     const [name, setName] = useState('')
     const [format, setFormat] = useState([])
     const [seed, setSeed] = useState({
@@ -45,7 +48,18 @@ const TournamentCreation = () => {
 
     const handleCreateButton = () => {
         if (isValidTournamentName(name) && isValidParticipantsNumber(participants)) {
-            console.log('create')
+            const data = {
+                name: name,
+                logo: "",
+                bracketType: {id: format[Object.keys(format).filter((f) => format[f].checked)[0]].id},
+                seedType: seed[Object.keys(seed).filter((s) => seed[s].checked)[0]].id,
+                teams: participants.map((p) => ({id: p.value}))
+            }
+            createTournament(data).then((id) => {
+                if (id) {
+                    history.push(PROFILE_TOURNAMENTS_ROUTE + '/' + id)
+                }
+            })
         } else {
             let message = ''
             message += !isValidTournamentName(name) ? 'Минимальная длина названия турнира 5 символов. ' : ''

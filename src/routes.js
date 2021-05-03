@@ -17,6 +17,7 @@ import {
 } from "./pages"
 import About from "./pages/about/About";
 import Creator from "./pages/creator/Creator";
+import Tournament from "./pages/tournament/Tournament";
 
 export const authRoutes = [
     {
@@ -47,6 +48,10 @@ export const authRoutes = [
         path: TOURNAMENT_CREATION_ROUTE,
         Component: TournamentCreation,
     },
+    {
+        path: PROFILE_TOURNAMENTS_ROUTE + '/:id',
+        Component: Tournament,
+    }
 ];
 
 export const publicRoutes = [
