@@ -9,8 +9,12 @@ import TournamentStore from "./store/tournament-store";
 import TeamStore from "./store/team-store";
 import ModalDialog from "./store/modal-dialog";
 import AlertStore from "./store/alert-store";
+import RootStore from "./store";
 
 Modal.setAppElement('#root')
+
+const store = RootStore.create({})
+export const StoreContext = createContext(store)
 
 export const Context = createContext(null)
 export const globalStorage = {
@@ -24,7 +28,9 @@ export const globalStorage = {
 
 ReactDOM.render(
     <Context.Provider value={globalStorage}>
-        <App/>
+        <StoreContext.Provider value={store}>
+            <App/>
+        </StoreContext.Provider>
     </Context.Provider>,
     document.getElementById('root')
 );

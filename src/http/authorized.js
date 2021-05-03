@@ -141,3 +141,8 @@ export const createTournament = async (data) => {
             }
         })
 }
+
+export const fetchOneTournament = async (id) => {
+    const url = '/tournaments/' + id
+    return await fetchData(url)
+}

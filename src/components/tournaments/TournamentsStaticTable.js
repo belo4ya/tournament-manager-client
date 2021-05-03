@@ -2,6 +2,7 @@ import './tournaments.scss'
 
 import React from 'react';
 import TournamentItem from "./TournamentItem";
+import {observer} from "mobx-react-lite";
 
 const TournamentsStaticTable = (props) => {
     return (
@@ -20,4 +21,4 @@ const TournamentsStaticTable = (props) => {
     );
 };
 
-export default TournamentsStaticTable;
+export default observer(TournamentsStaticTable);

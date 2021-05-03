@@ -17,7 +17,7 @@ const checkSession = async () => {
     return await $authHost.get(AUTH_ENDPOINT).then((response) => response.data);
 }
 
-const App = observer(() => {
+const App = () => {
     const {userStore} = useContext(Context)
     const [loading, setLoading] = useState(true)
 
@@ -53,6 +53,6 @@ const App = observer(() => {
             </div>
         </BrowserRouter>
     );
-});
+};
 
-export default App;
+export default observer(App);

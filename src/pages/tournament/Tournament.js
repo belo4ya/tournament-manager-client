@@ -1,12 +1,18 @@
 import "./tournament.scss"
 import placeholder from "../../assets/logo_placeholder.svg"
 
-import React from 'react';
+import React, {useEffect} from 'react';
+import {useHistory, useParams} from "react-router-dom";
 import OnPageNavigation from "../../components/OnPageNavigation/OnPageNavigation";
 import Bracket from "../../components/Bracket/Bracket"
 import Button from "../../components/Button";
+import TeamsTable from "../../components/teams/TeamsTable";
+import {fetchOneTournament} from "../../http/authorized";
+import {PROFILE_ROUTE} from "../../utils/constants";
 
 const Tournament = () => {
+    const history = useHistory()
+    const {id} = useParams()
 
     const rounds = [
         {
@@ -45,6 +51,105 @@ const Tournament = () => {
         },
     ];
 
+    useEffect(() => {
+        fetchOneTournament(id).then((data) => {
+            console.log(data)
+        })
+    }, [id])
+
+    const teams = [
+        {
+            id: 1,
+            name: 'Astralis',
+            logo: 'https://img-cdn.hltv.org/teamlogo/9bgXHp-oh1oaXr7F0mTGmd.svg?ixlib=java-2.1.0&s=f567161ab183001be33948b98c4b2067',
+            rating: 993,
+        },
+        {
+            id: 1,
+            name: 'Astralis',
+            logo: 'https://img-cdn.hltv.org/teamlogo/9bgXHp-oh1oaXr7F0mTGmd.svg?ixlib=java-2.1.0&s=f567161ab183001be33948b98c4b2067',
+            rating: 993,
+        },
+        {
+            id: 1,
+            name: 'Astralis',
+            logo: 'https://img-cdn.hltv.org/teamlogo/9bgXHp-oh1oaXr7F0mTGmd.svg?ixlib=java-2.1.0&s=f567161ab183001be33948b98c4b2067',
+            rating: 993,
+        },
+        {
+            id: 1,
+            name: 'Astralis',
+            logo: 'https://img-cdn.hltv.org/teamlogo/9bgXHp-oh1oaXr7F0mTGmd.svg?ixlib=java-2.1.0&s=f567161ab183001be33948b98c4b2067',
+            rating: 993,
+        },
+        {
+            id: 1,
+            name: 'Astralis',
+            logo: 'https://img-cdn.hltv.org/teamlogo/9bgXHp-oh1oaXr7F0mTGmd.svg?ixlib=java-2.1.0&s=f567161ab183001be33948b98c4b2067',
+            rating: 993,
+        },
+        {
+            id: 1,
+            name: 'Astralis',
+            logo: 'https://img-cdn.hltv.org/teamlogo/9bgXHp-oh1oaXr7F0mTGmd.svg?ixlib=java-2.1.0&s=f567161ab183001be33948b98c4b2067',
+            rating: 993,
+        },
+        {
+            id: 1,
+            name: 'Astralis',
+            logo: 'https://img-cdn.hltv.org/teamlogo/9bgXHp-oh1oaXr7F0mTGmd.svg?ixlib=java-2.1.0&s=f567161ab183001be33948b98c4b2067',
+            rating: 993,
+        },
+        {
+            id: 1,
+            name: 'Astralis',
+            logo: 'https://img-cdn.hltv.org/teamlogo/9bgXHp-oh1oaXr7F0mTGmd.svg?ixlib=java-2.1.0&s=f567161ab183001be33948b98c4b2067',
+            rating: 993,
+        },
+        {
+            id: 1,
+            name: 'Astralis',
+            logo: 'https://img-cdn.hltv.org/teamlogo/9bgXHp-oh1oaXr7F0mTGmd.svg?ixlib=java-2.1.0&s=f567161ab183001be33948b98c4b2067',
+            rating: 993,
+        },
+        {
+            id: 1,
+            name: 'Astralis',
+            logo: 'https://img-cdn.hltv.org/teamlogo/9bgXHp-oh1oaXr7F0mTGmd.svg?ixlib=java-2.1.0&s=f567161ab183001be33948b98c4b2067',
+            rating: 993,
+        },
+        {
+            id: 1,
+            name: 'Astralis',
+            logo: 'https://img-cdn.hltv.org/teamlogo/9bgXHp-oh1oaXr7F0mTGmd.svg?ixlib=java-2.1.0&s=f567161ab183001be33948b98c4b2067',
+            rating: 993,
+        },
+        {
+            id: 1,
+            name: 'Astralis',
+            logo: 'https://img-cdn.hltv.org/teamlogo/9bgXHp-oh1oaXr7F0mTGmd.svg?ixlib=java-2.1.0&s=f567161ab183001be33948b98c4b2067',
+            rating: 993,
+        },
+        {
+            id: 1,
+            name: 'Astralis',
+            logo: 'https://img-cdn.hltv.org/teamlogo/9bgXHp-oh1oaXr7F0mTGmd.svg?ixlib=java-2.1.0&s=f567161ab183001be33948b98c4b2067',
+            rating: 993,
+        },
+        {
+            id: 1,
+            name: 'Astralis',
+            logo: 'https://img-cdn.hltv.org/teamlogo/9bgXHp-oh1oaXr7F0mTGmd.svg?ixlib=java-2.1.0&s=f567161ab183001be33948b98c4b2067',
+            rating: 993,
+        },
+        {
+            id: 1,
+            name: 'Astralis',
+            logo: 'https://img-cdn.hltv.org/teamlogo/9bgXHp-oh1oaXr7F0mTGmd.svg?ixlib=java-2.1.0&s=f567161ab183001be33948b98c4b2067',
+            rating: 993,
+        }
+    ]
+
     return (
         <div>
             <div className="container">
@@ -70,6 +175,14 @@ const Tournament = () => {
                 <div className="participants-section">
                     <h4>Участники</h4>
                     <div className="section-content-container">
+                        <div className="table-section">
+                            <TeamsTable
+                                teams={teams}
+                                currentPage={0}
+                                // prevPage={prevPage}
+                                // nextPage={nextPage}
+                            />
+                        </div>
                     </div>
                 </div>
             </div>

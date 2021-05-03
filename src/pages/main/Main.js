@@ -1,6 +1,6 @@
 import './main.scss'
 
-import React, {useContext, useEffect, useState} from 'react';
+import React, {useContext} from 'react';
 import PageSelector from "../../components/PageSelector/PageSelector";
 import Button from "../../components/Button"
 import TournamentsStaticTable from "../../components/tournaments/TournamentsStaticTable";
@@ -8,45 +8,20 @@ import {useHistory} from 'react-router-dom'
 import {Context} from "../../index";
 import {PROFILE_ROUTE} from "../../utils/constants";
 import {observer} from "mobx-react-lite";
-import {fetchTournamentsPage} from "../../http/public";
+import useStore from "../../hooks/useStore";
 
 
-const Main = observer(() => {
+const Main = () => {
     const history = useHistory()
     const {userStore, signUpModal} = useContext(Context)
-    const [state, setState] = useState({tournaments: [], currentPage: 0, lastPage: 0})
-    let loading = false
-    
-    const updateTournamentsPage = (page) => {
-        loading = true
-        fetchTournamentsPage(page).then((data) => {
-            setState({
-                tournaments: data?._embedded.tournaments.map((t) => {
-                    t.date = t.createdDate
-                    return t
-                }) || [],
-                currentPage: page,
-                lastPage: (data?.page.totalPages - 1) || 0
-            })
-            loading = false
-        })
+    const {tournamentStore} = useStore()
+
+    const onNextPage = () => {
+        tournamentStore.onNextPage()
     }
 
-    useEffect(() => {
-        updateTournamentsPage(0)
-        // eslint-disable-next-line react-hooks/exhaustive-deps
-    }, [])
-
-    const nextPage = () => {
-        if (state.currentPage < state.lastPage && !loading) {
-            updateTournamentsPage(state.currentPage + 1)
-        }
-    }
-
-    const prevPage = () => {
-        if (state.currentPage > 0 && !loading) {
-            updateTournamentsPage(state.currentPage - 1)
-        }
+    const onPrevPage = () => {
+        tournamentStore.onPrevPage()
     }
 
     const handleTryButton = () => {
@@ -75,14 +50,15 @@ const Main = observer(() => {
                             <h2>Последние турниры</h2>
                         </div>
                         <div className="tournaments">
-                            <TournamentsStaticTable tournaments={state.tournaments}/>
-                            <PageSelector page={state.currentPage + 1} onPrevPage={prevPage} onNextPage={nextPage}/>
+                            <TournamentsStaticTable tournaments={tournamentStore.tournaments}/>
+                            <PageSelector page={tournamentStore.page.number + 1} onPrevPage={onPrevPage}
+                                          onNextPage={onNextPage}/>
                         </div>
                     </div>
                 </div>
             </section>
         </div>
     )
-});
+};
 
-export default Main;
+export default observer(Main);
