@@ -35,7 +35,7 @@ export const fetchProfileTournaments = async () => {
     return data?._embedded.tournaments || []
 }
 
-export const fetchProfileTeams = async () => {
+export const fetchProfileTeams = async (page, size) => {
     const url = '/teams/search/my'
     const params = {
         sort: ['lastModifiedDate', 'desc'].join(','),
@@ -101,4 +101,24 @@ export const fetchTeams = async (page, teamName) => {
         totalElements: 0,
         totalPages: 0
     }]
+}
+
+export const fetchAllTeams = async () => {
+    const url = '/teams/search/my'
+    const params = {
+        sort: ['rating', 'desc'].join(','),
+        page: 0,
+        size: 50
+    }
+
+    let data = await fetchData(url, params)
+
+    const totalPages = data?.page.totalPages || 0
+    const teams: Array = data?._embedded.teams
+    for (let i = 1; i < totalPages; i++) {
+        data = await fetchData(url, {...params, page: i})
+        teams.push(...data?._embedded.teams)
+    }
+
+    return teams
 }

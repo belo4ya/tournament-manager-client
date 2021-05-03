@@ -22,9 +22,8 @@ const Checkbox = (props) => {
                 onChange={props.onChange}
             />
             <label
-                htmlFor={props.name}
+                htmlFor={props.id}
                 className="text-2"
-                onClick={props.onChange}
             >
                 {props.value}
             </label>

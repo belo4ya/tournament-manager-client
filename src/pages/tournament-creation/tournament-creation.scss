@@ -7,6 +7,10 @@
 
   .input-subsection {
     margin-top: 25px;
+
+    input {
+      margin-top: 0;
+    }
   }
 
   .logo-input {
@@ -16,15 +20,43 @@
   .participants {
     .select-input {
       max-width: 665px;
-    }
-  }
+      margin-top: 10px;
 
-  h2 {
-    margin-left: 95px;
+      .css-1pahdxg-control {
+        box-shadow: none;
+        border-color: #858585;
+        border-radius: 0;
+        min-height: 42px;
+        &:hover {
+          border-color: #858585;
+        }
+      }
+
+      .css-yk16xz-control {
+        border-radius: 0;
+        min-height: 42px;
+      }
+    }
+
+    h5 {
+      display: inline;
+    }
+
+    .participants-number {
+      margin-left: 8px;
+    }
+
+    .danger {
+      color: #f3493e;
+    }
   }
 
   h5 {
     margin-bottom: 10px;
+  }
+
+  h2 {
+    margin-left: 95px;
   }
 
   .choice-box-list {
