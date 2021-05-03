@@ -1,0 +1,112 @@
+.bracket-frame {
+  max-width: 920px;
+  overflow-x: auto;
+  padding: 15px 5px;
+  display: flex;
+
+  &::-webkit-scrollbar{
+    height: 6px;
+  }
+
+  &::-webkit-scrollbar-button {
+    border-radius: 10px;
+  }
+
+  &::-webkit-scrollbar-track {
+    background-color: #D8D8D8;
+    border-radius: 10px;
+  }
+
+  &::-webkit-scrollbar-thumb {
+    border-radius: 10px;
+    background-color:#C4C4C4;
+  }
+
+  .bracket {
+
+  }
+
+  .round-title {
+    background-color: #f3493e;
+    color: #ffffff;
+    max-width: 150px;
+    width: 100%;
+    height: 30px;
+    padding: 7px 59px;
+    align-self: center;
+    font-size: 16px;
+    font-weight: bold;
+    margin-bottom: 7px;
+  }
+
+  @media (min-width: 993px) {
+    .seed {
+      min-width: 150px;
+      padding: 8px 10px;
+
+      &:nth-child(odd):not(:last-child)::after {
+        border-color: #c4c4c4 !important;
+        top: calc(50% - 0px) !important;
+      }
+
+      &:nth-child(odd):not(:last-child)::after {
+        border-color: #c4c4c4 !important;
+      }
+
+      &:nth-child(even)::before {
+        border-color: #c4c4c4 !important;
+      }
+
+      &:nth-child(even)::after {
+        border-color: #c4c4c4 !important;
+      }
+
+      .seed-item {
+        background-color: #E7E7E7;
+        border-radius: 0;
+        box-shadow: none;
+        width: 150px;
+
+        .seed-team {
+          padding: 7px;
+
+          .game-participant {
+            width: 100%;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            color: black;
+
+            .align-left {
+              display: flex;
+              align-items: center;
+
+              .participant-img {
+                width: 16px;
+                height: 16px;
+              }
+
+              .participant-name {
+                margin-left: 7px;
+                font-size: 12px;
+                font-weight: normal;
+              }
+
+            }
+
+            .participant-score {
+              font-size: 16px;
+              font-weight: bold;
+            }
+          }
+        }
+      }
+    }
+  }
+
+  .delimiter {
+    height: 0.5px;
+    background-color: #c4c4c4;
+  }
+
+}
