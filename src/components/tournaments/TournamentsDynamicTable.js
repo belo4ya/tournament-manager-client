@@ -9,6 +9,7 @@ import AlertBody from "../Alert/AlertBody";
 import {alertWarning, compare, toDate} from "../../utils/utils";
 import useStore from "../../hooks/useStore";
 import {useHistory} from "react-router-dom";
+import {TOURNAMENT_CREATION_ROUTE} from "../../utils/constants";
 
 const TournamentsDynamicTable = (props) => {
     const history = useHistory()
@@ -123,7 +124,7 @@ const TournamentsDynamicTable = (props) => {
                     onPrevPage={props.prevPage}
                     onNextPage={props.nextPage}
                 />
-                <Button class="red">Создать турнир</Button>
+                <Button class="red" onClick={() => history.push(TOURNAMENT_CREATION_ROUTE)}>Создать турнир</Button>
             </div>
         </div>
     );
