@@ -29,7 +29,7 @@ const SignUp = () => {
 
     const handleSignInButton = () => {
         handleClose()
-        signIn.openModal()
+        signIn.open()
     }
 
     const handleSignUpButton = () => {

@@ -11,7 +11,7 @@ const SimpleCredit = types.model('SimpleCredit', {
 }).actions(self => {
     return {
         setValue(value) {
-            if (self.value.length < 64) {
+            if (value.length < 64) {
                 self.value = value
             }
         }
@@ -27,6 +27,18 @@ const SignUp = types.model('SignUp', {
     return {
         isValid() {
             return self.login.isValid() && self.password.isValid() && self.rePassword.value === self.password.value
+        }
+    }
+}).actions(self => {
+    return {
+        open() {
+            self.isOpen = true
+        },
+        close() {
+            self.isOpen = false
+            self.login.setValue('')
+            self.password.setValue('')
+            self.rePassword.setValue('')
         }
     }
 })
