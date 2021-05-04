@@ -224,5 +224,5 @@ class ApiCall {
 
 }
 
-const apiCall = new ApiCall($authHost)
+const apiCall = new ApiCall()
 export default apiCall;
