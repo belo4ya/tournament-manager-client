@@ -50,6 +50,10 @@
     .tournaments {
       margin-top: 40px;
 
+      .tournament-card {
+        cursor: pointer;
+      }
+
       .buttons {
         margin-top: 15px;
         display: flex;

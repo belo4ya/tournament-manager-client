@@ -13,6 +13,7 @@ const TeamsRow = (props) => {
                     name={t.name}
                     logo={t.logo}
                     rating={t.rating}
+                    onClick={() => t.onClick()}
                 />
             )}
         </div>

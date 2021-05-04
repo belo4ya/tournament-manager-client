@@ -8,7 +8,7 @@ import cross from "../../assets/icn_cross.svg";
 
 const EditableTournamentItem = (props) => {
     return (
-        <div className="tournament">
+        <div onClick={props.onEdit} className="tournament">
             <TournamentCard
                 id={props.id}
                 name={props.name}

@@ -5,7 +5,7 @@ import React from 'react';
 
 const TeamCard = (props) => {
     return (
-        <div className="team-card">
+        <div className="team-card" onClick={props.onClick}>
             <h6>{props.name}</h6>
             <img
                 src={props.logo || placeholder}

@@ -5,12 +5,13 @@ const TournamentItem = (props) => {
     return (
         <div className="tournament-item">
             <TournamentCard
-                key={props.id}
+                id={props.id}
                 logo={props.logo}
                 name={props.name}
                 bracketType={props.bracketType}
                 totalTeams={props.totalTeams}
                 date={props.date}
+                onClick={props.onClick}
             />
         </div>
     );

@@ -8,8 +8,10 @@ import {observer} from "mobx-react-lite";
 import AlertBody from "../Alert/AlertBody";
 import {alertWarning, compare, toDate} from "../../utils/utils";
 import useStore from "../../hooks/useStore";
+import {useHistory} from "react-router-dom";
 
 const TournamentsDynamicTable = (props) => {
+    const history = useHistory()
     const {modalStore} = useStore()
     const [filters, setFilters] = useState({
         nameFilter: {
@@ -113,7 +115,7 @@ const TournamentsDynamicTable = (props) => {
                                 bracketType={t.bracketType}
                                 totalTeams={t.totalTeams}
                                 date={t.date}
-                                onEdit={(event) => handleEditButton(event, t)}
+                                onEdit={() => t.onClick(history)}
                                 onDelete={(event) => handleDeleteButton(event, t)}
                             />
                         );

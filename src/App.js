@@ -9,6 +9,7 @@ import ScrollToTop from "./components/ScrollToTop/ScrollToTop";
 import useStore from "./hooks/useStore";
 import SignIn from "./pages/sign-in/SignIn";
 import SignUp from "./pages/sign-up/SignUp";
+import TeamCreation from "./pages/team-creation/TeamCreation";
 
 const App = () => {
     const {userStore} = useStore()
@@ -26,6 +27,7 @@ const App = () => {
                 <Footer/>
                 <SignIn/>
                 <SignUp/>
+                <TeamCreation/>
                 <Alert/>
             </div>
         </BrowserRouter>

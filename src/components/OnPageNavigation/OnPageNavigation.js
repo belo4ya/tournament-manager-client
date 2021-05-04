@@ -8,20 +8,20 @@ import {
     PROFILE_ROUTE,
     PROFILE_TEAMS_ROUTE,
     PROFILE_TOURNAMENTS_ROUTE,
-    TEAM_CREATION_ROUTE,
     TOURNAMENT_CREATION_ROUTE
 } from "../../utils/constants";
+import useStore from "../../hooks/useStore";
 
 const OnPageNavigation = observer(() => {
     const history = useHistory()
+    const {modalStore} = useStore()
+    const teamCreation = modalStore.modalPages.teamCreation
 
-    const handleCreateTournamentButton = (event) => {
-        event.preventDefault()
+    const handleCreateTournamentButton = () => {
         history.push(TOURNAMENT_CREATION_ROUTE)
     }
-    const handleCreateTeamButton = (event) => {
-        event.preventDefault()
-        history.push(TEAM_CREATION_ROUTE)
+    const handleCreateTeamButton = () => {
+        teamCreation.open()
     }
 
     return (

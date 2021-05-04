@@ -1,5 +1,18 @@
 import {types} from "mobx-state-tree";
 
+const TeamModal = types.model('TeamModal', {
+    isOpen: false,
+}).actions(self => {
+    return {
+        open() {
+            self.isOpen = true
+        },
+        close() {
+            self.isOpen = false
+        }
+    }
+})
+
 const SimpleCredit = types.model('SimpleCredit', {
     value: '',
 }).views(self => {
@@ -68,7 +81,9 @@ const SignIn = types.model('SignIn', {
 
 const ModalPagesStore = types.model('ModalPagesStore', {
     signIn: types.optional(SignIn, {}),
-    signUp: types.optional(SignUp, {})
+    signUp: types.optional(SignUp, {}),
+    teamCreation: types.optional(TeamModal, {}),
+    teamEditing: types.optional(TeamModal, {}),
 })
 
 const Alert = types.model('Alert', {

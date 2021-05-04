@@ -42,6 +42,7 @@ form.form {
       align-items: center;
       justify-content: center;
       text-align: center;
+      cursor: pointer;
 
       p {
         font-size: 16px;
@@ -88,5 +89,9 @@ form.form {
         margin-left: 7px;
       }
     }
+  }
+
+  .actions-team {
+    margin-top: 0;
   }
 }

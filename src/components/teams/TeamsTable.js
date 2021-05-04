@@ -5,9 +5,17 @@ import TeamCard from "./TeamCard";
 import PageSelector from "../PageSelector/PageSelector";
 import Button from "../Button";
 import {observer} from "mobx-react-lite";
+import useStore from "../../hooks/useStore";
 
 
 const TeamsTable = (props) => {
+    const {modalStore} = useStore()
+    const teamCreation = modalStore.modalPages.teamCreation
+
+    const handleCreateTeamButton = () => {
+        teamCreation.open()
+    }
+
     return (
         <div className="teams-table">
             <div className="content">
@@ -26,7 +34,7 @@ const TeamsTable = (props) => {
                     onPrevPage={props.prevPage}
                     onNextPage={props.nextPage}
                 />
-                <Button class="red">Создать команду</Button>
+                <Button class="red" onClick={handleCreateTeamButton}>Создать команду</Button>
             </div>
         </div>
     );

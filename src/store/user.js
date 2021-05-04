@@ -1,5 +1,6 @@
-import {flow, getParent, types} from "mobx-state-tree";
+import {flow, getParent, getRoot, types} from "mobx-state-tree";
 import apiCall from "../http/api";
+import {PROFILE_TOURNAMENTS_ROUTE} from "../utils/constants";
 
 const Bracket = types.model('Bracket', {
     id: types.identifierNumber,
@@ -12,6 +13,13 @@ const Team = types.model('Team', {
     name: types.string,
     logo: types.string,
     rating: types.number,
+}).actions(self => {
+    return {
+        onClick() {
+            const rootStore = getRoot(self)
+            rootStore.modalStore.modalPages.teamEditing.open()
+        }
+    }
 })
 
 const Tournament = types.model('Tournament', {
@@ -23,6 +31,12 @@ const Tournament = types.model('Tournament', {
     totalTeams: types.number,
     teams: types.array(Team),
     bracket: types.array(Bracket),
+}).actions(self => {
+    return {
+        onClick(history) {
+            history.push(PROFILE_TOURNAMENTS_ROUTE + '/' + self.id)
+        }
+    }
 })
 
 const Page = types.model('Page', {

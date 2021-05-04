@@ -17,7 +17,12 @@ import useStore from "../../hooks/useStore";
 
 const Profile = () => {
     const history = useHistory()
-    const {userStore} = useStore()
+    const {userStore, modalStore} = useStore()
+    const teamCreation = modalStore.modalPages.teamCreation
+
+    const handleCreateTeamButton = () => {
+        teamCreation.open()
+    }
 
     useEffect(() => {
         userStore.load()
@@ -62,7 +67,7 @@ const Profile = () => {
                     <div className="my-teams__teams">
                         <TeamsRow teams={userStore.user.previewTeamStore.teams}/>
                         <div className="buttons">
-                            <Button class="red" onClick={() => history.push(TEAM_CREATION_ROUTE)}>Создать
+                            <Button class="red" onClick={handleCreateTeamButton}>Создать
                                 команду</Button>
                             <Button class="black" onClick={() => history.push(PROFILE_TEAMS_ROUTE)}>Показать
                                 все</Button>

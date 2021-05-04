@@ -5,7 +5,7 @@ import React from 'react';
 
 const TournamentCard = (props) => {
     return (
-        <div className="tournament-card">
+        <div className="tournament-card" onClick={props.onClick}>
             <div className="title-container">
                 <img
                     src={props.logo || placeholder}
