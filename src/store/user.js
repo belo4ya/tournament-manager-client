@@ -2,28 +2,63 @@ import {flow, types} from "mobx-state-tree";
 import apiCall from "../http/api";
 
 const User = types.model('User', {
-    id: types.identifierNumber,
-    createdDate: types.string,
+    id: types.maybe(types.number),
+    createdDate: types.maybe(types.string),
     username: types.string,
     roles: types.array(types.string),
 })
 
 const UserStore = types.model('UserStore', {
-    user: types.maybe(User),
+    user: types.maybeNull(User),
     isAuth: types.maybe(types.boolean),
+    isLoading: false,
+    isChecking: false
 }).actions(self => {
     return {
-        signIn: flow(function* () {
-            self.user = yield apiCall.signIn()
-            self.isAuth = true
+        load: flow(function* () {
+            self.isLoading = true
+            try {
+                self.user = yield apiCall.fetchUserData()
+            } finally {
+                self.isLoading = false
+            }
         }),
-        signUp: flow(function* () {
-            self.user = yield apiCall.signUp()
-            self.isAuth = true
+        signIn: flow(function* (login, password) {
+            self.isLoading = true
+            try {
+                const {user, isAuth} = yield apiCall.signIn(login, password)
+                self.user = user
+                self.isAuth = isAuth
+            } finally {
+                self.isLoading = false
+            }
+        }),
+        signUp: flow(function* (login, password) {
+            self.isLoading = true
+            try {
+                const {user, isAuth} = yield apiCall.signUp(login, password)
+                self.user = user
+                self.isAuth = isAuth
+            } finally {
+                self.isLoading = false
+            }
         }),
         checkSession: flow(function* () {
-            self.isAuth = yield apiCall.checkSession()
-        })
+            self.isChecking = true
+            try {
+                self.isAuth = yield apiCall.checkSession()
+            } finally {
+                self.isChecking = false
+            }
+        }),
+        signOut() {
+            self.isAuth = false
+            self.user = null
+            localStorage.setItem('token', '')
+        },
+        afterCreate() {
+            self.checkSession()
+        },
     }
 })
 

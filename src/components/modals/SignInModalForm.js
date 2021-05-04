@@ -4,16 +4,17 @@ import Modal from "react-modal";
 import {Context} from "../../index";
 import {observer} from "mobx-react-lite";
 import {useHistory} from "react-router-dom";
+import useStore from "../../hooks/useStore";
 import {PROFILE_ROUTE} from "../../utils/constants";
-import {signIn} from "../../http/public";
 
 const style = {
     overlay: {display: 'flex', alignItems: 'center', justifyContent: 'center'},
     content: {position: 'relative', inset: 0, padding: 0, borderRadius: '15px'}
 }
 
-const SignInModalForm = observer(() => {
+const SignInModalForm = () => {
     const history = useHistory()
+    const {userStore} = useStore()
     const {signInModal} = useContext(Context)
     const {signUpModal} = useContext(Context)
     const [login, setLogin] = useState('');
@@ -35,8 +36,8 @@ const SignInModalForm = observer(() => {
 
     const handleSignInButton = () => {
         if (isValidLogin(login) && isValidPassword(password)) {
-            signIn(login, password).then((status) => {
-                if (status) {
+            userStore.signIn(login, password).then(() => {
+                if (userStore.isAuth) {
                     handleClose()
                     history.push(PROFILE_ROUTE)
                 }
@@ -49,6 +50,7 @@ const SignInModalForm = observer(() => {
         signUpModal.openModal()
     }
 
+    console.log('signIn')
     return (
         <Modal
             style={style}
@@ -84,9 +86,9 @@ const SignInModalForm = observer(() => {
             />
         </Modal>
     );
-});
+};
 
-export default SignInModalForm;
+export default observer(SignInModalForm);
 
 
 const isValidLogin = (login) => {

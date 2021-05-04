@@ -8,11 +8,12 @@ import {Context} from "../../index";
 import {observer} from "mobx-react-lite";
 import {useHistory} from "react-router-dom";
 import {INDEX_ROUTE, PROFILE_ROUTE} from "../../utils/constants";
+import useStore from "../../hooks/useStore";
 
 
-const Header = observer(() => {
+const Header = () => {
     const history = useHistory()
-    const {userStore} = useContext(Context)
+    const {userStore} = useStore()
     const {signInModal} = useContext(Context)
     const {signUpModal} = useContext(Context)
 
@@ -23,10 +24,7 @@ const Header = observer(() => {
         signUpModal.openModal()
     }
     const handleSignOut = () => {
-        userStore.isAuth = false
-        userStore.username = ''
-        userStore.roles = []
-        localStorage.setItem('token', '')
+        userStore.signOut()
         history.push(INDEX_ROUTE)
     }
     const handleProfile = () => {
@@ -53,6 +51,6 @@ const Header = observer(() => {
             </div>
         </header>
     );
-});
+};
 
-export default Header;
+export default observer(Header);

@@ -13,7 +13,7 @@ import RootStore from "./store";
 
 Modal.setAppElement('#root')
 
-const store = RootStore.create({})
+export const store = RootStore.create({})
 export const StoreContext = createContext(store)
 
 export const Context = createContext(null)

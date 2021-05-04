@@ -6,10 +6,11 @@ import {Context} from "../../index";
 import {observer} from "mobx-react-lite";
 import {useHistory} from "react-router-dom";
 import {ABOUT_ROUTE, CREATOR_ROUTE, INDEX_ROUTE, TOURNAMENT_CREATION_ROUTE} from "../../utils/constants";
+import useStore from "../../hooks/useStore";
 
-const Navigation = observer((props) => {
+const Navigation = (props) => {
     const history = useHistory()
-    const {userStore} = useContext(Context)
+    const {userStore} = useStore()
     const {signInModal} = useContext(Context)
 
     const handleCreateTournamentButton = () => {
@@ -28,6 +29,6 @@ const Navigation = observer((props) => {
             <Button class="white" onClick={handleCreateTournamentButton}>Создать турнир</Button>
         </nav>
     );
-});
+};
 
-export default Navigation;
+export default observer(Navigation);

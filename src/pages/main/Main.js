@@ -13,7 +13,8 @@ import useStore from "../../hooks/useStore";
 
 const Main = () => {
     const history = useHistory()
-    const {userStore, signUpModal} = useContext(Context)
+    const {userStore} = useStore()
+    const {signUpModal} = useContext(Context)
     const {tournamentStore} = useStore()
 
     const onNextPage = () => {
@@ -32,6 +33,7 @@ const Main = () => {
         }
     }
 
+    console.log('main')
     return (
         <div>
             <section className="section-header">
@@ -51,8 +53,7 @@ const Main = () => {
                         </div>
                         <div className="tournaments">
                             <TournamentsStaticTable tournaments={tournamentStore.tournaments}/>
-                            <PageSelector page={tournamentStore.page.number + 1} onPrevPage={onPrevPage}
-                                          onNextPage={onNextPage}/>
+                            <PageSelector page={tournamentStore.page.number + 1} onPrevPage={onPrevPage} onNextPage={onNextPage}/>
                         </div>
                     </div>
                 </div>

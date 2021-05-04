@@ -18,7 +18,7 @@ const Page = types.model('Page', {
 })
 
 const TournamentStore = types.model('TournamentStore', {
-    tournaments: types.array(Tournament),
+    tournaments: types.optional(types.array(Tournament), []),
     page: types.optional(Page, {
         size: 0,
         totalElements: 0,
@@ -34,14 +34,6 @@ const TournamentStore = types.model('TournamentStore', {
                 const {tournaments, page} = yield apiCall.fetchPublicTournaments()
                 self.tournaments = tournaments
                 self.page = page
-            } catch (e) {
-                self.tournaments = []
-                self.page = {
-                    size: 0,
-                    totalElements: 0,
-                    totalPages: 0,
-                    number: 0
-                }
             } finally {
                 self.isLoading = false
             }

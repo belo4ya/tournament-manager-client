@@ -1,11 +1,10 @@
 import "./profile.scss"
 
-import React, {useContext, useEffect, useState} from 'react';
+import React, {useEffect, useState} from 'react';
 import OnPageNavigation from "../../components/OnPageNavigation/OnPageNavigation";
 import TournamentsStaticTable from "../../components/tournaments/TournamentsStaticTable";
 import Button from "../../components/Button";
 import TeamsRow from "../../components/teams/TeamsRow";
-import {Context} from "../../index";
 import {observer} from "mobx-react-lite";
 import {useHistory} from "react-router-dom";
 import {
@@ -14,29 +13,26 @@ import {
     TEAM_CREATION_ROUTE,
     TOURNAMENT_CREATION_ROUTE
 } from "../../utils/constants";
-import {fetchProfileData, fetchProfileTeams, fetchProfileTournaments} from "../../http/authorized";
+import useStore from "../../hooks/useStore";
 
-const Profile = observer(() => {
+const Profile = () => {
     const history = useHistory()
-    const {userStore} = useContext(Context)
+    const {userStore} = useStore()
     const [tournaments, setTournaments] = useState([])
     const [teams, setTeams] = useState([])
 
     useEffect(() => {
-        fetchProfileData().then((data) => {
-            userStore.id = data?.id
-            userStore.createdDate = data?.createdDate
-            userStore.username = data?.username
-        })
-        fetchProfileTournaments().then((tournaments) => {
-            setTournaments(tournaments.map((t) => {
-                t.date = t.lastModifiedDate
-                return t
-            }))
-        })
-        fetchProfileTeams().then((teams) => {
-            setTeams(teams)
-        })
+        userStore.load()
+        // fetchProfileTournaments().then((tournaments) => {
+        //     setTournaments(tournaments.map((t) => {
+        //         t.date = t.lastModifiedDate
+        //         return t
+        //     }))
+        // })
+        // fetchProfileTeams().then((teams) => {
+        //     setTeams(teams)
+        // })
+        // eslint-disable-next-line react-hooks/exhaustive-deps
     }, [userStore])
 
     return (
@@ -45,9 +41,9 @@ const Profile = observer(() => {
             <div className="profile-section">
                 <div className="profile-card">
                     <h4>Логин</h4>
-                    <p>{userStore.username}</p>
+                    <p>{userStore.user?.username}</p>
                     <h4>Дата регистрации</h4>
-                    <p>{userStore.createdDate}</p>
+                    <p>{userStore.user?.createdDate}</p>
                 </div>
             </div>
 
@@ -87,6 +83,6 @@ const Profile = observer(() => {
 
         </div>
     );
-});
+};
 
-export default Profile;
+export default observer(Profile);
