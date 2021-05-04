@@ -109,6 +109,65 @@ class ApiCall {
                 username: data.username,
             }))
     }
+
+    async fetchUserTournaments() {
+        const url = '/tournaments/search/my'
+        const params = {
+            projection: 'bracketType',
+            sort: ['lastModifiedDate', 'desc'].join(','),
+            page: 0,
+            size: 4
+        }
+        return this._makeRequest(() => this.authHost.get(url, {params}))
+            .then((data) => {
+                return data._embedded.tournaments.map((t) => ({
+                    id: t.id,
+                    date: t.lastModifiedDate,
+                    name: t.name,
+                    logo: t.logo,
+                    bracketType: t.bracketType,
+                    totalTeams: t.totalTeams,
+                }))
+            })
+    }
+
+    async fetchUserTeams() {
+        const url = '/teams/search/my'
+        const params = {
+            sort: ['lastModifiedDate', 'desc'].join(','),
+            page: 0,
+            size: 4
+        }
+        return this._makeRequest(() => this.authHost.get(url, {params}))
+            .then((data) => {
+                return data._embedded.teams.map((t) => ({
+                    id: t.id,
+                    createdDate: t.createdDate,
+                    lastModifiedDate: t.lastModifiedDate,
+                    name: t.name,
+                    logo: t.logo,
+                    rating: t.rating,
+                }))
+            })
+    }
+
+    async fetchUserTournamentsFilters(page, size, filters) {
+        const url = filters ? '/tournaments/search/filters' : '/tournaments/search/my'
+        const params = {
+            projection: 'bracketType',
+            sort: ['createdDate', 'desc'].join(','),
+            page: page,
+            size: size
+        }
+        if (filters) {
+            params.name = filters.name
+            params.types = filters.types?.join(',')
+            params.start = filters.range?.start
+            params.end = filters.range?.end
+        }
+        return await this._makeRequest(() => this.authHost.get(url, {params}))
+    }
+
 }
 
 const apiCall = new ApiCall($authHost)

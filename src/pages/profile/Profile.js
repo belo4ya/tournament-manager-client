@@ -1,6 +1,6 @@
 import "./profile.scss"
 
-import React, {useEffect, useState} from 'react';
+import React, {useEffect} from 'react';
 import OnPageNavigation from "../../components/OnPageNavigation/OnPageNavigation";
 import TournamentsStaticTable from "../../components/tournaments/TournamentsStaticTable";
 import Button from "../../components/Button";
@@ -18,21 +18,11 @@ import useStore from "../../hooks/useStore";
 const Profile = () => {
     const history = useHistory()
     const {userStore} = useStore()
-    const [tournaments, setTournaments] = useState([])
-    const [teams, setTeams] = useState([])
 
     useEffect(() => {
         userStore.load()
-        // fetchProfileTournaments().then((tournaments) => {
-        //     setTournaments(tournaments.map((t) => {
-        //         t.date = t.lastModifiedDate
-        //         return t
-        //     }))
-        // })
-        // fetchProfileTeams().then((teams) => {
-        //     setTeams(teams)
-        // })
-        // eslint-disable-next-line react-hooks/exhaustive-deps
+        userStore.user.previewTournamentStore.load()
+        userStore.user.previewTeamStore.load()
     }, [userStore])
 
     return (
@@ -52,7 +42,7 @@ const Profile = () => {
                 <div className="my-tournaments">
                     <h2>Мои турниры</h2>
                     <div className="tournaments">
-                        <TournamentsStaticTable tournaments={tournaments}/>
+                        <TournamentsStaticTable tournaments={userStore.user.previewTournamentStore.tournaments}/>
                         <div className="buttons">
                             <Button class="black" onClick={() => history.push(PROFILE_TOURNAMENTS_ROUTE)}>Показать
                                 все</Button>
@@ -70,7 +60,7 @@ const Profile = () => {
                         <h2>Мои команды</h2>
                     </div>
                     <div className="my-teams__teams">
-                        <TeamsRow teams={teams}/>
+                        <TeamsRow teams={userStore.user.previewTeamStore.teams}/>
                         <div className="buttons">
                             <Button class="red" onClick={() => history.push(TEAM_CREATION_ROUTE)}>Создать
                                 команду</Button>
@@ -80,7 +70,6 @@ const Profile = () => {
                     </div>
                 </div>
             </div>
-
         </div>
     );
 };

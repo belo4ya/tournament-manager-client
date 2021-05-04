@@ -2,6 +2,7 @@ import "./teams.scss"
 
 import React from 'react';
 import TeamCard from "./TeamCard";
+import {observer} from "mobx-react-lite";
 
 const TeamsRow = (props) => {
     return (
@@ -18,4 +19,4 @@ const TeamsRow = (props) => {
     );
 };
 
-export default TeamsRow;
+export default observer(TeamsRow);
