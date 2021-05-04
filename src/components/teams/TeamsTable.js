@@ -4,6 +4,7 @@ import React from 'react';
 import TeamCard from "./TeamCard";
 import PageSelector from "../PageSelector/PageSelector";
 import Button from "../Button";
+import {observer} from "mobx-react-lite";
 
 
 const TeamsTable = (props) => {
@@ -31,4 +32,4 @@ const TeamsTable = (props) => {
     );
 };
 
-export default TeamsTable;
+export default observer(TeamsTable);

@@ -151,7 +151,7 @@ class ApiCall {
             })
     }
 
-    async fetchUserTournamentsFilters(page, size, filters) {
+    async fetchUserFilteredTournaments(page, size, filters) {
         const url = filters ? '/tournaments/search/filters' : '/tournaments/search/my'
         const params = {
             projection: 'bracketType',
@@ -192,6 +192,33 @@ class ApiCall {
                     value: t.type,
                     checked: false
                 }))
+            })
+    }
+
+    async fetchUserFilteredTeams(page, size, filters) {
+        const params = {
+            sort: ['rating', 'desc'].join(','),
+            page: page,
+            size: 15,
+        }
+        let url
+        if (filters.teamName) {
+            url = '/teams/search/ilike'
+            params.team = filters.teamName
+        } else {
+            url = '/teams/search/my'
+        }
+        return this._makeRequest(() => this.authHost.get(url, {params}))
+            .then((data) => {
+                const teams = data._embedded.teams.map((t) => ({
+                    id: t.id,
+                    createdDate: t.createdDate,
+                    lastModifiedDate: t.lastModifiedDate,
+                    name: t.name,
+                    logo: t.logo,
+                    rating: t.rating,
+                }))
+                return {teams, page: data.page}
             })
     }
 

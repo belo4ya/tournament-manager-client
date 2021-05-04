@@ -1,59 +1,44 @@
 import "./profile-teams.scss"
 
-import React, {useEffect, useState} from 'react';
+import React, {useEffect} from 'react';
 import OnPageNavigation from "../../components/OnPageNavigation/OnPageNavigation";
 import Search from "../../components/Search/Search";
 import TeamsTable from "../../components/teams/TeamsTable";
-import {fetchTeams} from "../../http/authorized";
+import useStore from "../../hooks/useStore";
+import {observer} from "mobx-react-lite";
 
 const ProfileTeams = () => {
-    const [search, setSearch] = useState({value: '', isApplied: false})
-    const [state, setState] = useState({teams: [], currentPage: 0, lastPage: 0})
-    let loading = false
-
-    const updateTeamsPage = (page, teamName) => {
-        loading = true
-        fetchTeams(page, teamName).then(([teams, pageData]) => {
-            setState({teams: teams, currentPage: page, lastPage: pageData.totalPages - 1})
-            loading = false
-        })
-    }
+    const {userStore} = useStore()
+    const pageableTeamStore = userStore.user.pageableTeamStore
 
     const handleSearchInput = (event) => {
         const value = event.target.value
 
         if (value.length < 32) {
-            setSearch({value: value, isApplied: false})
+            pageableTeamStore.search.setValue(value)
         }
 
         if (!value) {
-            updateTeamsPage(state.currentPage)
+            pageableTeamStore.load()
         }
     }
 
     const handleSearchButton = () => {
-        if (!loading) {
-            setSearch({value: search.value, isApplied: true})
-            updateTeamsPage(0, search.value)
-        }
+        pageableTeamStore.search.apply()
+        pageableTeamStore.load()
     }
 
     const nextPage = () => {
-        if (state.currentPage < state.lastPage && !loading) {
-            updateTeamsPage(state.currentPage + 1, search.isApplied ? search.value : '')
-        }
+        pageableTeamStore.onNextPage()
     }
 
     const prevPage = () => {
-        if (state.currentPage > 0 && !loading) {
-            updateTeamsPage(state.currentPage - 1, search.isApplied ? search.value : '')
-        }
+        pageableTeamStore.onPrevPage()
     }
 
     useEffect(() => {
-        updateTeamsPage(0)
-        // eslint-disable-next-line react-hooks/exhaustive-deps
-    }, [])
+        pageableTeamStore.load()
+    }, [pageableTeamStore])
 
     return (
         <div className="container">
@@ -61,15 +46,15 @@ const ProfileTeams = () => {
             <div className="filter-section">
                 <h2>Мои команды</h2>
                 <Search
-                    value={search.value}
+                    value={pageableTeamStore.search.value}
                     onChange={handleSearchInput}
                     onSubmit={handleSearchButton}
                 />
             </div>
             <div className="table-section">
                 <TeamsTable
-                    teams={state.teams}
-                    currentPage={state.currentPage}
+                    teams={pageableTeamStore.teams}
+                    currentPage={pageableTeamStore.page.number}
                     prevPage={prevPage}
                     nextPage={nextPage}
                 />
@@ -78,4 +63,4 @@ const ProfileTeams = () => {
     );
 };
 
-export default ProfileTeams;
+export default observer(ProfileTeams);

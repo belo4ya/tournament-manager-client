@@ -32,15 +32,19 @@ const Page = types.model('Page', {
     number: types.number,
 })
 
-const PageableTeamStore = types.model('PageableTeamStore', {
-    teams: types.array(Team),
-    page: types.optional(Page, {
-        size: 0,
-        totalElements: 0,
-        totalPages: 0,
-        number: 0
-    }),
-    isLoading: false,
+const Search = types.model('Search', {
+    value: '',
+    isApplied: false,
+}).actions(self => {
+    return {
+        setValue(value) {
+            self.isApplied = false
+            self.value = value
+        },
+        apply() {
+            self.isApplied = true
+        }
+    }
 })
 
 const Checkbox = types.model('Checkbox', {
@@ -100,17 +104,45 @@ const Filter = types.model('Filter', {
     }
 })
 
-const Search = types.model('Search', {
-    value: '',
-    isApplied: false,
+const PageableTeamStore = types.model('PageableTeamStore', {
+    teams: types.array(Team),
+    page: types.maybe(Page),
+    search: types.maybe(Search),
+    isLoading: false,
 }).actions(self => {
     return {
-        setValue(value) {
-            self.isApplied = false
-            self.value = value
-        },
-        apply() {
-            self.isApplied = true
+        load: flow(function* (targetPage = 0) {
+            self.teams = []
+            self.isLoading = true
+            try {
+                const filters = {teamName: self.search.isApplied ? self.search.value : ''}
+                const {teams, page} = yield apiCall.fetchUserFilteredTeams(targetPage, 5, filters)
+                self.teams = teams
+                self.page = page
+            } finally {
+                self.isLoading = false
+            }
+        }),
+        onNextPage: flow(function* () {
+            const targetPage = self.page.number + 1
+            if (targetPage < self.page.totalPages && !self.isLoading) {
+                yield self.load(targetPage)
+            }
+        }),
+        onPrevPage: flow(function* () {
+            const targetPage = self.page.number - 1
+            if (targetPage >= 0 && !self.isLoading) {
+                yield self.load(targetPage)
+            }
+        }),
+        afterCreate() {
+            self.page = {
+                size: 0,
+                totalElements: 0,
+                totalPages: 0,
+                number: 0
+            }
+            self.search = Search.create({})
         }
     }
 })
@@ -139,7 +171,7 @@ const PageableTournamentStore = types.model('PageableTournamentStore', {
                     filters.types = self.filter.checkboxList.filter((el) => el.checked).map((el) => el.value)
                     filters.range = {start: self.filter.range.min, end: self.filter.range.max}
                 }
-                const {tournaments, page} = yield apiCall.fetchUserTournamentsFilters(targetPage, 5, filters)
+                const {tournaments, page} = yield apiCall.fetchUserFilteredTournaments(targetPage, 5, filters)
                 self.tournaments = tournaments
                 self.page = page
             } finally {
