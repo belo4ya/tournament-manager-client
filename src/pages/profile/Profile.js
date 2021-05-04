@@ -7,12 +7,7 @@ import Button from "../../components/Button";
 import TeamsRow from "../../components/teams/TeamsRow";
 import {observer} from "mobx-react-lite";
 import {useHistory} from "react-router-dom";
-import {
-    PROFILE_TEAMS_ROUTE,
-    PROFILE_TOURNAMENTS_ROUTE,
-    TEAM_CREATION_ROUTE,
-    TOURNAMENT_CREATION_ROUTE
-} from "../../utils/constants";
+import {PROFILE_TEAMS_ROUTE, PROFILE_TOURNAMENTS_ROUTE, TOURNAMENT_CREATION_ROUTE} from "../../utils/constants";
 import useStore from "../../hooks/useStore";
 
 const Profile = () => {

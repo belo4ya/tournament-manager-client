@@ -52,10 +52,6 @@ const TournamentsDynamicTable = (props) => {
         setFilters({nameFilter, teamsFilter, createdDateFilter})
     }
 
-    const handleEditButton = (event, id) => {
-        console.log('edit: ', id)
-    }
-
     const handleDeleteButton = (event, tournament) => {
         alertWarning(
             <AlertBody
