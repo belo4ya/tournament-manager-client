@@ -296,10 +296,10 @@ const UserStore = types.model('UserStore', {
             localStorage.setItem('token', '')
         },
         updateUserData(userData) {
-            self.user.id = userData.id
-            self.user.createdDate = userData.createdDate
-            self.user.username = userData.username
-            self.user.roles = userData.roles
+            self.user.id = userData?.id
+            self.user.createdDate = userData?.createdDate
+            self.user.username = userData?.username
+            self.user.roles = userData?.roles
         },
         afterCreate() {
             self.checkSession()

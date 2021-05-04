@@ -1,8 +1,8 @@
-import {globalStorage} from "../index";
+import {store} from "../index";
 import AlertBody from "../components/Alert/AlertBody";
 
 export const alertWarning = (body) => {
-    globalStorage.alertStore.showAlert(body)
+    store.modalStore.alert.open(body)
 }
 
 export const alertError = (e) => {

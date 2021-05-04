@@ -1,16 +1,17 @@
 import './alert.scss'
 
-import React, {useContext} from 'react';
+import React from 'react';
 import {observer} from "mobx-react-lite";
-import {Context} from "../../index";
+import useStore from "../../hooks/useStore";
 
-const AlertBody = observer((props) => {
-    const {alertStore} = useContext(Context)
+const AlertBody = (props) => {
+    const {modalStore} = useStore()
+
     return (
         <form className="alert">
             <div className="header">
                 <h3>{props.header}</h3>
-                <div className="close" onClick={props.handleClose || (() => alertStore.closeAlert())}>[x]</div>
+                <div className="close" onClick={props.handleClose || (() => modalStore.alert.close())}>[x]</div>
             </div>
             <div className="content">
                 <p>{props.content}</p>
@@ -40,6 +41,6 @@ const AlertBody = observer((props) => {
             )}
         </form>
     );
-});
+};
 
-export default AlertBody;
+export default observer(AlertBody);

@@ -1,5 +1,5 @@
 import React, {useContext, useState} from 'react';
-import Form from "../Form/Form";
+import Form from "../../components/Form/Form";
 import Modal from "react-modal";
 import {Context} from "../../index";
 import {observer} from "mobx-react-lite";

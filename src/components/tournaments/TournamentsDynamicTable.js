@@ -1,15 +1,16 @@
 import './tournaments.scss'
 
-import React, {useContext, useState} from 'react';
+import React, {useState} from 'react';
 import PageSelector from "../PageSelector/PageSelector";
 import Button from "../Button";
 import EditableTournamentItem from "./EditableTournamentItem";
 import {observer} from "mobx-react-lite";
-import {Context} from "../../index";
 import AlertBody from "../Alert/AlertBody";
 import {alertWarning, compare, toDate} from "../../utils/utils";
+import useStore from "../../hooks/useStore";
 
 const TournamentsDynamicTable = (props) => {
+    const {modalStore} = useStore()
     const [filters, setFilters] = useState({
         nameFilter: {
             state: 0,
@@ -27,7 +28,6 @@ const TournamentsDynamicTable = (props) => {
             comparator: (a, b, reverse) => compare(toDate(a.date), toDate(b.date), reverse)
         }
     })
-    const {alertStore} = useContext(Context)
 
     const handleNameFilter = () => {
         const [nameFilter, otherFilters] = managePriority(filters.nameFilter, [filters.teamsFilter, filters.createdDateFilter])
@@ -58,7 +58,7 @@ const TournamentsDynamicTable = (props) => {
         alertWarning(
             <AlertBody
                 header="Предупреждение"
-                handleClose={() => alertStore.closeAlert()}
+                handleClose={() => modalStore.alert.close()}
                 content={`Вы действительно хотите удалить ${tournament.name}?`}
                 actions={{ok: {text: "Удалить", action: () => false}, cancel: {text: "Отмена", action: () => false}}}
             />

@@ -1,25 +1,29 @@
-import React, {useContext} from 'react';
+import React from 'react';
 import Modal from "react-modal";
-import {Context} from "../../index";
 import {observer} from "mobx-react-lite";
+import useStore from "../../hooks/useStore";
 
 const style = {
     overlay: {display: 'flex', alignItems: 'center', justifyContent: 'center'},
     content: {position: 'relative', inset: 0, padding: 0, borderRadius: '15px'}
 }
 
-const Alert = observer(() => {
-    const {alertStore} = useContext(Context)
+const Alert = () => {
+    const {modalStore} = useStore()
+
+    const close = () => {
+        modalStore.alert.close()
+    }
 
     return (
         <Modal
             style={style}
-            isOpen={alertStore.isOpen}
-            onRequestClose={() => alertStore.closeAlert()}
+            isOpen={modalStore.alert.isOpen}
+            onRequestClose={close}
         >
-            {alertStore.body}
+            {modalStore.alert.body}
         </Modal>
     );
-});
+};
 
-export default Alert;
+export default observer(Alert);
