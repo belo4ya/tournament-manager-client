@@ -8,6 +8,7 @@ const CheckboxList = (props) => {
             {props.checkboxList.map((checkbox) =>
                 <Checkbox
                     key={checkbox.id}
+                    id={checkbox.id}
                     name={checkbox.name}
                     value={checkbox.value}
                     checked={checkbox.checked}
