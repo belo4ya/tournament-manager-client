@@ -1,6 +1,6 @@
 import './main.scss'
 
-import React, {useContext} from 'react';
+import React from 'react';
 import PageSelector from "../../components/PageSelector/PageSelector";
 import Button from "../../components/Button"
 import TournamentsStaticTable from "../../components/tournaments/TournamentsStaticTable";
