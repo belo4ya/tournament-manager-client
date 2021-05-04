@@ -2,6 +2,7 @@ import "./search.scss"
 import search from "../../assets/icn_search.svg"
 
 import React from 'react';
+import {observer} from "mobx-react-lite";
 
 const Search = (props) => {
     return (
@@ -21,4 +22,4 @@ const Search = (props) => {
     );
 };
 
-export default Search;
+export default observer(Search);

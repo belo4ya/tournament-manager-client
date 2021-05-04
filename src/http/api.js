@@ -165,7 +165,34 @@ class ApiCall {
             params.start = filters.range?.start
             params.end = filters.range?.end
         }
-        return await this._makeRequest(() => this.authHost.get(url, {params}))
+        return this._makeRequest(() => this.authHost.get(url, {params}))
+            .then((data) => {
+                const tournaments = data._embedded.tournaments.map((t) => ({
+                    id: t.id,
+                    date: t.createdDate,
+                    name: t.name,
+                    logo: t.logo,
+                    bracketType: t.bracketType,
+                    totalTeams: t.totalTeams,
+                }))
+                return {tournaments, page: data.page}
+            })
+    }
+
+    async fetchTournamentTypes() {
+        const url = '/bracketTypes'
+        const params = {
+            sort: ['createdDate', 'asc'].join(','),
+        }
+        return this._makeRequest(() => this.authHost.get(url, {params}))
+            .then((data) => {
+                return data?._embedded.bracketTypes.map((t) => ({
+                    id: t.id,
+                    name: t.type,
+                    value: t.type,
+                    checked: false
+                }))
+            })
     }
 
 }

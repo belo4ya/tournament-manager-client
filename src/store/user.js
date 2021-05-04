@@ -1,4 +1,4 @@
-import {flow, types} from "mobx-state-tree";
+import {flow, getParent, types} from "mobx-state-tree";
 import apiCall from "../http/api";
 
 const Bracket = types.model('Bracket', {
@@ -43,21 +43,103 @@ const PageableTeamStore = types.model('PageableTeamStore', {
     isLoading: false,
 })
 
-const PageableTournamentStore = types.model('PageableTournamentStore', {
-    tournaments: types.array(Tournament),
-    page: types.optional(Page, {
-        size: 0,
-        totalElements: 0,
-        totalPages: 0,
-        number: 0
-    }),
+const Checkbox = types.model('Checkbox', {
+    id: types.number,
+    value: types.string,
+    name: types.string,
+    checked: false
+}).actions(self => {
+    return {
+        handleClick() {
+            getParent(self, 2).cancel()
+            self.checked = !self.checked
+        }
+    }
+})
+
+const Range = types.model('Range', {
+    min: 0,
+    max: 128
+}).actions(self => {
+    return {
+        setValue({min, max}) {
+            getParent(self, 1).cancel()
+            self.min = min
+            self.max = max
+        }
+    }
+})
+
+const Filter = types.model('Filter', {
+    checkboxList: types.array(Checkbox),
+    range: types.maybe(Range),
+    isApplied: false,
     isLoading: false,
 }).actions(self => {
     return {
         load: flow(function* () {
+            self.checkboxList = []
+            self.range = {min: 0, max: 128}
             self.isLoading = true
             try {
-                const {tournaments, page} = yield apiCall.fetchPublicTournaments()
+                self.checkboxList = yield apiCall.fetchTournamentTypes()
+                yield getParent(self, 1).load()
+            } finally {
+                self.isLoading = false
+            }
+        }),
+        apply() {
+            self.isApplied = true
+        },
+        cancel() {
+            self.isApplied = false
+        },
+        afterCreate() {
+            self.load()
+        }
+    }
+})
+
+const Search = types.model('Search', {
+    value: '',
+    isApplied: false,
+}).actions(self => {
+    return {
+        setValue(value) {
+            self.isApplied = false
+            self.value = value
+        },
+        apply() {
+            self.isApplied = true
+        }
+    }
+})
+
+const PageableTournamentStore = types.model('PageableTournamentStore', {
+    tournaments: types.array(Tournament),
+    page: types.maybe(Page),
+    search: types.maybe(Search),
+    filter: types.optional(Filter, {
+        checkboxList: [],
+        range: {min: 0, max: 128},
+        isApplied: false,
+        isLoading: false,
+    }),
+    isLoading: false,
+}).actions(self => {
+    return {
+        load: flow(function* (targetPage = 0) {
+            self.tournaments = []
+            self.isLoading = true
+            try {
+                const filters = {
+                    name: self.search.isApplied ? self.search.value : '',
+                }
+                if (self.filter.isApplied) {
+                    filters.types = self.filter.checkboxList.filter((el) => el.checked).map((el) => el.value)
+                    filters.range = {start: self.filter.range.min, end: self.filter.range.max}
+                }
+                const {tournaments, page} = yield apiCall.fetchUserTournamentsFilters(targetPage, 5, filters)
                 self.tournaments = tournaments
                 self.page = page
             } finally {
@@ -67,29 +149,24 @@ const PageableTournamentStore = types.model('PageableTournamentStore', {
         onNextPage: flow(function* () {
             const targetPage = self.page.number + 1
             if (targetPage < self.page.totalPages && !self.isLoading) {
-                self.isLoading = true
-                try {
-                    const {tournaments, page} = yield apiCall.fetchPublicTournaments(targetPage)
-                    self.tournaments = tournaments
-                    self.page = page
-                } finally {
-                    self.isLoading = false
-                }
+                yield self.load(targetPage)
             }
         }),
         onPrevPage: flow(function* () {
             const targetPage = self.page.number - 1
             if (targetPage >= 0 && !self.isLoading) {
-                self.isLoading = true
-                try {
-                    const {tournaments, page} = yield apiCall.fetchPublicTournaments(targetPage)
-                    self.tournaments = tournaments
-                    self.page = page
-                } finally {
-                    self.isLoading = false
-                }
+                yield self.load(targetPage)
             }
-        })
+        }),
+        afterCreate() {
+            self.page = {
+                size: 0,
+                totalElements: 0,
+                totalPages: 0,
+                number: 0
+            }
+            self.search = Search.create({})
+        }
     }
 })
 

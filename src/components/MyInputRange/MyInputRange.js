@@ -2,6 +2,7 @@ import "./my-input-range.scss"
 
 import React from 'react';
 import InputRange from "react-input-range";
+import {observer} from "mobx-react-lite";
 
 
 const MyInputRange = (props) => {
@@ -18,4 +19,4 @@ const MyInputRange = (props) => {
     );
 };
 
-export default MyInputRange;
+export default observer(MyInputRange);

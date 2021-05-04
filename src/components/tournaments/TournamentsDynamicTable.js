@@ -9,7 +9,7 @@ import {Context} from "../../index";
 import AlertBody from "../Alert/AlertBody";
 import {alertWarning, compare, toDate} from "../../utils/utils";
 
-const TournamentsDynamicTable = observer((props) => {
+const TournamentsDynamicTable = (props) => {
     const [filters, setFilters] = useState({
         nameFilter: {
             state: 0,
@@ -129,9 +129,9 @@ const TournamentsDynamicTable = observer((props) => {
             </div>
         </div>
     );
-});
+};
 
-export default TournamentsDynamicTable;
+export default observer(TournamentsDynamicTable);
 
 
 const managePriority = (target, context: Array) => {
@@ -154,7 +154,7 @@ const managePriority = (target, context: Array) => {
 const sortWithPriority = (target, filters) => {
     filters = filters.filter((f) => f.state !== 0).sort((a, b) => compare(a.priority, b.priority))
     if (filters) {
-        return target.sort((a, b) => {
+        return target.slice().sort((a, b) => {
             // return filters.map((f) => f.comparator(a, b, f.state === 1)).reduce((a, b) => a || b, 0)
             return (
                 filters[0]?.comparator(a, b, filters[0].state === 1) ||

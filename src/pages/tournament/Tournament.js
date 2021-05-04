@@ -2,16 +2,14 @@ import "./tournament.scss"
 import placeholder from "../../assets/logo_placeholder.svg"
 
 import React, {useEffect} from 'react';
-import {useHistory, useParams} from "react-router-dom";
+import {useParams} from "react-router-dom";
 import OnPageNavigation from "../../components/OnPageNavigation/OnPageNavigation";
 import Bracket from "../../components/Bracket/Bracket"
 import Button from "../../components/Button";
 import TeamsTable from "../../components/teams/TeamsTable";
 import {fetchOneTournament} from "../../http/authorized";
-import {PROFILE_ROUTE} from "../../utils/constants";
 
 const Tournament = () => {
-    const history = useHistory()
     const {id} = useParams()
 
     const rounds = [
