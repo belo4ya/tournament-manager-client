@@ -22,7 +22,7 @@ const TournamentsDynamicTable = (props) => {
             comparator: (a, b, reverse) => compare(a.totalTeams, b.totalTeams, reverse)
         },
         createdDateFilter: {
-            state: 2,
+            state: 1,
             priority: 1,
             comparator: (a, b, reverse) => compare(toDate(a.date), toDate(b.date), reverse)
         }
