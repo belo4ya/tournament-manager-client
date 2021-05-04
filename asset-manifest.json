@@ -1,15 +1,15 @@
 {
   "files": {
-    "main.css": "/tournament-manager-client/static/css/main.0b005da8.chunk.css",
-    "main.js": "/tournament-manager-client/static/js/main.f0159536.chunk.js",
-    "main.js.map": "/tournament-manager-client/static/js/main.f0159536.chunk.js.map",
+    "main.css": "/tournament-manager-client/static/css/main.cad492b3.chunk.css",
+    "main.js": "/tournament-manager-client/static/js/main.9b86696b.chunk.js",
+    "main.js.map": "/tournament-manager-client/static/js/main.9b86696b.chunk.js.map",
     "runtime-main.js": "/tournament-manager-client/static/js/runtime-main.13d48529.js",
     "runtime-main.js.map": "/tournament-manager-client/static/js/runtime-main.13d48529.js.map",
-    "static/js/2.ab841b31.chunk.js": "/tournament-manager-client/static/js/2.ab841b31.chunk.js",
-    "static/js/2.ab841b31.chunk.js.map": "/tournament-manager-client/static/js/2.ab841b31.chunk.js.map",
+    "static/js/2.b6a28248.chunk.js": "/tournament-manager-client/static/js/2.b6a28248.chunk.js",
+    "static/js/2.b6a28248.chunk.js.map": "/tournament-manager-client/static/js/2.b6a28248.chunk.js.map",
     "index.html": "/tournament-manager-client/index.html",
-    "static/css/main.0b005da8.chunk.css.map": "/tournament-manager-client/static/css/main.0b005da8.chunk.css.map",
-    "static/js/2.ab841b31.chunk.js.LICENSE.txt": "/tournament-manager-client/static/js/2.ab841b31.chunk.js.LICENSE.txt",
+    "static/css/main.cad492b3.chunk.css.map": "/tournament-manager-client/static/css/main.cad492b3.chunk.css.map",
+    "static/js/2.b6a28248.chunk.js.LICENSE.txt": "/tournament-manager-client/static/js/2.b6a28248.chunk.js.LICENSE.txt",
     "static/media/icn_cross.6ada0a65.svg": "/tournament-manager-client/static/media/icn_cross.6ada0a65.svg",
     "static/media/icn_pencil.5480220a.svg": "/tournament-manager-client/static/media/icn_pencil.5480220a.svg",
     "static/media/icn_search.6095cc55.svg": "/tournament-manager-client/static/media/icn_search.6095cc55.svg",
@@ -17,8 +17,8 @@
   },
   "entrypoints": [
     "static/js/runtime-main.13d48529.js",
-    "static/js/2.ab841b31.chunk.js",
-    "static/css/main.0b005da8.chunk.css",
-    "static/js/main.f0159536.chunk.js"
+    "static/js/2.b6a28248.chunk.js",
+    "static/css/main.cad492b3.chunk.css",
+    "static/js/main.9b86696b.chunk.js"
   ]
 }
