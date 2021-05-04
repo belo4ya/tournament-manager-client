@@ -1,27 +1,24 @@
 import "./header.scss";
 
-import React, {useContext} from 'react';
+import React from 'react';
 import Logo from "../Logo";
 import Navigation from "../Navigation/Navigation";
 import Button from "../Button";
-import {Context} from "../../index";
 import {observer} from "mobx-react-lite";
 import {useHistory} from "react-router-dom";
 import {INDEX_ROUTE, PROFILE_ROUTE} from "../../utils/constants";
 import useStore from "../../hooks/useStore";
 
-
 const Header = () => {
     const history = useHistory()
-    const {userStore} = useStore()
-    const {signInModal} = useContext(Context)
-    const {signUpModal} = useContext(Context)
+    const {userStore, modalStore} = useStore()
+    const [signIn, signUp] = [modalStore.modalPages.signIn, modalStore.modalPages.signUp]
 
     const handleSignIn = () => {
-        signInModal.openModal()
+        signIn.open()
     }
     const handleSignUp = () => {
-        signUpModal.openModal()
+        signUp.open()
     }
     const handleSignOut = () => {
         userStore.signOut()

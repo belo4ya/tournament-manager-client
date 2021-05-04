@@ -5,7 +5,6 @@ import PageSelector from "../../components/PageSelector/PageSelector";
 import Button from "../../components/Button"
 import TournamentsStaticTable from "../../components/tournaments/TournamentsStaticTable";
 import {useHistory} from 'react-router-dom'
-import {Context} from "../../index";
 import {PROFILE_ROUTE} from "../../utils/constants";
 import {observer} from "mobx-react-lite";
 import useStore from "../../hooks/useStore";
@@ -13,9 +12,7 @@ import useStore from "../../hooks/useStore";
 
 const Main = () => {
     const history = useHistory()
-    const {userStore} = useStore()
-    const {signUpModal} = useContext(Context)
-    const {tournamentStore} = useStore()
+    const {userStore, tournamentStore, modalStore} = useStore()
 
     const onNextPage = () => {
         tournamentStore.onNextPage()
@@ -29,7 +26,7 @@ const Main = () => {
         if (userStore.isAuth) {
             history.push(PROFILE_ROUTE)
         } else {
-            signUpModal.openModal()
+            modalStore.modalPages.signUp.open()
         }
     }
 

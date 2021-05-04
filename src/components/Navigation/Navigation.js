@@ -1,8 +1,7 @@
 import './navigation.scss'
 
-import React, {useContext} from 'react';
+import React from 'react';
 import Button from "../Button";
-import {Context} from "../../index";
 import {observer} from "mobx-react-lite";
 import {useHistory} from "react-router-dom";
 import {ABOUT_ROUTE, CREATOR_ROUTE, INDEX_ROUTE, TOURNAMENT_CREATION_ROUTE} from "../../utils/constants";
@@ -10,14 +9,13 @@ import useStore from "../../hooks/useStore";
 
 const Navigation = (props) => {
     const history = useHistory()
-    const {userStore} = useStore()
-    const {signInModal} = useContext(Context)
+    const {userStore, modalStore} = useStore()
 
     const handleCreateTournamentButton = () => {
         if (userStore.isAuth) {
             history.push(TOURNAMENT_CREATION_ROUTE)
         } else {
-            signInModal.openModal()
+            modalStore.modalPages.signIn.open()
         }
     }
 

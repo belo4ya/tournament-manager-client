@@ -1,55 +1,41 @@
-import React, {useContext, useState} from 'react';
-import Form from "../Form/Form";
-import Modal from "react-modal";
-import {Context} from "../../index";
+import React from 'react';
+import Form from "../../components/Form/Form";
+import Modal from "../../components/Modal/Modal"
 import {observer} from "mobx-react-lite";
 import {useHistory} from "react-router-dom";
 import {PROFILE_ROUTE} from "../../utils/constants";
-import {signUp} from "../../http/public";
+import useStore from "../../hooks/useStore";
 
-const style = {
-    overlay: {display: 'flex', alignItems: 'center', justifyContent: 'center'},
-    content: {position: 'relative', inset: 0, padding: 0, borderRadius: '15px'}
-}
-
-const SignUpModalForm = () => {
+const SignUp = () => {
     const history = useHistory()
-    const {signInModal} = useContext(Context)
-    const {signUpModal} = useContext(Context)
-    const [login, setLogin] = useState('');
-    const [password, setPassword] = useState('');
-    const [rePassword, setRePassword] = useState('');
+    const {userStore, modalStore} = useStore()
+    const [signIn, signUp] = [modalStore.modalPages.signIn, modalStore.modalPages.signUp]
 
     const handleClose = () => {
-        signUpModal.closeModal()
-        setLogin('')
-        setPassword('')
-        setRePassword('')
+        signUp.close()
     }
 
     const handleChangeLoginInput = (event) => {
-        setLogin(event.target.value)
+        signUp.login.setValue(event.target.value)
     }
 
     const handleChangePasswordInput = (event) => {
-        setPassword(event.target.value)
+        signUp.password.setValue(event.target.value)
     }
 
     const handleChangeRePasswordInput = (event) => {
-        setRePassword(event.target.value)
+        signUp.rePassword.setValue(event.target.value)
     }
 
-    const handleSignInButton = (event) => {
-        event.preventDefault()
+    const handleSignInButton = () => {
         handleClose()
-        signInModal.openModal()
+        signIn.openModal()
     }
 
-    const handleSignUpButton = (event) => {
-        event.preventDefault()
-        if (isValidLogin(login) && isValidPassword(password) && isValidRePassword(password, rePassword)) {
-            signUp(login, password).then((status) => {
-                if (status) {
+    const handleSignUpButton = () => {
+        if (signUp.isValid()) {
+            userStore.signUp(signUp.login.value, signUp.password.value).then(() => {
+                if (userStore.isAuth) {
                     handleClose()
                     history.push(PROFILE_ROUTE)
                 }
@@ -59,9 +45,8 @@ const SignUpModalForm = () => {
 
     return (
         <Modal
-            style={style}
             onRequestClose={handleClose}
-            isOpen={signUpModal.isOpen}
+            isOpen={signUp.isOpen}
         >
             <Form
                 title="Регистрация"
@@ -70,29 +55,29 @@ const SignUpModalForm = () => {
                 fields={[
                     {
                         label: "Логин",
-                        inputStyle: isValidLogin(login) ? 'input-secondary' : 'input-danger',
+                        inputStyle: signUp.login.isValid() ? 'input-secondary' : 'input-danger',
                         type: "text",
                         placeholder: "login",
                         id: "login",
-                        value: login,
+                        value: signUp.login.value,
                         onChange: handleChangeLoginInput
                     },
                     {
                         label: "Пароль",
-                        inputStyle: isValidPassword(password) ? 'input-secondary' : 'input-danger',
+                        inputStyle: signUp.password.isValid() ? 'input-secondary' : 'input-danger',
                         type: "password",
                         placeholder: "password",
                         id: "password",
-                        value: password,
+                        value: signUp.password.value,
                         onChange: handleChangePasswordInput
                     },
                     {
                         label: "Подтвердите пароль",
-                        inputStyle: isValidRePassword(password, rePassword) ? 'input-secondary' : 'input-danger',
+                        inputStyle: signUp.password.value === signUp.rePassword.value ? 'input-secondary' : 'input-danger',
                         type: "password",
                         placeholder: "confirm password",
                         id: "rePassword",
-                        value: rePassword,
+                        value: signUp.rePassword.value,
                         onChange: handleChangeRePasswordInput
                     },
                 ]}
@@ -103,17 +88,4 @@ const SignUpModalForm = () => {
     );
 };
 
-export default observer(SignUpModalForm);
-
-
-const isValidLogin = (login) => {
-    return login.length > 3
-}
-
-const isValidPassword = (password) => {
-    return password.length > 3
-}
-
-const isValidRePassword = (password, rePassword) => {
-    return password === rePassword
-}
+export default observer(SignUp);

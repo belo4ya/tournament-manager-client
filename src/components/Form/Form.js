@@ -4,6 +4,7 @@ import React from 'react';
 import Input from "../Input/Input";
 import Button from "../Button";
 import {alertMessage} from "../../utils/utils";
+import {observer} from "mobx-react-lite";
 
 const Form = (props) => {
     return (
@@ -62,4 +63,4 @@ const Form = (props) => {
     );
 };
 
-export default Form;
+export default observer(Form);

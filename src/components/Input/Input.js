@@ -1,6 +1,7 @@
 import "./input.scss";
 
 import React from 'react';
+import {observer} from "mobx-react-lite";
 
 const Input = (props) => {
     return (
@@ -19,4 +20,4 @@ const Input = (props) => {
     );
 };
 
-export default Input;
+export default observer(Input);

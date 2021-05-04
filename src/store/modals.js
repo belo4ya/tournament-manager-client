@@ -1,8 +1,46 @@
 import {types} from "mobx-state-tree";
-import React from "react";
+
+const SimpleCredit = types.model('SimpleCredit', {
+    value: '',
+}).views(self => {
+    return {
+        isValid() {
+            return self.value.length > 3
+        }
+    }
+}).actions(self => {
+    return {
+        setValue(value) {
+            if (self.value.length < 64) {
+                self.value = value
+            }
+        }
+    }
+})
+
+const SignUp = types.model('SignUp', {
+    isOpen: false,
+    login: types.optional(SimpleCredit, {}),
+    password: types.optional(SimpleCredit, {}),
+    rePassword: types.optional(SimpleCredit, {}),
+}).views(self => {
+    return {
+        isValid() {
+            return self.login.isValid() && self.password.isValid() && self.rePassword.value === self.password.value
+        }
+    }
+})
 
 const SignIn = types.model('SignIn', {
     isOpen: false,
+    login: types.optional(SimpleCredit, {}),
+    password: types.optional(SimpleCredit, {}),
+}).views(self => {
+    return {
+        isValid() {
+            return self.login.isValid() && self.password.isValid()
+        }
+    }
 }).actions(self => {
     return {
         open() {
@@ -10,17 +48,19 @@ const SignIn = types.model('SignIn', {
         },
         close() {
             self.isOpen = false
+            self.login.setValue('')
+            self.password.setValue('')
         }
     }
 })
 
 const ModalPagesStore = types.model('ModalPagesStore', {
-    signIn: SignIn,
+    signIn: types.optional(SignIn, {}),
+    signUp: types.optional(SignUp, {})
 })
 
 const Alert = types.model('Alert', {
     isOpen: false,
-    body: types.maybeNull(React.Component)
 }).actions(self => {
     return {
         open(body) {
@@ -35,8 +75,8 @@ const Alert = types.model('Alert', {
 })
 
 const ModalStore = types.model('ModalStore', {
-    alert: Alert,
-    modalPages: ModalPagesStore,
+    alert: types.optional(Alert, {}),
+    modalPages: types.optional(ModalPagesStore, {}),
 })
 
 export default ModalStore;

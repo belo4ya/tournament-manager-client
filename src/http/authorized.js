@@ -1,6 +1,5 @@
 import {$authHost} from "./index";
 import {alertError, alertMessage} from "../utils/utils";
-import {globalStorage} from "../index";
 
 const fetchData = async (url, params) => {
     return await $authHost.get(url, {params: params})
@@ -11,7 +10,6 @@ const fetchData = async (url, params) => {
                     'Предупреждение',
                     'Время сессии истекло. Пожалуйста, авторизуйтесь снова.'
                 )
-                globalStorage.userStore.isAuth = false
             } else {
                 alertError(e)
             }
@@ -133,7 +131,6 @@ export const createTournament = async (data) => {
                     'Предупреждение',
                     'Время сессии истекло. Пожалуйста, авторизуйтесь снова.'
                 )
-                globalStorage.userStore.isAuth = false
             } else if (e?.response?.status === 400) {
                 alertMessage('Ошибка', 'Турнир с таким названием уже существует')
             } else {

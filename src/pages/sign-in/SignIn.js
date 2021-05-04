@@ -1,42 +1,31 @@
-import React, {useContext, useState} from 'react';
+import React from 'react';
 import Form from "../../components/Form/Form";
-import Modal from "react-modal";
-import {Context} from "../../index";
+import Modal from "../../components/Modal/Modal"
 import {observer} from "mobx-react-lite";
 import {useHistory} from "react-router-dom";
 import useStore from "../../hooks/useStore";
 import {PROFILE_ROUTE} from "../../utils/constants";
 
-const style = {
-    overlay: {display: 'flex', alignItems: 'center', justifyContent: 'center'},
-    content: {position: 'relative', inset: 0, padding: 0, borderRadius: '15px'}
-}
-
 const SignIn = () => {
     const history = useHistory()
-    const {userStore} = useStore()
-    const {signInModal} = useContext(Context)
-    const {signUpModal} = useContext(Context)
-    const [login, setLogin] = useState('');
-    const [password, setPassword] = useState('');
+    const {userStore, modalStore} = useStore()
+    const [signIn, signUp] = [modalStore.modalPages.signIn, modalStore.modalPages.signUp]
 
     const handleClose = () => {
-        signInModal.closeModal()
-        setLogin('')
-        setPassword('')
+        signIn.close()
     }
 
     const handleChangeLoginInput = (event) => {
-        setLogin(event.target.value)
+        signIn.login.setValue(event.target.value)
     }
 
     const handleChangePasswordInput = (event) => {
-        setPassword(event.target.value)
+        signIn.password.setValue(event.target.value)
     }
 
     const handleSignInButton = () => {
-        if (isValidLogin(login) && isValidPassword(password)) {
-            userStore.signIn(login, password).then(() => {
+        if (signIn.isValid()) {
+            userStore.signIn(signIn.login.value, signIn.password.value).then(() => {
                 if (userStore.isAuth) {
                     handleClose()
                     history.push(PROFILE_ROUTE)
@@ -47,15 +36,13 @@ const SignIn = () => {
 
     const handleSignUpButton = () => {
         handleClose()
-        signUpModal.openModal()
+        signUp.open()
     }
 
-    console.log('signIn')
     return (
         <Modal
-            style={style}
             onRequestClose={handleClose}
-            isOpen={signInModal.isOpen}
+            isOpen={signIn.isOpen}
         >
             <Form
                 title="Вход"
@@ -64,20 +51,20 @@ const SignIn = () => {
                 fields={[
                     {
                         label: "Логин",
-                        inputStyle: isValidLogin(login) ? 'input-secondary' : 'input-danger',
+                        inputStyle: signIn.login.isValid() ? 'input-secondary' : 'input-danger',
                         type: "text",
                         placeholder: "login",
                         id: "login",
-                        value: login,
+                        value: signIn.login.value,
                         onChange: handleChangeLoginInput
                     },
                     {
                         label: "Пароль",
-                        inputStyle: isValidPassword(password) ? 'input-secondary' : 'input-danger',
+                        inputStyle: signIn.password.isValid() ? 'input-secondary' : 'input-danger',
                         type: "password",
                         placeholder: "password",
                         id: "password",
-                        value: password,
+                        value: signIn.password.value,
                         onChange: handleChangePasswordInput
                     },
                 ]}
@@ -89,12 +76,3 @@ const SignIn = () => {
 };
 
 export default observer(SignIn);
-
-
-const isValidLogin = (login) => {
-    return login.length > 3
-}
-
-const isValidPassword = (password) => {
-    return password.length > 3
-}
