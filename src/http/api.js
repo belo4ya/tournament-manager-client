@@ -222,6 +222,22 @@ class ApiCall {
             })
     }
 
+    async createTeam(name, rating, logo) {
+        const url = '/teams'
+        const data = {name, rating}
+        return this.authHost.post(url, data)
+            .then(() => true)
+            .catch((e) => {
+                if (e?.response?.status === 401) {
+                    alertMessage('Предупреждение', 'Время сессии истекло. Пожалуйста, авторизуйтесь снова.')
+                    store.userStore.signOut()
+                } else if (e?.response?.status === 400) {
+                    alertMessage('Ошибка', 'Невозможно создать команду: команда с таким названием уже существует.')
+                } else {
+                    alertError(e)
+                }
+            })
+    }
 }
 
 const apiCall = new ApiCall()

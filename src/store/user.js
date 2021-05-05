@@ -11,7 +11,7 @@ const Team = types.model('Team', {
     createdDate: types.string,
     lastModifiedDate: types.string,
     name: types.string,
-    logo: types.string,
+    logo: types.maybeNull(types.string),
     rating: types.number,
 }).actions(self => {
     return {
