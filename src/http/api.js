@@ -96,7 +96,15 @@ class ApiCall {
                     bracketType: t.bracketType,
                     totalTeams: t.totalTeams,
                 })) || []
-                return {tournaments, page: data.page}
+                return {
+                    tournaments,
+                    page: data?.page || {
+                        size: 0,
+                        totalElements: 0,
+                        totalPages: 0,
+                        number: 0
+                    }
+                }
             })
     }
 

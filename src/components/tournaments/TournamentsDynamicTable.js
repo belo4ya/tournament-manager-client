@@ -133,7 +133,7 @@ const TournamentsDynamicTable = (props) => {
 export default observer(TournamentsDynamicTable);
 
 
-const managePriority = (target, context: Array) => {
+const managePriority = (target, context) => {
     target.state = next(target.state)
 
     if (target.state === 1) {

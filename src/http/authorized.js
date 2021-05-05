@@ -112,7 +112,7 @@ export const fetchAllTeams = async () => {
     let data = await fetchData(url, params)
 
     const totalPages = data?.page.totalPages || 0
-    const teams: Array = data?._embedded.teams
+    const teams = data?._embedded.teams
     for (let i = 1; i < totalPages; i++) {
         data = await fetchData(url, {...params, page: i})
         teams.push(...data?._embedded.teams)
