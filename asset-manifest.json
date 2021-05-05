@@ -1,8 +1,8 @@
 {
   "files": {
     "main.css": "/tournament-manager-client/static/css/main.43aadc27.chunk.css",
-    "main.js": "/tournament-manager-client/static/js/main.1b100b7b.chunk.js",
-    "main.js.map": "/tournament-manager-client/static/js/main.1b100b7b.chunk.js.map",
+    "main.js": "/tournament-manager-client/static/js/main.5af61433.chunk.js",
+    "main.js.map": "/tournament-manager-client/static/js/main.5af61433.chunk.js.map",
     "runtime-main.js": "/tournament-manager-client/static/js/runtime-main.13d48529.js",
     "runtime-main.js.map": "/tournament-manager-client/static/js/runtime-main.13d48529.js.map",
     "static/js/2.05769d8e.chunk.js": "/tournament-manager-client/static/js/2.05769d8e.chunk.js",
@@ -19,6 +19,6 @@
     "static/js/runtime-main.13d48529.js",
     "static/js/2.05769d8e.chunk.js",
     "static/css/main.43aadc27.chunk.css",
-    "static/js/main.1b100b7b.chunk.js"
+    "static/js/main.5af61433.chunk.js"
   ]
 }
