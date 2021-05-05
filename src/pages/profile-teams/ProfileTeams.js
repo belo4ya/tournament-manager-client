@@ -37,6 +37,10 @@ const ProfileTeams = () => {
     }
 
     useEffect(() => {
+        document.title = 'Мои команды'
+    }, [])
+
+    useEffect(() => {
         pageableTeamStore.load()
     }, [pageableTeamStore])
 

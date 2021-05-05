@@ -20,6 +20,10 @@ const Profile = () => {
     }
 
     useEffect(() => {
+        document.title = 'Профиль'
+    }, [])
+
+    useEffect(() => {
         userStore.load()
         userStore.user.previewTournamentStore.load()
         userStore.user.previewTeamStore.load()

@@ -148,6 +148,10 @@ const Tournament = () => {
         }
     ]
 
+    useEffect(() => {
+        document.title = 'DreamHack Masters Spring 2021'
+    }, [])
+
     return (
         <div>
             <div className="container">

@@ -1,6 +1,11 @@
-import React from 'react';
+import React, {useEffect} from 'react';
 
 const Creator = () => {
+
+    useEffect(() => {
+        document.title = 'Об авторе'
+    }, [])
+
     return (
         <div>
 

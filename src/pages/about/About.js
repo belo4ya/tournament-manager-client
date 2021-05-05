@@ -1,6 +1,11 @@
-import React from 'react';
+import React, {useEffect} from 'react';
 
 const About = () => {
+
+    useEffect(() => {
+        document.title = 'О сервисе'
+    }, [])
+
     return (
         <div>
 

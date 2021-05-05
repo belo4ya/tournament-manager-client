@@ -49,6 +49,10 @@ const ProfileTournaments = () => {
     }
 
     useEffect(() => {
+        document.title = 'Мои Турниры'
+    }, [])
+
+    useEffect(() => {
         pageableTournamentStore.filter.load()
     }, [pageableTournamentStore])
 

@@ -69,6 +69,10 @@ const TournamentCreation = () => {
     }
 
     useEffect(() => {
+        document.title = 'Создание турнира'
+    }, [])
+
+    useEffect(() => {
         fetchTournamentTypes().then((bracketTypes) => {
             setFormat(bracketTypes.reduce((a, b, i) => ({
                 ...a,

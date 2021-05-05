@@ -1,6 +1,6 @@
 import './main.scss'
 
-import React from 'react';
+import React, {useEffect} from 'react';
 import PageSelector from "../../components/PageSelector/PageSelector";
 import Button from "../../components/Button"
 import TournamentsStaticTable from "../../components/tournaments/TournamentsStaticTable";
@@ -29,6 +29,10 @@ const Main = () => {
             modalStore.modalPages.signUp.open()
         }
     }
+
+    useEffect(() => {
+        document.title = 'Генератор турнирных сеток и таблиц'
+    }, [])
 
     return (
         <div>
