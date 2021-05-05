@@ -30,7 +30,6 @@ const Main = () => {
         }
     }
 
-    console.log('main')
     return (
         <div>
             <section className="section-header">

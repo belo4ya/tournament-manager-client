@@ -88,14 +88,14 @@ class ApiCall {
         }
         return this._makeRequest(() => this.host.get(url, config))
             .then((data) => {
-                const tournaments = data._embedded.tournaments.map((t) => ({
+                const tournaments = data?._embedded.tournaments.map((t) => ({
                     id: t.id,
                     date: t.createdDate,
                     name: t.name,
                     logo: t.logo,
                     bracketType: t.bracketType,
                     totalTeams: t.totalTeams,
-                }))
+                })) || []
                 return {tournaments, page: data.page}
             })
     }
@@ -104,9 +104,9 @@ class ApiCall {
         const url = '/users/search/my'
         return this._makeRequest(() => this.authHost.get(url))
             .then((data) => ({
-                id: data.id,
-                createdDate: data.createdDate,
-                username: data.username,
+                id: data?.id,
+                createdDate: data?.createdDate,
+                username: data?.username,
             }))
     }
 
@@ -120,14 +120,14 @@ class ApiCall {
         }
         return this._makeRequest(() => this.authHost.get(url, {params}))
             .then((data) => {
-                return data._embedded.tournaments.map((t) => ({
+                return data?._embedded.tournaments.map((t) => ({
                     id: t.id,
                     date: t.lastModifiedDate,
                     name: t.name,
                     logo: t.logo,
                     bracketType: t.bracketType,
                     totalTeams: t.totalTeams,
-                }))
+                })) || []
             })
     }
 
@@ -140,14 +140,14 @@ class ApiCall {
         }
         return this._makeRequest(() => this.authHost.get(url, {params}))
             .then((data) => {
-                return data._embedded.teams.map((t) => ({
+                return data?._embedded.teams.map((t) => ({
                     id: t.id,
                     createdDate: t.createdDate,
                     lastModifiedDate: t.lastModifiedDate,
                     name: t.name,
                     logo: t.logo,
                     rating: t.rating,
-                }))
+                })) || []
             })
     }
 
@@ -167,14 +167,14 @@ class ApiCall {
         }
         return this._makeRequest(() => this.authHost.get(url, {params}))
             .then((data) => {
-                const tournaments = data._embedded.tournaments.map((t) => ({
+                const tournaments = data?._embedded.tournaments.map((t) => ({
                     id: t.id,
                     date: t.createdDate,
                     name: t.name,
                     logo: t.logo,
                     bracketType: t.bracketType,
                     totalTeams: t.totalTeams,
-                }))
+                })) || []
                 return {tournaments, page: data.page}
             })
     }
@@ -191,7 +191,7 @@ class ApiCall {
                     name: t.type,
                     value: t.type,
                     checked: false
-                }))
+                })) || []
             })
     }
 
@@ -210,14 +210,14 @@ class ApiCall {
         }
         return this._makeRequest(() => this.authHost.get(url, {params}))
             .then((data) => {
-                const teams = data._embedded.teams.map((t) => ({
+                const teams = data?._embedded.teams.map((t) => ({
                     id: t.id,
                     createdDate: t.createdDate,
                     lastModifiedDate: t.lastModifiedDate,
                     name: t.name,
                     logo: t.logo,
                     rating: t.rating,
-                }))
+                })) || []
                 return {teams, page: data.page}
             })
     }
